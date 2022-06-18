@@ -1,0 +1,15 @@
+[workspace]
+members = [
+    "core",
+    "fetch",
+    "test-data",
+    "utils",
+    "parser/xml",
+#    "gen",
+    "apps/download",
+#    "apps/dump"
+]
+
+[profile.release]
+opt-level = 3
+lto = true

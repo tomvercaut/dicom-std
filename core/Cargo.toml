@@ -1,0 +1,17 @@
+[package]
+name = "dicom-std-core"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+authors = ["Tom Vercauteren <tomvercaut@gmail.com>"]
+description = "Library contains the data structures that model different components described in the DICOM standard and the XML format in which it is defined: tag, tag ranges, Value Representation, Value Multiplicity, IODs & composite IODs, ... "
+readme = "README.md"
+keywords = ["dicom", "standard", "code generation"]
+homepage = "https://github.com/tomvercaut/dicom-std"
+
+[dependencies]
+thiserror = "^1"
+serde = { version = "1.0", features = ["derive"] }
+
+[dev-dependencies]
+serde_json = "1.0"

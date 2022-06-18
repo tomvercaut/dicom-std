@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<book xmlns="http://docbook.org/ns/docbook" label="PS3.3" version="5.0"
+      xml:id="PS3.3">
+    <title>PS3.3</title>
+    <subtitle>DICOM PS3.3 2021c - Information Object Definitions</subtitle>
+    <info>
+        <author>
+            <orgname>DICOM Standards Committee</orgname>
+        </author>
+        <copyright>
+            <year>2021</year>
+            <holder>NEMA</holder>
+        </copyright>
+        <legalnotice>
+            <para xml:id="para_80687a13-9d6e-433a-b7a4-36746d82979e">A DICOM publication</para>
+        </legalnotice>
+    </info>
+</book>

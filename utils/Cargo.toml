@@ -1,0 +1,17 @@
+[package]
+name = "dicom-std-utils"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+authors = ["Tom Vercauteren <tomvercaut@gmail.com>"]
+description = "Collection of small functions commonly used by other crates in the project."
+readme = "README.md"
+keywords = ["dicom", "standard", "code generation"]
+homepage = "https://github.com/tomvercaut/dicom-std"
+
+[dependencies]
+stdext = "0.3"
+log = "0.4"
+
+[dev-dependencies]
+env_logger = "^0.9"

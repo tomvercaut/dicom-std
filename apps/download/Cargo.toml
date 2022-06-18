@@ -1,0 +1,17 @@
+[package]
+name = "dicom-std-download"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+authors = ["Tom Vercauteren <tomvercaut@gmail.com>"]
+description = "Download XML parts of the DICOM standard."
+readme = "README.md"
+keywords = ["dicom", "standard", "download"]
+homepage = "https://github.com/tomvercaut/dicom-std"
+
+[dependencies]
+clap = "2.34"
+env_logger = "^0.9"
+log = "0.4"
+anyhow = "1.0"
+dicom-std-fetch = { path="../../fetch" }

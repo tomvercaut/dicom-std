@@ -1,0 +1,18 @@
+[package]
+name = "dicom-std-xml-parser"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+dicom-std-core = { path = "../../core" }
+quick-xml = "0.22.0"
+thiserror = "^1"
+regex = "^1"
+lazy_static = "1.4.0"
+log = "0.4"
+env_logger = "^0.9"
+dicom-std-fetch = { path = "../../fetch" }
+
+[dev-dependencies]
+async-std = {version="1.10", features=["attributes"]}
+dicom-std-test-data = {path = "../../test-data"}
