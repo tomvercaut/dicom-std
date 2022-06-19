@@ -10,8 +10,8 @@ keywords = ["dicom", "standard", "download"]
 homepage = "https://github.com/tomvercaut/dicom-std"
 
 [dependencies]
-clap = "2.34"
+clap = { version = "3.2.5", features = ["derive"] }
 env_logger = "^0.9"
 log = "0.4"
 anyhow = "1.0"
-dicom-std-fetch = { path="../../fetch" }
+dicom-std-fetch = { path = "../../fetch" }
