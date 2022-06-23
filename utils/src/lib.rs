@@ -14,6 +14,16 @@ pub fn temp_dir_fn(fn_name: &str) -> PathBuf {
     d
 }
 
+/// Test if a character is a whitespace, a carriage return or a newline.
+///
+/// # Arguments
+///
+/// * `c` - character
+#[inline]
+pub fn is_char_whitespace_or_return(c: char) -> bool {
+    c.is_whitespace() || c == '\r' || c == '\n'
+}
+
 #[cfg(test)]
 mod tests {
     use log::{trace, LevelFilter};

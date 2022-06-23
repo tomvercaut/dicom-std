@@ -1215,7 +1215,10 @@ mod tests {
         let index = Vec::from_iter(0..arr1.len());
         assert_eq!(arr1.len(), arr2.len());
         assert_eq!(arr1.len(), arr3.len());
-        for (a, (b, (c,i))) in arr1.iter().zip(arr2.iter().zip(arr3.iter().zip(index.iter()))) {
+        for (a, (b, (c, i))) in arr1
+            .iter()
+            .zip(arr2.iter().zip(arr3.iter().zip(index.iter())))
+        {
             assert_eq!(a.contains(b), *c, "failed on iteration: {}", i);
         }
     }
@@ -1290,7 +1293,10 @@ mod tests {
         let index = Vec::from_iter(0..arr1.len());
         assert_eq!(arr1.len(), arr2.len());
         assert_eq!(arr1.len(), expected.len());
-        for (a, (b, (e,i))) in arr1.iter().zip(arr2.iter().zip(expected.iter().zip(index.iter()))) {
+        for (a, (b, (e, i))) in arr1
+            .iter()
+            .zip(arr2.iter().zip(expected.iter().zip(index.iter())))
+        {
             let c = VM::from_str(a);
             assert!(
                 c.is_ok(),

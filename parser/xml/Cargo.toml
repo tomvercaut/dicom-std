@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 dicom-std-core = { path = "../../core" }
+dicom-std-utils = { path = "../../utils" }
 quick-xml = "0.22.0"
 thiserror = "^1"
 regex = "^1"

@@ -77,7 +77,7 @@ fn dicom_standard_part(
         .timeout(Duration::from_secs(timeout))
         .build()?;
 
-    let spart= if part < 10 {
+    let spart = if part < 10 {
         format!("part0{}", part)
     } else {
         format!("part{}", part)

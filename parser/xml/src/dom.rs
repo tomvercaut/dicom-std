@@ -71,9 +71,7 @@ pub fn read_str(s: &str) -> Result<model::Element, ParserError> {
 /// * `reader`: XML event reader
 ///
 /// returns: Result<Element, ParserError>
-pub fn from_reader<R>(
-    reader: &mut EventReader<R>,
-) -> Result<model::Element, ParserError>
+pub fn from_reader<R>(reader: &mut EventReader<R>) -> Result<model::Element, ParserError>
 where
     R: BufRead,
 {
@@ -190,12 +188,13 @@ mod tests {
 }
 
 pub mod model {
+    use dicom_std_utils::is_char_whitespace_or_return;
     use std::cmp::Ordering;
     use std::collections::BTreeMap;
     use std::str::FromStr;
 
     use crate::dom::from_reader;
-    use crate::{is_char_whitespace_or_return, query, ElementError, QualifiedNameError};
+    use crate::{query, ElementError, QualifiedNameError};
 
     /// Represents a Qualified XML name.
     ///

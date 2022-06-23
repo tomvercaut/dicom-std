@@ -1,6 +1,10 @@
 use crate::dom::model::{Element, QualifiedName};
-use crate::{helper, td_or_nested_para_emphasis_text, ParserError, UNICODE_ZERO_WIDTH_SPACE, find_emphasis_element, is_char_whitespace_or_return};
+use crate::{
+    find_emphasis_element, helper, td_or_nested_para_emphasis_text, ParserError,
+    UNICODE_ZERO_WIDTH_SPACE,
+};
 use dicom_std_core::{DataDictionary, DataDictionaryEntry, TagRange, VM, VR};
+use dicom_std_utils::is_char_whitespace_or_return;
 use log::{debug, info};
 use std::str::FromStr;
 
@@ -57,9 +61,7 @@ pub fn build(element: &Element) -> Result<DataDictionary, ParserError> {
 ///
 /// # Arguments
 /// * `e` - XML table element
-fn parse_registery_data_elements_table(
-    e: &Element,
-) -> Result<DataDictionary, ParserError> {
+fn parse_registery_data_elements_table(e: &Element) -> Result<DataDictionary, ParserError> {
     if e.name != "table" {
         return Err(ParserError::XmlExpectedElement(
             QualifiedName::from_str("table").unwrap(),
@@ -150,18 +152,18 @@ fn parse_data_element_dictionary_table_row(
         // In [chapter5, Conventions)[https://dicom.nema.org/medical/dicom/current/output/html/part06.html#chapter_5], retired elements are italicized and
         // the description starts with RET.
         let is_italic = match find_emphasis_element(desc_col) {
-            None => {false}
-            Some(emphasis) => {
-                match emphasis.get_attr(&QualifiedName::from_str("role").unwrap()) {
-                    None => {false}
-                    Some(val) => {val.contains("italic")}
-                }
-            }
+            None => false,
+            Some(emphasis) => match emphasis.get_attr(&QualifiedName::from_str("role").unwrap()) {
+                None => false,
+                Some(val) => val.contains("italic"),
+            },
         };
         entry.description = parse_td_description(vtd.get(5).unwrap());
-        entry.retired = is_italic || entry.description
-            .trim_matches(is_char_whitespace_or_return)
-            .starts_with("RET");
+        entry.retired = is_italic
+            || entry
+                .description
+                .trim_matches(is_char_whitespace_or_return)
+                .starts_with("RET");
         // entry.retired = entry.description.starts_with("RET");
     } else {
         return Err(ParserError::XmlTableInvalidNumberOfColumns(
@@ -173,9 +175,7 @@ fn parse_data_element_dictionary_table_row(
 }
 
 fn parse_td_tag(td: &Element) -> Result<TagRange, ParserError> {
-    let e = ParserError::XmlTableColumnParse(
-        "unable to extract tag".to_string(),
-    );
+    let e = ParserError::XmlTableColumnParse("unable to extract tag".to_string());
     let s = td_or_nested_para_emphasis_text(td)
         .ok_or(e)?
         .replace(UNICODE_ZERO_WIDTH_SPACE, "");
@@ -186,9 +186,8 @@ fn parse_td_tag(td: &Element) -> Result<TagRange, ParserError> {
 }
 
 fn parse_td_name(td: &Element) -> Result<String, ParserError> {
-    let e = ParserError::XmlTableColumnParse(
-        "unable to extract registery data entry name".to_string(),
-    );
+    let e =
+        ParserError::XmlTableColumnParse("unable to extract registery data entry name".to_string());
     td_or_nested_para_emphasis_text(td)
         .ok_or(e)
         .map(|t| t.replace(UNICODE_ZERO_WIDTH_SPACE, ""))
@@ -204,9 +203,7 @@ fn parse_td_keyword(td: &Element) -> Result<String, ParserError> {
 }
 
 fn parse_td_vr(td: &Element) -> Result<Vec<VR>, ParserError> {
-    let e = ParserError::XmlTableColumnParse(
-        "unable to extract data element entry VR".to_string(),
-    );
+    let e = ParserError::XmlTableColumnParse("unable to extract data element entry VR".to_string());
     let s = td_or_nested_para_emphasis_text(td)
         .ok_or(e)
         .map(|t| t.replace(UNICODE_ZERO_WIDTH_SPACE, ""))?;
@@ -236,9 +233,7 @@ fn parse_td_vr(td: &Element) -> Result<Vec<VR>, ParserError> {
 }
 
 fn parse_td_vm(td: &Element) -> Result<VM, ParserError> {
-    let e=ParserError::XmlTableColumnParse(
-        "unable to extract data element entry VM".to_string(),
-    );
+    let e = ParserError::XmlTableColumnParse("unable to extract data element entry VM".to_string());
     let s = td_or_nested_para_emphasis_text(td)
         .ok_or(e)
         .map(|t| t.replace(UNICODE_ZERO_WIDTH_SPACE, ""))?;

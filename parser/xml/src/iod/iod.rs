@@ -296,9 +296,7 @@ fn parse_iod_module_table_row(tr: &Element) -> Result<Option<ModuleDefinitionIte
 ///
 /// * `e` - XML element (expecting a td element)
 fn parse_td_ie(td: &Element) -> Result<String, ParserError> {
-    let err = ParserError::XmlTableColumnParse(
-        "unable to extract IE text".to_string(),
-    );
+    let err = ParserError::XmlTableColumnParse("unable to extract IE text".to_string());
     td_or_nested_para_text(td).ok_or(err)
 }
 
@@ -308,9 +306,7 @@ fn parse_td_ie(td: &Element) -> Result<String, ParserError> {
 ///
 /// * `e` - XML element (expecting a td element)
 fn parse_td_module(td: &Element) -> Result<String, ParserError> {
-    let err = ParserError::XmlTableColumnParse(
-        "unable to extract Module text".to_string(),
-    );
+    let err = ParserError::XmlTableColumnParse("unable to extract Module text".to_string());
     td_or_nested_para_text(td).ok_or(err)
 }
 

@@ -85,11 +85,11 @@ fn main() -> anyhow::Result<()> {
     // Determine which DICOM parts to download
     let mut parts = vec![];
     if cli.all {
-            for i in 1..23u32 {
-                if i != 9 && i != 13 {
-                    parts.push(i);
-                }
+        for i in 1..23u32 {
+            if i != 9 && i != 13 {
+                parts.push(i);
             }
+        }
     } else if let Some(pts) = cli.parts {
         parts = pts;
     }

@@ -25,16 +25,6 @@ impl<T: PartialEq + Clone> Dedup<T> for Vec<T> {
     }
 }
 
-/// Test if a character is a whitespace, a carriage return or a newline.
-///
-/// # Arguments
-///
-/// * `c` - character
-#[inline]
-pub(crate) fn is_char_whitespace_or_return(c: char) -> bool {
-    c.is_whitespace() || c == '\r' || c == '\n'
-}
-
 /// Test if a character is zero width space.
 ///
 /// # Arguments
@@ -121,10 +111,10 @@ pub(crate) fn td_or_nested_para_emphasis_text(e: &Element) -> Option<String> {
 /// Get a nested emphasis element.
 pub(crate) fn find_emphasis_element(e: &Element) -> Option<&Element> {
     let qn = QualifiedName::from_str("emphasis").unwrap();
-    if e.name == qn{
+    if e.name == qn {
         return Some(e);
     }
-    e.find_child(|t|t.name == qn)
+    e.find_child(|t| t.name == qn)
 }
 
 /// Filter all the "table" elements from a list of Elements.
@@ -219,9 +209,7 @@ pub(crate) fn parse_td_reference(td: &Element) -> Result<Link, ParserError> {
         ));
     }
     let xref = *vxref.get(0).unwrap();
-    let err = ParserError::XmlTableColumnParse(
-        "failed to parse xref element".to_string(),
-    );
+    let err = ParserError::XmlTableColumnParse("failed to parse xref element".to_string());
     parse_xref(xref).ok_or(err)
 }
 
@@ -325,7 +313,7 @@ fn parse_xref(xref: &Element) -> Option<Link> {
         style: xref
             .get_attr(&QualifiedName::from_str("xrefstyle").unwrap())
             .unwrap_or_default()
-            .to_string()
+            .to_string(),
     })
 }
 
@@ -390,9 +378,8 @@ pub(crate) fn parse_td_include_link(td: &Element) -> Result<Link, ParserError> {
         ));
     }
     let xref = xref.unwrap();
-    let err = ParserError::XmlTableColumnParse(
-        "failed to parse Link from xref element".to_string(),
-    );
+    let err =
+        ParserError::XmlTableColumnParse("failed to parse Link from xref element".to_string());
     parse_xref(xref).ok_or(err)
 }
 

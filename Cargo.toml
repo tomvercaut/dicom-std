@@ -5,7 +5,7 @@ members = [
     "test-data",
     "utils",
     "parser/xml",
-#    "gen",
+    "codegen",
     "apps/download",
 #    "apps/dump"
 ]
