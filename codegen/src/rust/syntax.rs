@@ -666,6 +666,7 @@ mod tests {
                 lifetime: None,
                 reference: false,
                 type_: "Obj".to_string(),
+                depth: 0,
             },
             StructField {
                 visibility: Visibility::Public,
@@ -673,6 +674,7 @@ mod tests {
                 lifetime: None,
                 reference: false,
                 type_: "Obj".to_string(),
+                depth: 0,
             },
             StructField {
                 visibility: Visibility::PublicCrate,
@@ -680,6 +682,7 @@ mod tests {
                 lifetime: None,
                 reference: false,
                 type_: "Obj".to_string(),
+                depth: 0,
             },
             StructField {
                 visibility: Default::default(),
@@ -687,6 +690,7 @@ mod tests {
                 lifetime: None,
                 reference: true,
                 type_: "Obj".to_string(),
+                depth: 0,
             },
             StructField {
                 visibility: Default::default(),
@@ -694,6 +698,7 @@ mod tests {
                 lifetime: Lifetime::new("a").unwrap().into(),
                 reference: true,
                 type_: "Obj".to_string(),
+                depth: 0,
             },
         ];
         let e_arr = [
@@ -724,6 +729,7 @@ mod tests {
                     lifetime: Lifetime::new("a").unwrap().into(),
                     reference: true,
                     type_: "str".to_string(),
+                    depth: 0,
                 },
                 StructField {
                     visibility: Visibility::PublicCrate,
@@ -731,6 +737,7 @@ mod tests {
                     lifetime: Lifetime::new("b").unwrap().into(),
                     reference: true,
                     type_: "str".to_string(),
+                    depth: 0,
                 },
             ],
         }];

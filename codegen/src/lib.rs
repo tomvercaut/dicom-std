@@ -1,5 +1,6 @@
 #[cfg(test)]
 use std::path::PathBuf;
+use dicom_std_core::{DataDictionary, IODLibrary};
 
 pub use error::*;
 use helper::*;
@@ -34,7 +35,8 @@ fn read_data_dictionary() -> DataDictionary {
     let part06 = PathBuf::from(dicom_std_test_data::path_dicom_standard())
         .join("part06")
         .join("part06.xml");
-    let data_dict = dicom_std_xml_parser::data_dictionary::build(&part06);
+    let root = dicom_std_xml_parser::dom::read_file(part06).unwrap();
+    let data_dict = dicom_std_xml_parser::data_dictionary::build(&root);
     if let Err(e) = data_dict {
         panic!("Failed to build data dictionary: {:?}", e);
     }
