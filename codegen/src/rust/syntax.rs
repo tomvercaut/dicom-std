@@ -214,6 +214,7 @@ pub(crate) struct StructField {
     pub reference: bool,
     pub type_: String,
     pub depth: i16,
+    pub is_sequence: bool,
 }
 
 impl Default for StructField {
@@ -225,6 +226,7 @@ impl Default for StructField {
             reference: false,
             type_: "".to_string(),
             depth: 0,
+            is_sequence: false,
         }
     }
 }
@@ -667,6 +669,7 @@ mod tests {
                 reference: false,
                 type_: "Obj".to_string(),
                 depth: 0,
+                is_sequence: false,
             },
             StructField {
                 visibility: Visibility::Public,
@@ -675,6 +678,7 @@ mod tests {
                 reference: false,
                 type_: "Obj".to_string(),
                 depth: 0,
+                is_sequence: false,
             },
             StructField {
                 visibility: Visibility::PublicCrate,
@@ -683,6 +687,7 @@ mod tests {
                 reference: false,
                 type_: "Obj".to_string(),
                 depth: 0,
+                is_sequence: false,
             },
             StructField {
                 visibility: Default::default(),
@@ -691,6 +696,7 @@ mod tests {
                 reference: true,
                 type_: "Obj".to_string(),
                 depth: 0,
+                is_sequence: false,
             },
             StructField {
                 visibility: Default::default(),
@@ -699,6 +705,7 @@ mod tests {
                 reference: true,
                 type_: "Obj".to_string(),
                 depth: 0,
+                is_sequence: false,
             },
         ];
         let e_arr = [
@@ -730,6 +737,7 @@ mod tests {
                     reference: true,
                     type_: "str".to_string(),
                     depth: 0,
+                    is_sequence: false,
                 },
                 StructField {
                     visibility: Visibility::PublicCrate,
@@ -738,6 +746,7 @@ mod tests {
                     reference: true,
                     type_: "str".to_string(),
                     depth: 0,
+                    is_sequence: false,
                 },
             ],
         }];

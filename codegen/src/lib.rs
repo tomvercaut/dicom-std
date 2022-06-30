@@ -1,6 +1,7 @@
+use dicom_std_core::{DataDictionary, IODLibrary};
 #[cfg(test)]
 use std::path::PathBuf;
-use dicom_std_core::{DataDictionary, IODLibrary};
+use log::LevelFilter;
 
 pub use error::*;
 use helper::*;
@@ -10,6 +11,14 @@ mod error;
 mod helper;
 mod rust;
 mod traits;
+
+#[cfg(test)]
+pub fn init_test_logger() {
+    let _ = env_logger::builder()
+        .is_test(true)
+        .filter_level(LevelFilter::Trace)
+        .try_init();
+}
 
 #[cfg(test)]
 pub fn test_resource_dir() -> PathBuf {
