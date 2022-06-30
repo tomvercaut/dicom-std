@@ -81,68 +81,113 @@ pub(crate) struct SeqIndex {
     start: usize,
     end: usize,
 }
-
 pub(crate) fn find_seq_indices_begin_end(
-    fields: &[StructField],
-    start_index: usize,
-    recurse_level: usize,
-) -> (usize, Vec<SeqIndex>) {
+    fields: &[StructField]
+) -> Vec<SeqIndex> {
     let n = fields.len();
     let mut rv = vec![];
     if n == 0 {
-        return (n, rv);
+        return rv;
     }
-    let mut seq_index = None;;
-    let mut i = start_index;
-    let first_d = fields[i].depth;
-    while i < n {
-        let field = &fields[i];
-        if field.is_sequence == true {
-            seq_index = Some(SeqIndex {
-                depth: field.depth,
-                start: i,
-                end: 0,
-            });
-            let (last_idx, tv) = find_seq_indices_begin_end(fields, i + 1, recurse_level + 1);
-            let ntv = tv.len();
-            // if ntv > 0 {
-            //     let last_tv_idx = ntv - 1;
-            //     let last = &tv[last_tv_idx];
-            //     if last.end > last.start {
-            //         i = last.end;
-            //     }
-            // }
-            rv.extend(tv);
-            i = last_idx;
-        }
-        // index in the list might have changed
-        if i < n {
-            let field = &fields[i];
-            if field.depth < first_d {
-                break;
-            }
-            let mut append = false;
-            if let Some(sindex) = &mut seq_index {
-                if field.depth <= sindex.depth {
-                    sindex.end = i;
-                    append = true;
+    let mut queue : Vec<SeqIndex> = vec![];
+    for (i, field) in fields.iter().enumerate() {
+        {
+            let mut rm_idx = queue.len();
+            for (j, qf) in queue.iter().rev().enumerate() {
+                if field.depth <= qf.depth {
+                    rv.push(SeqIndex {
+                        depth: qf.depth,
+                        start: qf.start,
+                        end: i, // one after the last match
+                    });
+                    rm_idx = j;
                 }
             }
-            if append {
-                rv.push(seq_index.unwrap());
-                seq_index = None;
+            let mut nqueue = queue.len();
+            while nqueue > 0 && rm_idx <= nqueue-1 {
+                queue.pop();
+                nqueue = queue.len();
             }
-            i += 1;
+        }
+        if field.is_sequence {
+            queue.push(SeqIndex {
+                depth: field.depth,
+                start: i,
+                end: i,
+            });
         }
     }
-    if seq_index.is_some() {
-        let mut sindex = seq_index.unwrap();
-        seq_index = None;
-        sindex.end = n;
-        rv.push(sindex);
+    for qf in queue.iter().rev() {
+        rv.push(SeqIndex{
+            depth: qf.depth,
+            start: qf.start,
+            end: n
+        });
     }
-    (i,rv)
+    rv
 }
+
+// pub(crate) fn find_seq_indices_begin_end(
+//     fields: &[StructField],
+//     start_index: usize,
+//     recurse_level: usize,
+// ) -> (usize, Vec<SeqIndex>) {
+//     let n = fields.len();
+//     let mut rv = vec![];
+//     if n == 0 {
+//         return (n, rv);
+//     }
+//     let mut seq_index = None;;
+//     let mut i = start_index;
+//     let first_d = fields[i].depth;
+//     while i < n {
+//         let field = &fields[i];
+//         if field.is_sequence == true {
+//             seq_index = Some(SeqIndex {
+//                 depth: field.depth,
+//                 start: i,
+//                 end: 0,
+//             });
+//             let (last_idx, tv) = find_seq_indices_begin_end(fields, i + 1, recurse_level + 1);
+//             let ntv = tv.len();
+//             // if ntv > 0 {
+//             //     let last_tv_idx = ntv - 1;
+//             //     let last = &tv[last_tv_idx];
+//             //     if last.end > last.start {
+//             //         i = last.end;
+//             //     }
+//             // }
+//             rv.extend(tv);
+//             i = last_idx;
+//         }
+//         // index in the list might have changed
+//         if i < n {
+//             let field = &fields[i];
+//             if field.depth < first_d {
+//                 break;
+//             }
+//             let mut append = false;
+//             if let Some(sindex) = &mut seq_index {
+//                 if field.depth <= sindex.depth {
+//                     sindex.end = i;
+//                     append = true;
+//                 }
+//             }
+//             if append {
+//                 rv.push(seq_index.unwrap());
+//                 seq_index = None;
+//             }
+//             i += 1;
+//         }
+//     }
+//     if seq_index.is_some() {
+//         let mut sindex = seq_index.unwrap();
+//         seq_index = None;
+//         sindex.end = n;
+//         rv.push(sindex);
+//     }
+//     (i,rv)
+// }
 
 // /// Find depth and indices to the start and end of (nested) sequences in a list.
 // ///
@@ -274,8 +319,8 @@ mod tests {
         DataDictionary, DataDictionaryEntry, IODLibrary, IodModuleType, ModuleAttribute, Tag,
         TagRange, VM, VR,
     };
-    use std::path::PathBuf;
     use log::debug;
+    use std::path::PathBuf;
 
     use crate::rust::syntax::StructField;
     use crate::rust::{module_attribute_to_field, RustAstBuilder, SeqIndex, Visibility};
@@ -379,6 +424,7 @@ mod tests {
     fn find_seq_indices_begin_end() {
         init_test_logger();
         let fields = vec![
+            // 0
             StructField {
                 visibility: Visibility::Public,
                 name: "item".to_string(),
@@ -388,6 +434,7 @@ mod tests {
                 depth: 0,
                 is_sequence: false,
             },
+            // 1
             StructField {
                 visibility: Default::default(),
                 name: "sequence start".to_string(),
@@ -397,6 +444,7 @@ mod tests {
                 depth: 0,
                 is_sequence: true,
             },
+            // 2
             StructField {
                 visibility: Visibility::Public,
                 name: "sequence item".to_string(),
@@ -406,6 +454,7 @@ mod tests {
                 depth: 1,
                 is_sequence: false,
             },
+            // 3
             StructField {
                 visibility: Visibility::Public,
                 name: "sequence item".to_string(),
@@ -415,6 +464,7 @@ mod tests {
                 depth: 1,
                 is_sequence: false,
             },
+            // 4
             StructField {
                 visibility: Visibility::Public,
                 name: "sequence start".to_string(),
@@ -424,6 +474,7 @@ mod tests {
                 depth: 1,
                 is_sequence: true,
             },
+            // 5
             StructField {
                 visibility: Visibility::Public,
                 name: "sequence item".to_string(),
@@ -433,6 +484,7 @@ mod tests {
                 depth: 2,
                 is_sequence: false,
             },
+            // 6
             StructField {
                 visibility: Visibility::Public,
                 name: "sequence item".to_string(),
@@ -442,6 +494,7 @@ mod tests {
                 depth: 2,
                 is_sequence: false,
             },
+            // 7
             StructField {
                 visibility: Visibility::PublicCrate,
                 name: "other item".to_string(),
@@ -456,15 +509,15 @@ mod tests {
             SeqIndex {
                 depth: 0,
                 start: 1,
-                end: 8,
+                end: 7,
             },
             SeqIndex {
                 depth: 1,
                 start: 4,
-                end: 8,
+                end: 7,
             },
         ];
-        let (_, v) = super::find_seq_indices_begin_end(&fields, 0, 0);
+        let v = super::find_seq_indices_begin_end(&fields);
         debug!("expected: {:?}\n", &expected);
         debug!("result: {:?}\n", &v);
         for item in &v {
@@ -556,7 +609,47 @@ mod tests {
                 end: 6,
             },
         ];
-        let (_,v) = super::find_seq_indices_begin_end(&fields, 0, 0);
+        let v = super::find_seq_indices_begin_end(&fields);
+        for item in &v {
+            let nc = v.iter().filter(|itr| *itr == item).count();
+            assert_eq!(nc, 1);
+        }
+        for item in &v {
+            assert!(expected.contains(item));
+        }
+    }
+
+    #[test]
+    fn find_seq_indices_begin_end3() {
+        init_test_logger();
+        let fields = vec![
+            StructField {
+                visibility: Default::default(),
+                name: "sequence start".to_string(),
+                lifetime: None,
+                reference: false,
+                type_: "Obj".to_string(),
+                depth: 0,
+                is_sequence: true,
+            },
+            StructField {
+                visibility: Visibility::Public,
+                name: "sequence item".to_string(),
+                lifetime: None,
+                reference: false,
+                type_: "Obj".to_string(),
+                depth: 1,
+                is_sequence: false,
+            },
+        ];
+        let expected = vec![
+            SeqIndex {
+                depth: 0,
+                start: 0,
+                end: 2,
+            },
+        ];
+        let v = super::find_seq_indices_begin_end(&fields);
         for item in &v {
             let nc = v.iter().filter(|itr| *itr == item).count();
             assert_eq!(nc, 1);
