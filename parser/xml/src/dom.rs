@@ -71,9 +71,7 @@ pub fn read_str(s: &str) -> Result<model::Element, ParserError> {
 /// * `reader`: XML event reader
 ///
 /// returns: Result<Element, ParserError>
-pub fn from_reader<R>(
-    reader: &mut EventReader<R>,
-) -> Result<model::Element, ParserError>
+pub fn from_reader<R>(reader: &mut EventReader<R>) -> Result<model::Element, ParserError>
 where
     R: BufRead,
 {
@@ -509,7 +507,7 @@ pub mod model {
         /// for (e, s) in children.iter().zip(texts.iter()) {
         ///   assert_eq!(e.name.local.as_str(), "subtitle");
         ///   let t = e.text().unwrap();
-        ///   assert_eq!(t.unwrap().as_str(), *s);
+        ///   assert_eq!(t.as_str(), *s);
         /// }
         /// ```
         pub fn find_children<P>(&self, predicate: P) -> Vec<&Element>
