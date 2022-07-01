@@ -75,12 +75,25 @@ pub struct RustAstBuilder {
     normative: BTreeMap<String, Trait>,
 }
 
+/// Data struct storing the indices and depth at which a sequence starts and ends.
 #[derive(Debug, PartialEq, Eq, Copy, Clone)]
 pub(crate) struct SeqIndex {
+    /// Depth of the sequence
     depth: i16,
+    /// Index at which the sequence starts
     start: usize,
+    /// Index at which the sequence ends (one past the last sequence member)
     end: usize,
 }
+
+/// Find the indices in the field where (nested) sequences start and finish.
+///
+/// The algorithm is based on changes detecting the depth changes between StructFields.
+///
+/// Expected increases in depth are not expected to exceed 1. If it does, the function will panic.
+///
+/// # Arguments
+/// * `fields` - slice of [StructField]
 pub(crate) fn find_seq_indices_begin_end(
     fields: &[StructField]
 ) -> Vec<SeqIndex> {
@@ -90,33 +103,42 @@ pub(crate) fn find_seq_indices_begin_end(
         return rv;
     }
     let mut queue : Vec<SeqIndex> = vec![];
-    for (i, field) in fields.iter().enumerate() {
-        {
-            let mut rm_idx = queue.len();
-            for (j, qf) in queue.iter().rev().enumerate() {
-                if field.depth <= qf.depth {
-                    rv.push(SeqIndex {
-                        depth: qf.depth,
-                        start: qf.start,
-                        end: i, // one after the last match
-                    });
-                    rm_idx = j;
-                }
-            }
-            let mut nqueue = queue.len();
-            while nqueue > 0 && rm_idx <= nqueue-1 {
+    // To avoid an if inside the loop, check if the first field is a sequence.
+    if fields[0].is_sequence {
+        queue.push(SeqIndex{
+            depth: fields[0].depth,
+            start: 0,
+            end: 0,
+        });
+    }
+    for i in 1..n {
+        let prev = &fields[i-1];
+        let curr = &fields[i];
+        let dd = curr.depth - prev.depth;
+        if dd < 0 { // We must have jumped out of one or more sequences.
+            let m = dd.abs();
+            for _ in 0..m {
+                rv.push(SeqIndex{
+                    depth: queue.last().unwrap().depth,
+                    start: queue.last().unwrap().start,
+                    end: i,
+                });
                 queue.pop();
-                nqueue = queue.len();
+            }
+        } else if dd > 0 { // We must have jumped in a sequence.
+            if dd != 1 {
+                panic!("Expected depth increases between to StructFields, not to exceed 1.");
             }
         }
-        if field.is_sequence {
-            queue.push(SeqIndex {
-                depth: field.depth,
+        if curr.is_sequence { // Add the new sequence to the queue.
+            queue.push(SeqIndex{
+                depth: curr.depth,
                 start: i,
                 end: i,
             });
         }
     }
+    // Any remaining indices on the queue should be moved into the return value.
     for qf in queue.iter().rev() {
         rv.push(SeqIndex{
             depth: qf.depth,
@@ -126,143 +148,6 @@ pub(crate) fn find_seq_indices_begin_end(
     }
     rv
 }
-
-// pub(crate) fn find_seq_indices_begin_end(
-//     fields: &[StructField],
-//     start_index: usize,
-//     recurse_level: usize,
-// ) -> (usize, Vec<SeqIndex>) {
-//     let n = fields.len();
-//     let mut rv = vec![];
-//     if n == 0 {
-//         return (n, rv);
-//     }
-//     let mut seq_index = None;;
-//     let mut i = start_index;
-//     let first_d = fields[i].depth;
-//     while i < n {
-//         let field = &fields[i];
-//         if field.is_sequence == true {
-//             seq_index = Some(SeqIndex {
-//                 depth: field.depth,
-//                 start: i,
-//                 end: 0,
-//             });
-//             let (last_idx, tv) = find_seq_indices_begin_end(fields, i + 1, recurse_level + 1);
-//             let ntv = tv.len();
-//             // if ntv > 0 {
-//             //     let last_tv_idx = ntv - 1;
-//             //     let last = &tv[last_tv_idx];
-//             //     if last.end > last.start {
-//             //         i = last.end;
-//             //     }
-//             // }
-//             rv.extend(tv);
-//             i = last_idx;
-//         }
-//         // index in the list might have changed
-//         if i < n {
-//             let field = &fields[i];
-//             if field.depth < first_d {
-//                 break;
-//             }
-//             let mut append = false;
-//             if let Some(sindex) = &mut seq_index {
-//                 if field.depth <= sindex.depth {
-//                     sindex.end = i;
-//                     append = true;
-//                 }
-//             }
-//             if append {
-//                 rv.push(seq_index.unwrap());
-//                 seq_index = None;
-//             }
-//             i += 1;
-//         }
-//     }
-//     if seq_index.is_some() {
-//         let mut sindex = seq_index.unwrap();
-//         seq_index = None;
-//         sindex.end = n;
-//         rv.push(sindex);
-//     }
-//     (i,rv)
-// }
-
-// /// Find depth and indices to the start and end of (nested) sequences in a list.
-// ///
-// /// fields:
-// /// [0]: sequence start
-// /// [1]:   > sequence item
-// /// [2]:   > sequence item
-// /// [3]:   > sequence start
-// /// [4]:     >> sequence item
-// /// [5]: other item
-// /// [6]: other item
-// ///
-// /// Expected result:
-// /// * (0, 0, 5)
-// /// * (1, 3, 5)
-// pub(crate) fn find_seq_indices_begin_end(fields: &[StructField], start_index: usize) -> Vec<(i16, usize, usize)> {
-//     let n = fields.len();
-//     let mut rv = vec![];
-//     if n == 0 {
-//         return rv;
-//     }
-//     let first_d = fields[0].depth;
-//     let mut seq_d = 0;
-//     let mut seq_start = 0;
-//     let mut in_seq = false;
-//     let mut i = start_index;
-//     while i < n {
-//         let field = &fields[i];
-//
-//         debug!("i = {} [{}]", i, in_seq);
-//
-//         // already in sequence
-//         // sequence tag
-//         //   > sequence item
-//         //   > sequence item
-//         // next item          <- [depth == sequence tag depth]
-//         if (in_seq && field.depth <= seq_d) || (!in_seq && field.depth < first_d) {
-//             debug!("sequence ends depth = {} [{},{}]", seq_d, seq_start, i);
-//             rv.push((seq_d, seq_start, i));
-//             in_seq = false;
-//         }
-//         //   > sequence item     [depth == 1]
-//         // next item          <- [depth == 0]
-//         if field.depth < first_d {
-//             // println!("field.depth < first_d: {} < {}", field.depth, first_d);
-//             break;
-//         }
-//         // at the start of a sequence tag
-//         // sequence tag          <- [here]
-//         //   > sequence item
-//         //   > sequence item
-//         //   > sequence tag
-//         //     >> sequence item  <- [or here]
-//         if field.is_sequence && !in_seq {
-//             seq_d = field.depth;
-//             seq_start = i;
-//             in_seq = true;
-//             debug!("sequence starts depth = {} [{}]", seq_d, i);
-//             // println!("start = ({},{})", seq_d, seq_start);
-//             let tv = find_seq_indices_begin_end(fields, i+1);
-//             let ntv = tv.len();
-//             if ntv != 0 {
-//                 rv.extend(tv);
-//                 let (_,_,last_idx) = rv.last().unwrap();
-//                 i = *last_idx;
-//             }
-//         }
-//         i += 1;
-//     }
-//     if in_seq {
-//         debug!("sequence ends depth = {} [{},{}]", seq_d, seq_start, n-1);
-//         rv.push((seq_d, seq_start, n-1));
-//     }
-//     rv
-// }
 
 /// Create a field in a struct form a module attribute.
 ///
