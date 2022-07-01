@@ -508,7 +508,7 @@ pub mod model {
         /// for (e, s) in children.iter().zip(texts.iter()) {
         ///   assert_eq!(e.name.local.as_str(), "subtitle");
         ///   let t = e.text().unwrap();
-        ///   assert_eq!(t.unwrap().as_str(), *s);
+        ///   assert_eq!(t.as_str(), *s);
         /// }
         /// ```
         pub fn find_children<P>(&self, predicate: P) -> Vec<&Element>
@@ -599,7 +599,7 @@ pub mod model {
             let mut e_text = r#"
             DICOM Standards Committee
         "#;
-            assert_eq!(text.as_str(), e_text);
+            assert_eq!(text.as_str().replace('\r', "").as_str(), e_text);
             let copyright = root.find_child(|e| e.name.local.as_str() == "copyright");
             assert!(copyright.is_some());
             let copyright = copyright.unwrap();
@@ -610,7 +610,7 @@ pub mod model {
             2021
             NEMA
         "#;
-            assert_eq!(text.as_str(), e_text);
+            assert_eq!(text.as_str().replace('\r', "").as_str(), e_text);
         }
 
         #[test]
@@ -636,7 +636,7 @@ pub mod model {
             let text = text.unwrap();
             e_text = r#"2021
 NEMA"#;
-            assert_eq!(text.as_str(), e_text);
+            assert_eq!(text.as_str().replace('\r', "").as_str(), e_text);
         }
 
         #[test]
