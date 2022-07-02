@@ -1,4 +1,5 @@
 use log::{debug, error};
+use std::cmp::Ordering;
 use std::collections::BTreeMap;
 use std::fmt::format;
 
@@ -86,6 +87,23 @@ pub(crate) struct SeqIndex {
     end: usize,
 }
 
+impl PartialOrd for SeqIndex {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        let order = self.start.partial_cmp(&other.start)?;
+        return if order != Ordering::Equal {
+            Some(order)
+        } else {
+            self.end.partial_cmp(&other.end)
+        };
+    }
+}
+
+impl Ord for SeqIndex {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.partial_cmp(other).unwrap()
+    }
+}
+
 /// Find the indices in the field where (nested) sequences start and finish.
 ///
 /// The algorithm is based on changes detecting the depth changes between StructFields.
@@ -94,44 +112,45 @@ pub(crate) struct SeqIndex {
 ///
 /// # Arguments
 /// * `fields` - slice of [StructField]
-pub(crate) fn find_seq_indices_begin_end(
-    fields: &[StructField]
-) -> Vec<SeqIndex> {
+pub(crate) fn find_seq_indices_begin_end(fields: &[StructField]) -> Vec<SeqIndex> {
     let n = fields.len();
     let mut rv = vec![];
     if n == 0 {
         return rv;
     }
-    let mut queue : Vec<SeqIndex> = vec![];
+    let mut queue: Vec<SeqIndex> = vec![];
     // To avoid an if inside the loop, check if the first field is a sequence.
     if fields[0].is_sequence {
-        queue.push(SeqIndex{
+        queue.push(SeqIndex {
             depth: fields[0].depth,
             start: 0,
             end: 0,
         });
     }
     for i in 1..n {
-        let prev = &fields[i-1];
+        let prev = &fields[i - 1];
         let curr = &fields[i];
         let dd = curr.depth - prev.depth;
-        if dd < 0 { // We must have jumped out of one or more sequences.
+        if dd < 0 {
+            // We must have jumped out of one or more sequences.
             let m = dd.abs();
             for _ in 0..m {
-                rv.push(SeqIndex{
+                rv.push(SeqIndex {
                     depth: queue.last().unwrap().depth,
                     start: queue.last().unwrap().start,
                     end: i,
                 });
                 queue.pop();
             }
-        } else if dd > 0 { // We must have jumped in a sequence.
+        } else if dd > 0 {
+            // We must have jumped in a sequence.
             if dd != 1 {
                 panic!("Expected depth increases between to StructFields, not to exceed 1.");
             }
         }
-        if curr.is_sequence { // Add the new sequence to the queue.
-            queue.push(SeqIndex{
+        if curr.is_sequence {
+            // Add the new sequence to the queue.
+            queue.push(SeqIndex {
                 depth: curr.depth,
                 start: i,
                 end: i,
@@ -140,13 +159,39 @@ pub(crate) fn find_seq_indices_begin_end(
     }
     // Any remaining indices on the queue should be moved into the return value.
     for qf in queue.iter().rev() {
-        rv.push(SeqIndex{
+        rv.push(SeqIndex {
             depth: qf.depth,
             start: qf.start,
-            end: n
+            end: n,
         });
     }
     rv
+}
+
+/// Find the nested sequence indices of `index` in `indices`.
+///
+/// The function doesn't assume that indices are sorted.
+///
+/// # Arguments
+/// * `indices` - slice of sequence indices
+/// * `index` - sequence index
+///
+/// # Returns
+/// Vector of nested sequences indices within the `index` sequence.
+pub(crate) fn get_nested_sequence_indices<'a, 'b>(
+    indices: &'a [SeqIndex],
+    index: &'b SeqIndex,
+) -> Vec<&'a SeqIndex> {
+    let mut v = vec![];
+    for i in indices {
+        if i == index {
+            continue;
+        }
+        if i.start > index.start && i.end <= index.end {
+            v.push(i);
+        }
+    }
+    v
 }
 
 /// Create a field in a struct form a module attribute.
@@ -303,6 +348,35 @@ mod tests {
         let iod_library = read_iod_library();
         let data_dictionary = read_data_dictionary();
         print!("normative n={}", iod_library.normative.len());
+    }
+
+    #[test]
+    fn get_nested_sequence_indices() {
+        let index = SeqIndex {
+            depth: 0,
+            start: 1,
+            end: 12,
+        };
+        let expected = vec![
+            SeqIndex {
+                depth: 1,
+                start: 3,
+                end: 6,
+            },
+            SeqIndex {
+                depth: 1,
+                start: 8,
+                end: 12,
+            },
+        ];
+        let mut indices = expected.clone();
+        indices.insert(1, index.clone());
+        let result = super::get_nested_sequence_indices(&indices, &index);
+        assert_eq!(expected.len(), result.len());
+        for index in &result {
+            assert!(expected.contains(*index));
+        }
+        // assert_eq!(&expected, &result);
     }
 
     #[test]
@@ -527,13 +601,11 @@ mod tests {
                 is_sequence: false,
             },
         ];
-        let expected = vec![
-            SeqIndex {
-                depth: 0,
-                start: 0,
-                end: 2,
-            },
-        ];
+        let expected = vec![SeqIndex {
+            depth: 0,
+            start: 0,
+            end: 2,
+        }];
         let v = super::find_seq_indices_begin_end(&fields);
         for item in &v {
             let nc = v.iter().filter(|itr| *itr == item).count();
