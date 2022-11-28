@@ -58,3 +58,6 @@ hs_err_pid*
 replay_pid*
 
 
+
+# Ignore Gradle build output directory
+build
