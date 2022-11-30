@@ -1,8 +1,9 @@
 package tv.dicom.std.core.model
 
-import tv.dicom.std.core.model.coid.Definition
+import tv.dicom.std.core.model.ciod.Ciod
+import tv.dicom.std.core.model.imd.Imd
 
 class DicomStandard {
-    val ciods: MutableList<Definition> = mutableListOf()
-    val niods: MutableList<tv.dicom.std.core.model.niod.Definition> = mutableListOf()
+    val ciods: MutableList<Ciod> = mutableListOf()
+    val imds: MutableList<Imd> = mutableListOf()
 }

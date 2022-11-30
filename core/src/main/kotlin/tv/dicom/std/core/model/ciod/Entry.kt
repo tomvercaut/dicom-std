@@ -1,4 +1,4 @@
-package tv.dicom.std.core.model.coid
+package tv.dicom.std.core.model.ciod
 
 import tv.dicom.std.core.model.Usage
 import tv.dicom.std.core.model.XRef
