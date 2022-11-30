@@ -10,8 +10,8 @@ repositories {
 
 dependencies {
 
-    // Use JUnit Jupiter for testing.
-    testImplementation("org.junit.jupiter:junit-jupiter:5.9.1")
+    // Use the kotlin.test library which under the hood uses JUnit to run tests.
+    testImplementation(kotlin("test"))
 }
 
 tasks.named<Test>("test") {
