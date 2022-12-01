@@ -1,0 +1,799 @@
+<!-- This XML file contains a section from the DICOM standard. This section is only meant to test the code in the project. Don't use it for any other purpose. -->
+<!-- Information on the DICOM standard and it's full description can be found on: https://www.dicomstandard.org/current/-->
+<book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" label="PS3.3" version="5.0"
+      xml:id="PS3.3">
+    <chapter label="A" status="1" xml:id="chapter_A">
+        <section label="A.2" status="2" xml:id="sect_A.2">
+            <title>Computed Radiography Image IOD</title>
+            <section label="A.2.1" status="3" xml:id="sect_A.2.1">
+                <title>CR Image IOD Description</title>
+                <para xml:id="para_d1de8bb0-9b4c-4318-839e-e466a8e3de2e">The Computed Radiography (CR) Image Information
+                    Object Definition specifies an image that has been created by a computed radiography imaging device.
+                </para>
+                <note>
+                    <para xml:id="para_f15c3af6-cfd3-4764-ba54-1674fe6f3602">Digital Luminescence Radiography is an
+                        equivalent term for computed Radiography.
+                    </para>
+                </note>
+            </section>
+            <section label="A.2.2" status="3" xml:id="sect_A.2.2">
+                <title>CR Image IOD Entity-Relationship Model</title>
+                <para xml:id="para_6bd914ca-bef5-40d6-92c7-dbe9e8f34759">This IOD uses the E-R Model in<xref
+                        linkend="sect_A.1.2" xrefstyle="select: label"/>, with only the Image IE below the Series IE.
+                    The
+                    Frame of Reference IE is not a component of this IOD.
+                </para>
+            </section>
+            <section label="A.2.3" status="3" xml:id="sect_A.2.3">
+                <title>CR Image IOD Module Table</title>
+                <para xml:id="para_8e9b9882-30e4-4395-9774-eab5ea4559e8">
+                    <xref linkend="table_A.2-1" xrefstyle="select: label"/>
+                    specifies the Modules of the CR Image IOD.
+                </para>
+                <table frame="box" label="A.2-1" rules="all" xml:id="table_A.2-1">
+                    <caption>CR Image IOD Modules</caption>
+                    <thead>
+                        <tr valign="top">
+                            <th align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_28e42d61-377f-4682-9d88-da5e5365a395">IE</para>
+                            </th>
+                            <th align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_95fae2e4-1ed9-4d29-bc9c-0f8686e77b0b">Module</para>
+                            </th>
+                            <th align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_2ba6d8f0-4d9b-47e4-8526-d71dd7f54845">Reference</para>
+                            </th>
+                            <th align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_eca4d531-84f7-4e84-9160-0944cff46991">Usage</para>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="2">
+                                <para xml:id="para_5aa8b3f7-568e-412b-9b86-87014069f3a3">Patient</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_bc79bc38-fded-4e83-b6cf-358317aeb7a2">Patient</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_a3b139fa-41a0-4df8-808c-38cb364c850d">
+                                    <xref linkend="sect_C.7.1.1" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_cf0b8a2b-c59e-407e-a1c0-45924a108d74">M</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_834fae3d-253a-4360-9a6f-94aee097dc49">Clinical Trial Subject</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_41e4a5af-fc11-45db-b9ad-fe28652cc651">
+                                    <xref linkend="sect_C.7.1.3" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_28527800-853e-4f79-97f1-6234eb1d3c0d">U</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="3">
+                                <para xml:id="para_ef4f5872-b6f4-46a5-aabc-054a5a67e93f">Study</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_3afefb6d-8eb6-4cf9-92fa-c6cb50873da8">General Study</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_64574519-b874-4628-8258-5476c306da79">
+                                    <xref linkend="sect_C.7.2.1" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_c5849c80-b002-43e0-ae0f-527e322e694c">M</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_393f2483-ba32-4664-ab6c-30c0392cc918">Patient Study</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_7686a9ed-8ace-4b85-a6eb-72a2815beb39">
+                                    <xref linkend="sect_C.7.2.2" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_7c6fc16b-6b27-4eb3-9fa4-584ab0eeb810">U</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_c00649d9-1926-4bd8-8605-90e358146f75">Clinical Trial Study</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_a7033261-8521-481f-9dca-87c89c6138be">
+                                    <xref linkend="sect_C.7.2.3" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_581a54f2-7e7f-4617-8cfd-0008fd799c7f">U</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="3">
+                                <para xml:id="para_e2608dce-e9da-4dd6-8940-04ea47d51a17">Series</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_17e3d9a6-d0c7-4756-9582-1eb16888a744">General Series</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_93be873b-e198-451c-9def-ecdccb4d8852">
+                                    <xref linkend="sect_C.7.3.1" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_4cb50869-5884-4518-96d0-815ef2899275">M</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_7e390a4d-c5fd-46f1-8e83-79fc72edc07e">CR Series</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_40f9906f-2965-4c48-b765-2c3b89d84a15">
+                                    <xref linkend="sect_C.8.1.1" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_69924ade-cc99-4d38-84cd-5f9061b498fe">M</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_f74f3bf3-db94-431e-987c-421ca1743d8a">Clinical Trial Series</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_d31a6b8c-47d5-4997-bfaf-9a7f4b79b708">
+                                    <xref linkend="sect_C.7.3.2" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_a2000d71-50ad-4876-a76e-d891fc4ae476">U</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_7371a85d-a1cd-48fd-a1d9-3efc8ef5da2d">Equipment</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_02a38e1d-d322-4686-9342-039323a86f6d">General Equipment</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_cf5652f6-095d-42d8-9666-a34801035ea3">
+                                    <xref linkend="sect_C.7.5.1" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_a9a1f855-6c61-4621-ab68-358c66d0f85f">M</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_bd977ee5-857d-4b84-b6ee-d862a8ae66e0">Acquisition</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_d65836d7-57f9-460a-b6dc-7162e0d25146">General Acquisition</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_292f4396-9003-4060-8292-dfbdaa474bab">
+                                    <xref linkend="sect_C.7.10.1" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_a99708dc-600c-49ea-ad3a-7361ff2939e0">M</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="13">
+                                <para xml:id="para_55790433-b9e7-4895-b142-8a099909d824">Image</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_5909a777-a45b-4d16-a16f-6c41a5ac1749">General Image</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_c4f433f0-0a10-4fda-84ce-dda21638de66">
+                                    <xref linkend="sect_C.7.6.1" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_b550ee7d-3988-4fe9-96a4-a5330c30e5fc">M</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_03db6e34-50ed-4c56-953d-9abbb7b3752d">General Reference</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_c78fef84-68f1-4048-bd14-3b49d4c970cf">
+                                    <xref linkend="sect_C.12.4" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_5a2184a4-5779-4958-8597-97d98d37cb5f">U</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_5fa7ace6-ca0e-4c83-8612-4b97cdf3dcb5">Image Pixel</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_902e736f-769d-430d-9f99-0e51e4032cca">
+                                    <xref linkend="sect_C.7.6.3" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_67ef5f83-5ab2-4f7b-ad7b-6ce866b8d310">M</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_2d287a91-b1fd-4915-81d6-c6d8001a6d8e">Contrast/Bolus</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_0c6dc198-fee8-4904-843c-c41e27a6e27f">
+                                    <xref linkend="sect_C.7.6.4" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_941c1f1e-49cb-44ef-8b7d-5763953ab041">C - Required if contrast media
+                                    was
+                                    used in this image
+                                </para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_051d483d-1cef-4f58-b728-5186848916ae">Display Shutter</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_9597d767-a5af-43e7-a302-ab76bfa0cc36">
+                                    <xref linkend="sect_C.7.6.11" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_1f78cc34-f31b-4d2f-8a21-6ceb710fed62">U</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_9e7645e3-a0cc-4d61-ae20-1da01ffe6e31">Device</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_c6b37cc1-ae01-4b53-88c4-959c267d9733">
+                                    <xref linkend="sect_C.7.6.12" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_feb3027e-505b-4e9c-84e7-09c7df6d09e0">U</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_f0e92fe2-8733-4658-9126-852b167b4089">Specimen</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_4a5152e5-648d-429f-a7b2-d6ab8caeed2b">
+                                    <xref linkend="sect_C.7.6.22" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_79ef4fa1-20ef-481b-af08-aa76769c6ae1">U</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_207abe81-d5ba-4695-8b18-1c92a70f3cc5">CR Image</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_99c06c36-495a-4881-8e10-e2beb8bb5fb0">
+                                    <xref linkend="sect_C.8.1.2" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_bcc647a1-d93f-4c53-96ca-a37ac86986d7">M</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_d564e827-8274-47d3-b641-933aa4e9f2f9">Overlay Plane</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_ebbdf045-b753-4245-b450-b034c19a6d4f">
+                                    <xref linkend="sect_C.9.2" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_27336772-bccc-4c52-8f35-01c88d9fbec4">U</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_09e8b2e3-f555-40f9-85b5-98909e2e9249">Modality LUT</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_8985bee5-74ca-417a-8eba-9d081ac04e94">
+                                    <xref linkend="sect_C.11.1" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_c2a2d701-acd7-4ff8-8931-fc6e76e9709a">U</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_b33b14c6-87ae-479f-908a-eaf0884be908">VOI LUT</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_124fe9c3-fde2-46fd-8633-b8c7eb4c311a">
+                                    <xref linkend="sect_C.11.2" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_30157c90-d1ca-40d7-94fd-7b6208c73e56">U</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_522a9b46-2fc2-4482-b248-c43fe2208257">SOP Common</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_cd8bc6b8-9d2e-4ef5-8b30-7d9c13d93ac5">
+                                    <xref linkend="sect_C.12.1" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_5f04022b-47a0-4930-b094-c11a74283b9e">M</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_d015b873-dcd2-44f7-bb47-51903f0f3c55">Common Instance Reference
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_1d02db6b-46a7-4b07-8126-ea4bf4f555c9">
+                                    <xref linkend="sect_C.12.2" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_68e1e0b5-a959-452d-9a31-8b4a09abf60a">U</para>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <note>
+                    <para xml:id="para_dfdad0c6-73c1-4872-9b23-f7b9fd7b59b7">The
+                        <xref linkend="sect_C.10.2" xrefstyle="select: title"/>
+                        was previously included in the Image IE for this IOD but has been retired. See <link
+                                xl:href="http://medical.nema.org/MEDICAL/Dicom/2004/printed/04_03pu3.pdf">
+                            PS3.3-2004</link>.
+                    </para>
+                </note>
+            </section>
+        </section>
+        <section label="A.3" status="2" xml:id="sect_A.3">
+            <title>CT Image IOD</title>
+            <section label="A.3.1" status="3" xml:id="sect_A.3.1">
+                <title>CT Image IOD Description</title>
+                <para xml:id="para_fb8dd083-1414-48b7-9d01-e763e2dc8732">The Computed Tomography (CT) Image Information
+                    Object Definition (IOD) specifies an image that has been created by a computed tomography imaging
+                    device.
+                </para>
+            </section>
+            <section label="A.3.2" status="3" xml:id="sect_A.3.2">
+                <title>CT Image IOD Entity-Relationship Model</title>
+                <para xml:id="para_5cf5ac0f-5a99-4cde-989c-34ceb4d0e1cd">This IOD uses the E-R Model in<xref
+                        linkend="sect_A.1.2" xrefstyle="select: label"/>, with only the Image IE below the Series IE.
+                </para>
+            </section>
+            <section label="A.3.3" status="3" xml:id="sect_A.3.3">
+                <title>CT Image IOD Module Table</title>
+                <para xml:id="para_bfb13ffd-c2b4-4b65-b05d-f4414ce61692">
+                    <xref linkend="table_A.3-1" xrefstyle="select: label"/>
+                    specifies the Modules of the CT Image IOD.
+                </para>
+                <table frame="box" label="A.3-1" rules="all" xml:id="table_A.3-1">
+                    <caption>CT Image IOD Modules</caption>
+                    <thead>
+                        <tr valign="top">
+                            <th align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_214112ac-721f-486a-be6a-2597dcbc70bb">IE</para>
+                            </th>
+                            <th align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_302cd7d8-c30c-46a1-ad12-c3954af8ee6c">Module</para>
+                            </th>
+                            <th align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_85431da6-d428-407e-9c17-d6bb0572ed80">Reference</para>
+                            </th>
+                            <th align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_de9a329d-4d96-49ef-813b-f7ed74c4baa4">Usage</para>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="2">
+                                <para xml:id="para_50c79060-20ed-490d-b7b8-4c0594062d1d">Patient</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_99f6501a-80db-47ee-a9c8-1fb2d7b48bec">Patient</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_4e3e8104-1463-4f8f-822c-d57964e4e66d">
+                                    <xref linkend="sect_C.7.1.1" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_86814e25-0623-44ad-8d14-cdafdcc05046">M</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_ed3ff446-ba8c-44dc-8041-c71ef807f7bd">Clinical Trial Subject</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_68418705-1164-48e5-8c6b-aed378c06ffe">
+                                    <xref linkend="sect_C.7.1.3" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_1462a110-e9e7-4a25-aadb-de407d6827cf">U</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="3">
+                                <para xml:id="para_825a7a77-fa62-4efb-afb8-40162024b7e2">Study</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_e063ec3d-4f38-4c23-a1f0-636801bae138">General Study</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_73545da7-01f8-47f1-a7d8-24affa04babe">
+                                    <xref linkend="sect_C.7.2.1" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_7210f0b3-bd88-45bd-882a-d76f39d0ea0c">M</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_d1f4c2e8-bbf6-46a3-8e2c-db24c714531f">Patient Study</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_32e8ba19-4de6-4b05-93d0-afca9881a5d1">
+                                    <xref linkend="sect_C.7.2.2" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_8662a642-12f6-4bd4-845b-167f09bdbb3c">U</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_a063f2fd-eab6-4a0e-936a-59926aee13fc">Clinical Trial Study</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_3193153c-49b1-414e-9f78-69a39b4a50b6">
+                                    <xref linkend="sect_C.7.2.3" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_14d45998-6249-470f-ad16-cfd134ec3aed">U</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="2">
+                                <para xml:id="para_60662264-a701-448a-b7b0-9565ac0b622d">Series</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_56324560-266b-4003-9fdd-85ce0f7953f5">General Series</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_6dec30cc-0815-41a9-882d-f834f60afd14">
+                                    <xref linkend="sect_C.7.3.1" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_718d551d-dbdb-446c-9814-4da69c7bdf05">M</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_792ef5c1-4160-442a-a7a2-8259e501770b">Clinical Trial Series</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_b5db8931-c335-4e52-9d07-f78016d24af3">
+                                    <xref linkend="sect_C.7.3.2" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_51c26a00-6e8a-414a-8716-04b966786498">U</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="2">
+                                <para xml:id="para_6e98e6c1-c0b0-4630-9b3e-1e959eacc74c">Frame of Reference</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_b6d4bf8d-7eff-4396-9b9f-9280cfde32c8">Frame of Reference</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_32fe977e-5784-45cb-8b7f-1d1700f9cac4">
+                                    <xref linkend="sect_C.7.4.1" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_2ff96759-f17b-4f9c-9c1c-561ecccf0be4">M</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_3691e808-449e-42d0-8329-7407034f53c4">Synchronization</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_ad666280-1021-4114-b7c8-6d47c591f7a4">
+                                    <xref linkend="sect_C.7.4.2" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_e902b967-619b-4699-8a3d-ecbed6a4dff6">C - Required if time
+                                    synchronization was applied.
+                                </para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_0f272f8c-a60e-4842-877a-9f782ef822dc">Equipment</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_29a34bb3-39c4-4615-b629-5ddbdb7dc283">General Equipment</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_0048dbdc-9532-4c37-a11e-283860c0f5dd">
+                                    <xref linkend="sect_C.7.5.1" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_0ca94efe-6b6a-4886-90a2-ba057dc52f8c">M</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_55eeccc3-6d91-4523-8262-7215ab15d62e">Acquisition</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_87d3dc60-fdde-477b-9572-6fe7a22e02fa">General Acquisition</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_c83f2470-719a-438a-874f-9297fa7ef4cc">
+                                    <xref linkend="sect_C.7.10.1" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_0523fded-a446-45b3-bf10-7d4f82f94338">M</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="13">
+                                <para xml:id="para_19840044-9026-4bd4-bae3-5e9cfc2378ea">Image</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_2af04aba-b192-4c48-9cbc-d5f45bf86e69">General Image</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_6bf06600-6b3e-4651-8258-4c6bab4b29c8">
+                                    <xref linkend="sect_C.7.6.1" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_21954fa8-2b32-46c6-8392-0696583b727b">M</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_42ce2097-71b5-4ffc-beb8-ec3fc9a1e082">General Reference</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_ba04cbd7-b5c2-4115-ae0c-d53a31d5a152">
+                                    <xref linkend="sect_C.12.4" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_ccb5097f-5914-4926-80f9-5af8e64aa7ee">U</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_70203331-0955-4339-86f4-1961b8c904c7">Image Plane</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_faea233a-c49f-4da5-9d76-395ecfb4ae49">
+                                    <xref linkend="sect_C.7.6.2" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_bfb708a8-26f6-47ed-a8e5-06caa9227f89">M</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_9d166336-efbd-49c0-9a50-63fb55265f6e">Image Pixel</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_a3b9e1bb-5113-4f5c-9c16-803d7ef5ff83">
+                                    <xref linkend="sect_C.7.6.3" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_1dc4fcd7-998b-4ede-847f-a97dfa28af99">M</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_c53881c0-e79a-4372-9fa6-bb7a0fb0e871">Contrast/Bolus</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_50cd3187-d824-4fac-9850-c70175713bec">
+                                    <xref linkend="sect_C.7.6.4" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_44130fcc-e2ac-401d-9f68-983b0927106e">C - Required if contrast media
+                                    was used in this image
+                                </para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_867f95b1-2af6-49cd-b418-1bca609c0c48">Device</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_dd11122a-5277-41ca-9444-a659bc9fb096">
+                                    <xref linkend="sect_C.7.6.12" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_f5c7c6a5-f6c4-47e4-80b5-15a44b9de3be">U</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_63d0232d-5539-4a2e-95a5-4f0f8ea77ade">Specimen</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_ebbaec3d-585a-4427-94e5-491a9cb95d53">
+                                    <xref linkend="sect_C.7.6.22" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_bb46f595-cc12-4e42-bf74-c3c62b2d0711">U</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_7d01cbae-952b-4e88-a7ca-bfacc748d0a9">CT Image</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_48209c8e-2c56-4fbc-b5d6-6514e0a75e51">
+                                    <xref linkend="sect_C.8.2.1" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_4cef1937-ff1d-4087-9463-726db621778e">M</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_8f14d58d-169c-4f00-b1ea-c1de18cc8632">Multi-energy CT Image</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_4a01f8a4-6d56-4141-83a2-ebb17d1abc13">
+                                    <xref linkend="sect_C.8.2.2" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_e86b95fc-aa8c-4d9a-9d4a-8ab664a926ca">C - Required if Multi-energy CT
+                                    Acquisition (0018,9361) is YES.
+                                </para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_129565b4-ecb8-4200-b76f-0439966f1bc9">Overlay Plane</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_775dbb1b-6b98-4f0b-a1e4-75224c86ea3f">
+                                    <xref linkend="sect_C.9.2" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_f0377ccf-ca2c-48b6-b420-bfa60bbb8b85">U</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_d54bb6d8-45a7-4c04-be37-e632f8a6bbcb">VOI LUT</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_ea6f98b7-d652-47d4-a2ba-931e9e43ecb5">
+                                    <xref linkend="sect_C.11.2" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_d3c5bbe5-0006-4f23-a377-0b588faad6cf">U</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_311090ff-6c4d-4991-95b3-d324a173d258">SOP Common</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_b7ac48a7-a585-4d9f-ad0a-20f1cf4fe565">
+                                    <xref linkend="sect_C.12.1" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_8594150f-10ae-4da9-a0dd-1a6b451dc3c8">M</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_a95858cc-fd4c-4a6e-b5bf-998bb1eac2e4">Common Instance Reference
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_14d33e15-c432-4b1b-803b-cd97f2661b7e">
+                                    <xref linkend="sect_C.12.2" xrefstyle="select: labelnumber"/>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_3f229691-06dd-41c2-91a4-f8ed641e3f49">U</para>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <section label="A.3.3.1" status="4" xml:id="sect_A.3.3.1">
+                    <title>CT Image IOD Content Constraints</title>
+                    <para xml:id="para_eac63c30-86ef-4e3a-99d5-362c104166de">If Multi-energy CT Acquisition (0018,9361)
+                        is YES the following constraints will apply:
+                    </para>
+                    <itemizedlist>
+                        <listitem>
+                            <para xml:id="para_c7f0e445-67c0-45fc-87f7-343e734c755b">The
+                                <xref linkend="sect_C.7.6.4" xrefstyle="select: title"/>
+                                shall be present if contrast was administered even if images are processed to remove
+                                contrast information from the pixels, e.g. Virtual Non-Contrast images.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para xml:id="para_dd51ab59-4a62-4931-bb9f-fa05b31282a1">The Real World Value Mapping
+                                Sequence (0040,9096) shall be present in the<xref linkend="sect_C.7.6.1"
+                                                                                  xrefstyle="select: title"/>.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para xml:id="para_739ebb7e-a5e7-4b28-9c32-33c8d4048478">For Measurement Units Code Sequence
+                                (0040,08EA) in the Real World Value Mapping Sequence (0040,9096) D
+                                <olink targetdoc="PS3.16" targetptr="sect_CID_301"
+                                       xrefstyle="select: labelnumber quotedtitle"/>
+                                shall be used.
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                </section>
+            </section>
+        </section>
+    </chapter>
+</book>

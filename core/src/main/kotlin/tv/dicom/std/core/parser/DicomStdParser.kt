@@ -20,7 +20,7 @@ import javax.xml.parsers.DocumentBuilderFactory
 fun parse(file: File): Optional<DicomStandard> {
     val builder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
     val document = builder.parse(file)
-    return build(document)
+    return build(listOf(document))
 }
 
 /**
@@ -34,5 +34,5 @@ fun parse(file: File): Optional<DicomStandard> {
 fun parse(xmlString: String): Optional<DicomStandard> {
     val builder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
     val document = builder.parse(InputSource(StringReader(xmlString)))
-    return build(document)
+    return build(listOf(document))
 }
