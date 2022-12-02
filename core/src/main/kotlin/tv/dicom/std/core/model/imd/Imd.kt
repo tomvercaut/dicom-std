@@ -8,6 +8,6 @@ package tv.dicom.std.core.model.imd
  * @constructor Create an Information Module Definition
  */
 data class Imd(
-        var ids: MutableList<String> = mutableListOf(),
-        var items: MutableList<Entry> = mutableListOf()
+    var ids: MutableList<String> = mutableListOf(),
+    var items: MutableList<Entry> = mutableListOf()
 )

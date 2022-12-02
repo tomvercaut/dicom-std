@@ -8,6 +8,6 @@ package tv.dicom.std.core.model.ciod
  * @constructor Create Composite Information Object Definition
  */
 data class Ciod(
-        var ids: MutableList<String> = mutableListOf(),
-        val items: List<Entry> = mutableListOf<Entry>()
+    var ids: MutableList<String> = mutableListOf(),
+    val items: List<Entry> = mutableListOf<Entry>()
 )
