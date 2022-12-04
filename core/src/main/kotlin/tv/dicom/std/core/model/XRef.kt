@@ -1,3 +1,3 @@
 package tv.dicom.std.core.model
 
-data class XRef(var linked: String = "", var style: String = "")
+data class XRef(var linkend: String = "", var style: String = "")
