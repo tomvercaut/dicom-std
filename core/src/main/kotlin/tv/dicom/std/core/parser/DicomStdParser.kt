@@ -1,6 +1,5 @@
 package tv.dicom.std.core.parser
 
-import org.w3c.dom.Document
 import org.xml.sax.InputSource
 import tv.dicom.std.core.model.DicomStandard
 
