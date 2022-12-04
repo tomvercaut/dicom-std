@@ -1,0 +1,18 @@
+<!-- This XML file contains a section from the DICOM standard. This section is only meant to test the code in the project. Don't use it for any other purpose. -->
+<!-- Information on the DICOM standard and it's full description can be found on: https://www.dicomstandard.org/current/-->
+<tr valign="top">
+    <td align="left" colspan="1" rowspan="3">
+        <para xml:id="para_ef4f5872-b6f4-46a5-aabc-054a5a67e93f">Study</para>
+    </td>
+    <td align="left" colspan="1" rowspan="1">
+        <para xml:id="para_3afefb6d-8eb6-4cf9-92fa-c6cb50873da8">General Study</para>
+    </td>
+    <td align="left" colspan="1" rowspan="1">
+        <para xml:id="para_64574519-b874-4628-8258-5476c306da79">
+            <xref linkend="sect_C.7.2.1" xrefstyle="select: labelnumber"/>
+        </para>
+    </td>
+    <td align="left" colspan="1" rowspan="1">
+        <para xml:id="para_c5849c80-b002-43e0-ae0f-527e322e694c">M</para>
+    </td>
+</tr>

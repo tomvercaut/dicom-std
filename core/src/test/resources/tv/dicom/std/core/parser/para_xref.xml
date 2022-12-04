@@ -1,0 +1,8 @@
+<!-- This XML file contains a section from the DICOM standard. This section is only meant to test the code in the project. Don't use it for any other purpose. -->
+<!-- Information on the DICOM standard and it's full description can be found on: https://www.dicomstandard.org/current/-->
+<book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" label="PS3.3" version="5.0"
+      xml:id="PS3.3">
+    <para xml:id="para_a3b139fa-41a0-4df8-808c-38cb364c850d">
+        <xref linkend="sect_C.7.1.1" xrefstyle="select: labelnumber"/>
+    </para>
+</book>
