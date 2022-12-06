@@ -3,11 +3,13 @@ package tv.dicom.std.core.model.imd
 /**
  * Information Module Definition as defined in the DICOM standard part 03 chapter C.
  *
- * @property ids One or more IDs (first ID could be the matching table ID)
+ * @property id XML table ID
+ * @property parentIds zero or more XML IDs of parent elements
  * @property items properties of the Information Module Definition
  * @constructor Create an Information Module Definition
  */
 data class Imd(
-    var ids: MutableList<String> = mutableListOf(),
+    var id: String = "",
+    var parentIds: List<String> = listOf(),
     var items: MutableList<Entry> = mutableListOf()
 )

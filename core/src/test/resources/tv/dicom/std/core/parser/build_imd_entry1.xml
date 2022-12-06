@@ -1,0 +1,14 @@
+<!-- This XML file contains a section from the DICOM standard. This section is only meant to test the code in the project. Don't use it for any other purpose. -->
+<!-- Information on the DICOM standard and it's full description can be found on: https://www.dicomstandard.org/current/-->
+<tr valign="top">
+    <td align="left" colspan="1" rowspan="1">
+        <para xml:id="para_a5eabe67-19b5-45dc-9df8-be581e83055d">Referenced Study Sequence</para>
+    </td>
+    <td align="center" colspan="1" rowspan="1">
+        <para xml:id="para_24baad75-fd41-41c5-93da-e955cf662b0b">(0008,1110)</para>
+    </td>
+    <td align="left" colspan="1" rowspan="1">
+        <para xml:id="para_8aaff5d1-92bd-4b2f-b38e-175494ff58d9">Uniquely identifies the Study SOP Instances associated with the Patient SOP Instance. One or more Items shall be included in this Sequence.</para>
+        <para xml:id="para_97a2b1d5-487e-498a-9d48-26c4cb77823c">See <xref linkend="sect_10.6.1" xrefstyle="select: label"/>.</para>
+    </td>
+</tr>

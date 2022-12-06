@@ -1,0 +1,15 @@
+<!-- This XML file contains a section from the DICOM standard. This section is only meant to test the code in the project. Don't use it for any other purpose. -->
+<!-- Information on the DICOM standard and it's full description can be found on: https://www.dicomstandard.org/current/-->
+<tr valign="top">
+    <td align="left" colspan="3" rowspan="1">
+        <para xml:id="para_e286ea91-a113-42b9-b269-20538f8933ec">
+            <emphasis role="italic">Include <xref linkend="table_10-16" xrefstyle="select: label quotedtitle"/>
+            </emphasis>
+        </para>
+    </td>
+    <td align="left" colspan="1" rowspan="1">
+        <para xml:id="para_1e004f82-f8e2-457a-9fec-ea9bd51db662">
+            <emphasis role="italic">No Baseline CID is defined.</emphasis>
+        </para>
+    </td>
+</tr>

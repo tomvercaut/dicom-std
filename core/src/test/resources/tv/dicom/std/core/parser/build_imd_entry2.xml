@@ -1,0 +1,18 @@
+<!-- This XML file contains a section from the DICOM standard. This section is only meant to test the code in the project. Don't use it for any other purpose. -->
+<!-- Information on the DICOM standard and it's full description can be found on: https://www.dicomstandard.org/current/-->
+<tr valign="top">
+    <td align="left" colspan="1" rowspan="1">
+        <para xml:id="para_fbbd54a3-2fad-4469-adb8-71cd664e03a4">Patient's Alternative Calendar</para>
+    </td>
+    <td align="center" colspan="1" rowspan="1">
+        <para xml:id="para_ecfb8187-70a3-40f7-be83-e142d1e1174a">(0010,0035)</para>
+    </td>
+    <td align="center" colspan="1" rowspan="1">
+        <para xml:id="para_0361c986-e534-4ac2-852d-62b17c649885">1C</para>
+    </td>
+    <td align="left" colspan="1" rowspan="1">
+        <para xml:id="para_1b1ab514-65a0-41a1-b2c3-85e218d1a13d">The Alternative Calendar used for Patient's Birth Date in Alternative Calendar (0010,0033) and Patient's Death Date in Alternative Calendar (0010,0034).</para>
+        <para xml:id="para_3160703a-8f78-4c6e-9dc7-c09daea16ae4">See <xref linkend="sect_C.7.1.5" xrefstyle="select: label"/> for Defined Terms.</para>
+        <para xml:id="para_97e473ec-bac4-4f74-8514-c71d560c1f75">Required if either Patient's Birth Date in Alternative Calendar (0010,0033) or Patient's Alternative Death Date in Calendar (0010,0034) is present.</para>
+    </td>
+</tr>

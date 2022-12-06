@@ -796,4 +796,460 @@
             </section>
         </section>
     </chapter>
+    <chapter label="C" status="1" xml:id="chapter_C">
+        <section label="C.2" status="2" xml:id="sect_C.2">
+            <title>Patient Modules</title>
+            <para xml:id="para_1f1b812b-8cd0-40fe-8555-b2b78e5f445e">The following Sections specify Modules used for
+                Patient
+                management.
+            </para>
+            <section label="C.2.1" status="3" xml:id="sect_C.2.1">
+                <title>Patient Relationship Module</title>
+                <para xml:id="para_d9634482-4dbc-4aa6-af6b-6b36e5da498a">
+                    <xref linkend="table_C.2-1" xrefstyle="select: label"/>
+                    specifies the Attributes of the<xref linkend="sect_C.2.1" xrefstyle="select: title"/>, which
+                    reference
+                    SOP Instances related to this SOP Class.
+                </para>
+                <table frame="box" label="C.2-1" rules="all" xml:id="table_C.2-1">
+                    <caption>Patient Relationship Module Attributes</caption>
+                    <thead>
+                        <tr valign="top">
+                            <th align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_2142bc87-0f9b-4ecc-a5c0-d6a71bf08e5b">Attribute Name</para>
+                            </th>
+                            <th align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_78798264-984e-4a9b-9788-07a4baf73011">Tag</para>
+                            </th>
+                            <th align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_3dc2c957-7030-45d9-984d-08eca6161975">Attribute Description</para>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_a5eabe67-19b5-45dc-9df8-be581e83055d">Referenced Study Sequence
+                                </para>
+                            </td>
+                            <td align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_24baad75-fd41-41c5-93da-e955cf662b0b">(0008,1110)</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_8aaff5d1-92bd-4b2f-b38e-175494ff58d9">Uniquely identifies the Study
+                                    SOP
+                                    Instances associated with the Patient SOP Instance. One or more Items shall be
+                                    included
+                                    in this Sequence.
+                                </para>
+                                <para xml:id="para_97a2b1d5-487e-498a-9d48-26c4cb77823c">See
+                                    <xref linkend="sect_10.6.1"
+                                          xrefstyle="select: label"/>
+                                    .
+                                </para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="2" rowspan="1">
+                                <para xml:id="para_3689184c-3731-4271-adee-097e4a7ffbbc">
+                                    <emphasis role="italic">&gt;Include
+                                        <xref linkend="table_10-11" xrefstyle="select: label quotedtitle"/>
+                                    </emphasis>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_faab8f73-4106-4346-bd80-487a5813f445"/>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_7dbe3340-ddb4-4f64-9323-fbb6158d067c">Referenced Visit Sequence
+                                </para>
+                            </td>
+                            <td align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_52091862-89a6-4ab7-986b-c2d4b4844d94">(0008,1125)</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_23d376a7-1af8-4792-944f-5a32f1019872">Uniquely identifies the Visit
+                                    SOP
+                                    Instances associated with this Patient SOP Instance. One or more Items shall be
+                                    included
+                                    in this Sequence.
+                                </para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="2" rowspan="1">
+                                <para xml:id="para_fedebc1d-e1f0-4172-aa77-36dc2cc65e44">
+                                    <emphasis role="italic">&gt;Include
+                                        <xref linkend="table_10-11" xrefstyle="select: label quotedtitle"/>
+                                    </emphasis>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_c43da675-f2d1-4077-8d06-6903cb2cb874"/>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_76862061-6ef1-41f1-8f69-13730dbadb36">Referenced Patient Alias
+                                    Sequence
+                                </para>
+                            </td>
+                            <td align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_10497b8e-c44e-4ea1-87da-1c1e17b4a779">(0038,0004)</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_eebac586-9223-44a2-9574-8436592edce2">Uniquely identifies any Patient
+                                    SOP
+                                    Instances that also describe this Patient. These SOP Instances are aliases. Zero or
+                                    more
+                                    Items shall be included in this Sequence.
+                                </para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="2" rowspan="1">
+                                <para xml:id="para_3de33b80-dad5-4ed3-bac2-b2712589de0b">
+                                    <emphasis role="italic">&gt;Include
+                                        <xref linkend="table_10-11" xrefstyle="select: label quotedtitle"/>
+                                    </emphasis>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_b9e8d7b5-552e-4b84-9fc7-f0ec6f808360"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section label="C.2.2" status="3" xml:id="sect_C.2.2">
+                <title>Patient Identification Module</title>
+                <para xml:id="para_8d01a4b4-8fb5-4cab-9280-4df33290725d">
+                    <xref linkend="table_C.2-2" xrefstyle="select: label"/>
+                    specifies the Attributes of the<xref linkend="sect_C.2.2" xrefstyle="select: title"/>, which define
+                    the Attributes relevant to identifying a Patient.
+                </para>
+                <table frame="box" label="C.2-2" rules="all" xml:id="table_C.2-2">
+                    <caption>Patient Identification Module Attributes</caption>
+                    <thead>
+                        <tr valign="top">
+                            <th align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_b8c6f38a-e416-4bc8-8c1d-e71faa096b67">Attribute Name</para>
+                            </th>
+                            <th align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_d111285c-0522-44cb-b421-fbd239873ac7">Tag</para>
+                            </th>
+                            <th align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_976bc5e4-e263-4473-a03e-c1d6929696c1">Attribute Description</para>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_9ebf20fc-363c-48ed-a823-902aa031adce">Patient's Name</para>
+                            </td>
+                            <td align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_0fbd53ab-bbcb-4494-a908-056bbc2714ee">(0010,0010)</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_e18671b4-268b-4b54-8bb1-1d745387f4b9">Patient's full name.</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_fe2afe04-551d-40d7-b312-7a9f44078111">Patient ID</para>
+                            </td>
+                            <td align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_00efcc2e-ab62-491f-8afd-df5a27e28b6f">(0010,0020)</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_2410a061-1d37-47a8-8ad1-9a9d999f90ef">Primary identifier for the
+                                    Patient.
+                                </para>
+                                <note>
+                                    <para xml:id="para_43a859ae-395f-4cc2-9af1-aa5fc1fbea13">In the case of imaging a
+                                        group of small animals simultaneously, the single value of this identifier
+                                        corresponds to the identification of the entire group. See also<xref
+                                                linkend="sect_C.7.1.4.1.1" xrefstyle="select: label"/>.
+                                    </para>
+                                </note>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="2" rowspan="1">
+                                <para xml:id="para_2347a9c4-3b76-465b-adec-3de2a44b3b38">
+                                    <emphasis role="italic">Include
+                                        <xref linkend="table_10-18" xrefstyle="select: label quotedtitle"/>
+                                    </emphasis>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_8298e2c2-1bad-41b9-9434-e9a160d00e04"/>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_a742b021-b0ff-45b1-b4a2-0527d6623ca1">Type of Patient ID</para>
+                            </td>
+                            <td align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_09bdab50-f17e-40dd-a8d8-0311508ef880">(0010,0022)</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_c2ee4585-98bc-4293-992d-79ca837d26fa">The type of identifier in the
+                                    Patient ID (0010,0020).
+                                </para>
+                                <variablelist spacing="compact">
+                                    <title>Defined Terms:</title>
+                                    <varlistentry>
+                                        <term>TEXT</term>
+                                        <listitem>
+                                            <para xml:id="para_2c2072e5-1dfa-470c-88de-2c8b3d2e5d46"/>
+                                        </listitem>
+                                    </varlistentry>
+                                    <varlistentry>
+                                        <term>RFID</term>
+                                        <listitem>
+                                            <para xml:id="para_b7157ad1-b00b-4422-b157-4c87a8c8c845"/>
+                                        </listitem>
+                                    </varlistentry>
+                                    <varlistentry>
+                                        <term>BARCODE</term>
+                                        <listitem>
+                                            <para xml:id="para_70531cc7-11ff-4075-b7c4-acce25797acd"/>
+                                        </listitem>
+                                    </varlistentry>
+                                </variablelist>
+                                <note>
+                                    <orderedlist>
+                                        <listitem>
+                                            <para xml:id="para_a1f4199b-3871-4a28-b7a5-fde92ae75b2f">The identifier is
+                                                coded as a string regardless of the type, not as a binary value.
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para xml:id="para_a48c5e6d-adf2-4c87-832a-962045c0e275">When this Attribute
+                                                has a value of BARCODE, Patient ID (0010,0020) may or may not have the
+                                                same value as Barcode Value (2200,0005) in the<xref
+                                                        linkend="sect_C.4.10" xrefstyle="select: title"/>, if present.
+                                            </para>
+                                        </listitem>
+                                    </orderedlist>
+                                </note>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_c2e09104-ecb2-4918-a96a-ff4552f37e36">Other Patient IDs Sequence
+                                </para>
+                            </td>
+                            <td align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_7f9ac129-87be-410b-9ef4-d2015704ede9">(0010,1002)</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_4246fa07-6701-4a33-a8cf-660ce9902718">A Sequence of identification
+                                    numbers or codes used to identify the Patient, which may or may not be human
+                                    readable, and may or may not have been obtained from an implanted or attached device
+                                    such as an RFID or barcode.
+                                </para>
+                                <para xml:id="para_226004f2-cb2c-4c8a-b03f-8f747a3c0053">One or more Items are permitted
+                                    in this Sequence.
+                                </para>
+                                <note>
+                                    <para xml:id="para_dd33d55a-7fbf-4336-80a1-32b32eb6d46a">This Attribute replaces the
+                                        use of Other Patient IDs (0010,1000), which did not specify an issuer for each
+                                        other identifier, and which has been retired.
+                                    </para>
+                                </note>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_d9259917-56e5-4abb-a292-351b3287bd07">&gt;Patient ID</para>
+                            </td>
+                            <td align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_47a7bcd4-6863-454b-bc36-f91e694c8730">(0010,0020)</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_1e44b86b-2c6a-47be-85d5-7fda1a2dc0ed">An identifier for the
+                                    Patient.
+                                </para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="2" rowspan="1">
+                                <para xml:id="para_5a42efdd-a257-4a6a-86c5-0d7fe0db9799">
+                                    <emphasis role="italic">&gt;Include
+                                        <xref linkend="table_10-18" xrefstyle="select: label quotedtitle"/>
+                                    </emphasis>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_88eafdcc-68fd-435f-b7b5-3516ed6aaa71"/>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_ff097ada-e605-4e00-a69f-283ab0548e81">&gt;Type of Patient ID</para>
+                            </td>
+                            <td align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_bd15f694-3fb8-4f38-8d05-f4807811c52a">(0010,0022)</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_967e07d5-90d4-4e72-b824-d9b938695ec9">The type of identifier in the
+                                    Patient ID (0010,0020) in this Item.
+                                </para>
+                                <variablelist spacing="compact">
+                                    <title>Defined Terms:</title>
+                                    <varlistentry>
+                                        <term>TEXT</term>
+                                        <listitem>
+                                            <para xml:id="para_968acb8b-fc0f-4d63-b26d-cba64e916a8e"/>
+                                        </listitem>
+                                    </varlistentry>
+                                    <varlistentry>
+                                        <term>RFID</term>
+                                        <listitem>
+                                            <para xml:id="para_3d8d8c23-9593-477c-a53f-0749e271a476"/>
+                                        </listitem>
+                                    </varlistentry>
+                                    <varlistentry>
+                                        <term>BARCODE</term>
+                                        <listitem>
+                                            <para xml:id="para_d6e79899-f61b-4da5-bc94-6fbb7b2c5d66"/>
+                                        </listitem>
+                                    </varlistentry>
+                                </variablelist>
+                                <note>
+                                    <orderedlist>
+                                        <listitem>
+                                            <para xml:id="para_7db6fc0d-2296-4050-9536-c5ff814beb75">The identifier is
+                                                coded as a string regardless of the type, not as a binary value.
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para xml:id="para_51e2bffe-f322-46d2-b7d7-40134957f313">When this Attribute
+                                                has a value of BARCODE, Patient ID (0010,0020) may or may not have the
+                                                same value as Barcode Value (2200,0005) in the<xref
+                                                        linkend="sect_C.4.10" xrefstyle="select: title"/>, if present.
+                                            </para>
+                                        </listitem>
+                                    </orderedlist>
+                                </note>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_fd651f07-bcb6-4371-9cde-c00275961119">Other Patient Names</para>
+                            </td>
+                            <td align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_02673344-2ce9-4afc-8dad-956705cb5f48">(0010,1001)</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_8bb7a487-8cd1-4bd0-8569-ca6bcae1ae74">Other names used to identify
+                                    the Patient.
+                                </para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_449bb8d4-b5f7-43a6-bbdd-0321f502ac49">Patient's Birth Name</para>
+                            </td>
+                            <td align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_8ad6ad8f-3a51-49da-8395-1ca48db10509">(0010,1005)</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_33c50e1b-80f7-4dfa-958d-1fb05f97ec30">Patient's birth name.</para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_7f91c98a-828a-493e-9f51-af7960ff3ada">Patient's Mother's Birth Name
+                                </para>
+                            </td>
+                            <td align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_90a0ffc1-0f7f-419e-a601-d5ffcdeb7144">(0010,1060)</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_95c4c96e-df00-44ab-a8a9-99be6693ee72">Birth name of Patient's
+                                    mother.
+                                </para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_c0cdef00-da68-4b9f-a7cf-38ca052c497b">Referenced Patient Photo
+                                    Sequence
+                                </para>
+                            </td>
+                            <td align="center" colspan="1" rowspan="1">
+                                <para xml:id="para_3dfaf3dd-6b80-40f9-bd41-ea8f2ba7fc22">(0010,1100)</para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_a4e4d272-65b7-498c-9046-777ce56706e3">A photo to confirm the identity
+                                    of a Patient.
+                                </para>
+                                <para xml:id="para_aa78f70f-d6bc-481c-9ab2-44da9de21824">Only a single Item is permitted
+                                    in this Sequence.
+                                </para>
+                                <para xml:id="para_0340d2f3-fe33-42d1-b4d0-53c6cba98d6d">See<xref
+                                        linkend="sect_C.2.2.1.1" xrefstyle="select: labelnumber"/>.
+                                </para>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="2" rowspan="1">
+                                <para xml:id="para_6955c664-886f-4968-b9e0-9b1370c1b1a1">
+                                    <emphasis role="italic">&gt;Include
+                                        <xref linkend="table_10-3b" xrefstyle="select: label quotedtitle"/>
+                                    </emphasis>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_08b7f226-3ff8-4a2d-b354-7c35996f2434"/>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="left" colspan="2" rowspan="1">
+                                <para xml:id="para_6c3dbe22-b295-40ae-947c-26ec33377d4d">
+                                    <emphasis role="italic">Include
+                                        <xref linkend="table_C.7.1.4-1" xrefstyle="select: label quotedtitle"/>
+                                    </emphasis>
+                                </para>
+                            </td>
+                            <td align="left" colspan="1" rowspan="1">
+                                <para xml:id="para_a77cdc1c-19a3-4f94-a826-0c4e300b2e4e"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <note>
+                    <para xml:id="para_24105841-c21f-4b34-b95c-d0db85683f8a">Previously, Other Patient IDs (0010,1000)
+                        and Medical Record Locator (0010,1090) were included in this table. These Attributes have been
+                        retired. See <link xl:href="http://dicom.nema.org/MEDICAL/Dicom/2017a/output/pdf/part03.pdf">
+                            PS3.3-2017a</link>.
+                    </para>
+                </note>
+                <section label="C.2.2.1" status="4" xml:id="sect_C.2.2.1">
+                    <title>Patient Identification Module Attribute Descriptions</title>
+                    <section label="C.2.2.1.1" status="5" xml:id="sect_C.2.2.1.1">
+                        <title>Referenced Patient Photo Sequence</title>
+                        <para xml:id="para_b22f2b40-4a3d-4b3f-a697-9040b5ec159b">A Patient Photo may be provided as an
+                            additional means to confirm the identity of the Patient.
+                        </para>
+                        <para xml:id="para_adf9e415-c8d0-484a-9ad8-39ef3e971677">When the Referenced SOP Sequence
+                            (0008,1199) is present, the Referenced SOP Class UID (0008,1150) shall be either VL
+                            Photographic Image Storage (1.2.840.10008.5.1.4.1.1.77.1.4) or Secondary Capture Image
+                            Storage (1.2.840.10008.5.1.4.1.1.7).
+                        </para>
+                        <para xml:id="para_e5c887f0-e451-415d-83ea-341cf0fc5e94">When the WADO Retrieval Sequence
+                            (0040,E023) or WADO-RS Retrieval Sequence (0040,E025) is present, the Retrieve URI
+                            (0040,E010) shall refer to a JPEG image if the referenced server is not WADO-compliant.
+                        </para>
+                    </section>
+                </section>
+            </section>
+        </section>
+    </chapter>
 </book>

@@ -3,12 +3,12 @@ package tv.dicom.std.core.parser
 import org.apache.logging.log4j.kotlin.logger
 import org.w3c.dom.*
 import tv.dicom.std.core.Resource
-import tv.dicom.std.core.model.DicomStandard
-import tv.dicom.std.core.model.Usage
-import tv.dicom.std.core.model.XRef
+import tv.dicom.std.core.model.*
 import tv.dicom.std.core.model.ciod.Ciod
 import tv.dicom.std.core.model.ciod.Entry
+import tv.dicom.std.core.model.imd.DataEntry
 import tv.dicom.std.core.model.imd.Imd
+import tv.dicom.std.core.model.imd.IncludeEntry
 import java.util.*
 import javax.xml.xpath.XPathConstants
 import javax.xml.xpath.XPathFactory
@@ -28,7 +28,7 @@ fun build(documents: List<Document>): Optional<DicomStandard> {
     val dicomStandard = DicomStandard()
     for (document in documents) {
         val root = document.documentElement
-        val rootId = root.getAttribute("id")
+        val rootId = root.getAttribute("xml:id")
 
         if (rootId == "PS3.3") {
             if (!buildPart03(document, dicomStandard)) {
@@ -56,7 +56,7 @@ internal fun buildPart03(document: Document, dicomStandard: DicomStandard): Bool
         return false
     }
     val chapterA = optChapterA.get()
-    buildCiods(chapterA)
+    val ciods = buildCiods(chapterA)
 
     // Get Chapter C
     // Information Module Definitions (Normative)
@@ -66,7 +66,10 @@ internal fun buildPart03(document: Document, dicomStandard: DicomStandard): Bool
         return false
     }
     val chapterC = optChapterC.get()
-    buildImds(root, chapterC)
+    val imds = buildImds(root, chapterC)
+
+    dicomStandard.ciods = ciods
+    dicomStandard.imds = imds
 
     return true
 }
@@ -260,6 +263,21 @@ internal fun xref(element: Element, nested: Boolean = true): XRef {
 }
 
 /**
+ * Get table header rows of an XML table header rows.
+ *
+ * @param table XML table [Element]
+ * @return If the table header rows exists they are returned as an Optional. If no thead element or thead/tr elements exists, an empty [Optional] is returned.
+ */
+private fun getTableHeaderRows(table: Element): Optional<List<Element>> {
+    val optThead = findElement(table, "thead")
+    if (optThead.isEmpty) {
+        return Optional.empty()
+    }
+    val thead = optThead.get()
+    return findElements(thead, "tr")
+}
+
+/**
  * Check if a table header matches with the one from a CIOD table.
  *
  * @param table CIOD XML table
@@ -269,19 +287,11 @@ internal fun xref(element: Element, nested: Boolean = true): XRef {
  *   * the first tr element doesn't contain the
  */
 internal fun hasCiodTableHeader(table: Element): Boolean {
-    val optThead = findElement(table, "thead")
-    if (optThead.isEmpty) {
+    val opt = getTableHeaderRows(table)
+    if (opt.isEmpty || opt.get().isEmpty()) {
         return false
     }
-    val thead = optThead.get()
-    val optTrs = findElements(thead, "tr")
-    if (optTrs.isEmpty) {
-        return false
-    }
-    val trs = optTrs.get()
-    if (trs.isEmpty()) {
-        return false
-    }
+    val trs = opt.get()
     for (i in trs.indices) {
         val optTds = findElements(trs[i], "th")
         if (optTds.isEmpty) {
@@ -291,10 +301,10 @@ internal fun hasCiodTableHeader(table: Element): Boolean {
         if (tds.size != 4) {
             continue
         }
-        val ie = tds[0].toString().lowercase()
-        val module = tds[1].toString().lowercase()
-        val reference = tds[2].toString().lowercase()
-        val usage = tds[3].toString().lowercase()
+        val ie = trimWsNl(tds[0].textContent.lowercase())
+        val module = trimWsNl(tds[1].textContent.lowercase())
+        val reference = trimWsNl(tds[2].textContent.lowercase())
+        val usage = trimWsNl(tds[3].textContent.lowercase())
         if (ie == "ie" || module == "module" || reference == "reference" || usage == "usage") {
             return true
         }
@@ -303,16 +313,250 @@ internal fun hasCiodTableHeader(table: Element): Boolean {
     return true
 }
 
+/**
+ * Check if a table header matches with the one from a Information Module Definition (IMD) table.
+ *
+ * @param table IMD XML table
+ * @return True if it matches the following criteria:
+ *   * no thead element
+ *   * no tr element
+ *   * not one tr does not have the following formats:
+ *      - | attribute name | tag | type | attribute description
+ *      - | attribute name | tag | attribute description
+ */
+internal fun hasImdTableHeader(table: Element): Boolean {
+    val opt = getTableHeaderRows(table)
+    if (opt.isEmpty || opt.get().isEmpty()) {
+        return false
+    }
+    val trs = opt.get()
+    for (i in trs.indices) {
+        val optTds = findElements(trs[i], "th")
+        if (optTds.isEmpty) {
+            continue
+        }
+        val tds = optTds.get()
+        if (tds.size == 4) {
+            val attrName = trimWsNl(tds[0].textContent.lowercase())
+            val tag = trimWsNl(tds[1].textContent.lowercase())
+            val type = trimWsNl(tds[2].textContent.lowercase())
+            val attrDesc = trimWsNl(tds[3].textContent.lowercase())
+            if (attrName.contains("attribute name") &&
+                tag.contains("tag") &&
+                type.contains("type") &&
+                attrDesc.contains("attribute description")
+            ) {
+                return true
+            }
+        } else if (tds.size == 3) {
+            val attrName = trimWsNl(tds[0].textContent.lowercase())
+            val tag = trimWsNl(tds[1].textContent.lowercase())
+            val attrDesc = trimWsNl(tds[2].textContent.lowercase())
+            if (attrName.contains("attribute name") &&
+                tag.contains("tag") &&
+                attrDesc.contains("attribute description")
+            ) {
+                return true
+            }
+        }
+
+    }
+
+    return false
+}
+
+/**
+ * Build all Information Definition Modules (IDM)s.
+ *
+ * The function looks for all tables within [parent] (for example the XML element matching the expression `//chapter[@id='chapter_C']`) and tries to build [Imd] instances from them.
+ *
+ * @param parent XML DOM element that stores all IDM tables in it's descendants
+ * @return A [List] of [tv.dicom.std.core.model.imd.Entry] instances is returned.
+ */
 internal fun buildImds(root: Element, parent: Element): List<Imd> {
     val imds = mutableListOf<Imd>()
-
+    val optTables = findElements(parent, ".//table")
+    if (optTables.isEmpty) {
+        return imds
+    }
+    val tables = optTables.get()
+    for (table in tables) {
+        val opt = buildImd(root, table)
+        if (opt.isEmpty) {
+            val id = table.getAttribute("xml:id")
+            log.error("XML table [${id}] is no valid IMD table")
+            continue
+        }
+        val imd = opt.get()
+        imds.add(imd)
+    }
     return imds
 }
 
-internal fun buildImd(root: Element, parent: Element): Optional<Imd> {
+internal fun buildImd(root: Element, table: Element): Optional<Imd> {
     val imd = Imd()
-
+    if (table.nodeName != "table") {
+        return Optional.empty()
+    }
+    val id = table.getAttribute("xml:id")
+    if (id.isBlank()) {
+        log.error("XML table has no id attribute which is required for the implementation.")
+        return Optional.empty()
+    }
+    imd.id = id
+    imd.parentIds = getParentXmlId(table)
+    if (!hasImdTableHeader(table)) {
+        log.error("XML table [${imd.id}] has no matching IMD table header")
+        return Optional.empty()
+    }
+    val optTrs = findElements(table, "tbody/tr")
+    if (optTrs.isEmpty) {
+        log.error("XML table [${imd.id}] has no rows")
+        return Optional.empty()
+    }
+    val trs = optTrs.get()
+    for (i in trs.indices) {
+        val optEntry = buildImdEntry(trs[i])
+        if (optEntry.isEmpty) {
+            log.error("XML table [${imd.id}] rows [$i] does not contain a valid IMD entry")
+            return Optional.empty()
+        }
+        imd.items.add(optEntry.get())
+    }
     return Optional.of(imd)
+}
+
+/**
+ * Determine the depth of a sequence item in an XML table entry.
+ *
+ * The function counts the larger than characters at the beginning of the string. Newlines, return characters and whitespaces are discarded while counting.
+ *
+ * # Examples
+ *
+ * * `entry` => 0
+ * * `>entry` => 1
+ * * `>>entry` => 2
+ *
+ * @param s input string
+ * @return Depth of an item in a (nested) sequence
+ */
+internal fun sequenceItemDepth(s: String): UShort {
+    var indent: UShort = 0U
+    for (i in s.indices) {
+        if (s[i] == '>') {
+            ++indent
+        } else if (s[i] == ' ' || s[i] == '\n' || s[i] == '\r') {
+            // ignore whitespaces, newline characters and return carriages at the beginning of the string
+            continue
+        } else {
+            break
+        }
+    }
+    return indent
+}
+
+/**
+ * Test if a string (like an Attribute Name) has a substring with `Include`.
+ *
+ * The characters before `Include` can only be:
+ * * newline
+ * * carriage return
+ * * whitespace
+ * * larger than character '>'
+ *
+ * @param s input string
+ * @return True if the input string complies with the stated requirements, otherwise false is returned.
+ */
+internal fun attributeHasInclude(s: String): Boolean {
+    val index = s.indexOf("Include")
+    if (index == -1) {
+        return false
+    }
+    for (i in 0 until index) {
+        if (s[i] != '>' && s[i] != ' ' && s[i] != '\n' && s[i] != '\r') {
+            return false
+        }
+    }
+    return true
+}
+
+/**
+ * Get the name of an attribute.
+ *
+ * These characters at the start of the String are excluded from the name:
+ * * newline
+ * * carriage return
+ * * whitespace
+ * * larger than character '>'
+ *
+ * @param s input string
+ * @return Name of the attribute
+ */
+internal fun attributeName(s: String): String {
+    var index = -1
+    for(i in s.indices) {
+        val c = s[i]
+        if (c != '>' && c != ' ' && c != '\n' && c != '\r') {
+            index = i
+            break
+        }
+    }
+    if (index == -1) {
+        return ""
+    }
+    return s.substring(index)
+}
+
+internal fun buildImdEntry(tr: Element): Optional<tv.dicom.std.core.model.imd.Entry> {
+    if (tr.nodeName != "tr") {
+        log.error("XML Element is not a table row element (tr)")
+        return Optional.empty()
+    }
+    val optTd = findElements(tr, "td")
+    if (optTd.isEmpty) {
+        log.error("Table row does not contain table columns.")
+        return Optional.empty()
+    }
+    val tds = optTd.get()
+    if (tds.size != 1 && tds.size != 2 && tds.size != 3 && tds.size != 4) {
+        log.error("Table row contains an unsupported number of columns [${tds.size}]")
+        return Optional.empty()
+    }
+
+    if (tds.size == 1 || tds.size == 2) {
+        val entry = IncludeEntry()
+        entry.seqIndent = sequenceItemDepth(tds[0].textContent)
+        if (attributeHasInclude(tds[0].textContent)) {
+            entry.xref = xref(tds[0])
+        }
+        if (tds.size == 2) {
+            entry.description = trimWsNl(tds[1].textContent)
+        }
+        return Optional.of(entry as tv.dicom.std.core.model.imd.Entry)
+    } else if (tds.size == 3 || tds.size == 4) {
+        val entry = DataEntry()
+        entry.seqIndent = sequenceItemDepth(tds[0].textContent)
+        entry.name = attributeName(trimWsNl(tds[0].textContent))
+        val tag = Tag.of(tds[1].textContent)
+        if (tag == null) {
+            log.error("Table row contains an unsupported entry in the Tag column [${tds[1]}]")
+            return Optional.empty()
+        }
+        entry.tag = tag
+        if (tds.size == 3) {
+            entry.description = trimWsNl(tds[2].textContent)
+        } else if (tds.size == 4) {
+            val type = attributeTypeFromString(trimWsNl(tds[2].textContent))
+            if (type == null) {
+                log.error("Table row contains an unsupported entry in the Type column [${tds[2]}]")
+                return Optional.empty()
+            }
+            entry.type = type
+            entry.description = trimWsNl(tds[3].textContent)
+        }
+        return Optional.of(entry)
+    }
+    return Optional.empty()
 }
 
 /**

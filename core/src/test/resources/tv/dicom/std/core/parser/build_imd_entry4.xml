@@ -1,0 +1,13 @@
+<!-- This XML file contains a section from the DICOM standard. This section is only meant to test the code in the project. Don't use it for any other purpose. -->
+<!-- Information on the DICOM standard and it's full description can be found on: https://www.dicomstandard.org/current/-->
+<tr valign="top">
+    <td align="left" colspan="2" rowspan="1">
+        <para xml:id="para_3689184c-3731-4271-adee-097e4a7ffbbc">
+            <emphasis role="italic">&gt;Include <xref linkend="table_10-11" xrefstyle="select: label quotedtitle"/>
+            </emphasis>
+        </para>
+    </td>
+    <td align="left" colspan="1" rowspan="1">
+        <para xml:id="para_faab8f73-4106-4346-bd80-487a5813f445"/>
+    </td>
+</tr>
