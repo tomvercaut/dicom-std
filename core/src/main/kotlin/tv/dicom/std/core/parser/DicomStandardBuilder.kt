@@ -189,7 +189,7 @@ internal fun buildCiodEntry(tr: Element): Optional<Entry> {
 
     val entry = Entry()
     if (tds.size == 3) {
-        entry.module = trimWsNl(tds[0].textContent)
+        entry.module = attributeName(trimWsNl(tds[0].textContent))
         entry.reference = xref(tds[1])
         val usage = ciodUsage(tds[2])
         if (usage == null) {
@@ -199,7 +199,7 @@ internal fun buildCiodEntry(tr: Element): Optional<Entry> {
         entry.usage = usage
     }
     if (tds.size == 4) {
-        entry.ie = trimWsNl(tds[0].textContent)
+        entry.ie = attributeName(trimWsNl(tds[0].textContent))
         entry.module = trimWsNl(tds[1].textContent)
         entry.reference = xref(tds[2])
         val usage = ciodUsage(tds[3])
@@ -504,7 +504,9 @@ internal fun attributeName(s: String): String {
     if (index == -1) {
         return ""
     }
-    return s.substring(index)
+    var t = s.substring(index)
+    t = t.replace("[ \n\r\t.]+".toRegex(), " ")
+    return t
 }
 
 internal fun buildImdEntry(tr: Element): Optional<tv.dicom.std.core.model.imd.Entry> {
