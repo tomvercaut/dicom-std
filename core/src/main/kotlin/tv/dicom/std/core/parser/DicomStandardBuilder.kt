@@ -81,10 +81,10 @@ internal fun buildPart03(document: Document, dicomStandard: DicomStandard): Bool
  * The function looks for all tables within [parent] (for example the XML element matching the expression `//chapter[@id='chapter_A']`) and tries to build [Ciod] instances from them.
  *
  * @param parent XML DOM element that stores all CIOD tables in it's descendants
- * @return A [List] of [Ciod] instances is returned.
+ * @return A [Map] of [Ciod] instances is returned. The corresponding key is the XML table ID.
  */
-internal fun buildCiods(parent: Element): List<Ciod> {
-    val ciods = mutableListOf<Ciod>()
+internal fun buildCiods(parent: Element): Map<String, Ciod> {
+    val ciods = mutableMapOf<String, Ciod>()
 
     val optTables = findElements(parent, ".//table")
     if (optTables.isEmpty) {
@@ -99,7 +99,11 @@ internal fun buildCiods(parent: Element): List<Ciod> {
             continue
         }
         val ciod = opt.get()
-        ciods.add(ciod)
+        if (ciods.contains(ciod.id)) {
+            log.error("XML table [${ciod.id}] already exists in the CIOD map. Original value will not be overridden.")
+        } else {
+            ciods[ciod.id] = ciod
+        }
     }
 
     return ciods
@@ -371,10 +375,10 @@ internal fun hasImdTableHeader(table: Element): Boolean {
  * The function looks for all tables within [parent] (for example the XML element matching the expression `//chapter[@id='chapter_C']`) and tries to build [Imd] instances from them.
  *
  * @param parent XML DOM element that stores all IDM tables in it's descendants
- * @return A [List] of [tv.dicom.std.core.model.imd.Entry] instances is returned.
+ * @return A [Map] of [tv.dicom.std.core.model.imd.Entry] instances is returned. The keys in the map are the matching XML table IDs.
  */
-internal fun buildImds(root: Element, parent: Element): List<Imd> {
-    val imds = mutableListOf<Imd>()
+internal fun buildImds(root: Element, parent: Element): Map<String, Imd> {
+    val imds = mutableMapOf<String, Imd>()
     val optTables = findElements(parent, ".//table")
     if (optTables.isEmpty) {
         return imds
@@ -388,7 +392,11 @@ internal fun buildImds(root: Element, parent: Element): List<Imd> {
             continue
         }
         val imd = opt.get()
-        imds.add(imd)
+        if (imds.containsKey(imd.id)) {
+            log.error("XML table [${imd.id}] already exists in the IMD map. Original value will not be overridden.")
+        } else {
+            imds[imd.id] = imd
+        }
     }
     return imds
 }
@@ -494,7 +502,7 @@ internal fun attributeHasInclude(s: String): Boolean {
  */
 internal fun attributeName(s: String): String {
     var index = -1
-    for(i in s.indices) {
+    for (i in s.indices) {
         val c = s[i]
         if (c != '>' && c != ' ' && c != '\n' && c != '\r') {
             index = i
@@ -509,6 +517,12 @@ internal fun attributeName(s: String): String {
     return t
 }
 
+/**
+ * Build an Information Module Definition entry from an XML table row.
+ *
+ * @param tr XML table row
+ * @return Entry can be either a [DataEntry] or an [IncludeEntry] depending on the data in the table row.
+ */
 internal fun buildImdEntry(tr: Element): Optional<tv.dicom.std.core.model.imd.Entry> {
     if (tr.nodeName != "tr") {
         log.error("XML Element is not a table row element (tr)")

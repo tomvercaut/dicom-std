@@ -116,6 +116,15 @@ class DicomStdParserTest {
         return ciod
     }
 
+    private fun tableA(): Map<String, Ciod> {
+        val t0 = tableA_2_1()
+        val t1 = tableA_3_1()
+        val ciods = mutableMapOf<String, Ciod>()
+        ciods[t0.id] = t0
+        ciods[t1.id] = t1
+        return ciods
+    }
+
     private fun tableC_2_1(): Imd {
         val xstyle = "select: label quotedtitle"
         val imd = Imd()
@@ -200,6 +209,15 @@ class DicomStdParserTest {
         return imd
     }
 
+    private fun tableC(): Map<String, Imd> {
+        val t0 = tableC_2_1()
+        val t1 = tableC_2_2()
+        val imds = mutableMapOf<String, Imd>()
+        imds[t0.id] = t0
+        imds[t1.id] = t1
+        return imds
+    }
+
     @Test
     fun parsePart03SectA2() {
         val url = this::class.java.getResource("part_03_extract.xml")
@@ -207,17 +225,22 @@ class DicomStdParserTest {
         val file = File(url.toURI())
 
         val eds = DicomStandard()
-        eds.ciods = listOf(tableA_2_1(), tableA_3_1())
-        eds.imds = listOf(tableC_2_1(), tableC_2_2())
+        eds.ciods = tableA()
+        eds.imds = tableC()
 
         val opt = parse(file)
         assertTrue(opt.isPresent)
         val ds = opt.get()
         assertEquals(eds.ciods.size, ds.ciods.size)
         assertEquals(eds.imds.size, ds.imds.size)
-        for (i in eds.ciods.indices) {
-            val eciod = eds.ciods[i]
-            val ciod = ds.ciods[i]
+        for (i in eds.ciods.keys.indices) {
+            val eKey = eds.ciods.keys.elementAt(i)
+            val key = ds.ciods.keys.elementAt(i)
+            assertEquals(eKey, key)
+            assertNotNull(eds.ciods[eKey])
+            assertNotNull(ds.ciods[key])
+            val eciod : Ciod = eds.ciods[eKey]!!
+            val ciod : Ciod = ds.ciods[key]!!
             val min = if (eciod.items.size < ciod.items.size) {
                 eciod.items.size
             } else {
@@ -256,9 +279,14 @@ class DicomStdParserTest {
                 )
             }
         }
-        for (i in eds.imds.indices) {
-            val eimd = eds.imds[i]
-            val imd = ds.imds[i]
+        for (i in eds.imds.keys.indices) {
+            val eKey = eds.imds.keys.elementAt(i)
+            val key = ds.imds.keys.elementAt(i)
+            assertEquals(eKey, key)
+            assertNotNull(eds.imds[eKey])
+            assertNotNull(ds.imds[key])
+            val eimd = eds.imds[eKey]!!
+            val imd = ds.imds[key]!!
             assertEquals(eimd.id, imd.id, "Information Definition Module mismatch at $i")
             assertEquals(eimd.parentIds, imd.parentIds, "Information Definition Module mismatch at $i")
             assertEquals(eimd.items.size, imd.items.size, "Information Definition Module mismatch at $i")
