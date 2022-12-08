@@ -68,8 +68,12 @@ internal fun buildPart03(document: Document, dicomStandard: DicomStandard): Bool
     val chapterC = optChapterC.get()
     val imds = buildImds(root, chapterC)
 
-    dicomStandard.ciods = ciods
-    dicomStandard.imds = imds
+    for (ciod in ciods) {
+        dicomStandard.add(ciod)
+    }
+    for(imd in imds) {
+        dicomStandard.add(imd)
+    }
 
     return true
 }
@@ -81,10 +85,10 @@ internal fun buildPart03(document: Document, dicomStandard: DicomStandard): Bool
  * The function looks for all tables within [parent] (for example the XML element matching the expression `//chapter[@id='chapter_A']`) and tries to build [Ciod] instances from them.
  *
  * @param parent XML DOM element that stores all CIOD tables in it's descendants
- * @return A [Map] of [Ciod] instances is returned. The corresponding key is the XML table ID.
+ * @return A [List] of [Ciod] instances is returned.
  */
-internal fun buildCiods(parent: Element): Map<String, Ciod> {
-    val ciods = mutableMapOf<String, Ciod>()
+internal fun buildCiods(parent: Element): List<Ciod> {
+    val ciods = mutableListOf<Ciod>()
 
     val optTables = findElements(parent, ".//table")
     if (optTables.isEmpty) {
@@ -99,11 +103,7 @@ internal fun buildCiods(parent: Element): Map<String, Ciod> {
             continue
         }
         val ciod = opt.get()
-        if (ciods.contains(ciod.id)) {
-            log.error("XML table [${ciod.id}] already exists in the CIOD map. Original value will not be overridden.")
-        } else {
-            ciods[ciod.id] = ciod
-        }
+        ciods.add(ciod)
     }
 
     return ciods
@@ -375,10 +375,10 @@ internal fun hasImdTableHeader(table: Element): Boolean {
  * The function looks for all tables within [parent] (for example the XML element matching the expression `//chapter[@id='chapter_C']`) and tries to build [Imd] instances from them.
  *
  * @param parent XML DOM element that stores all IDM tables in it's descendants
- * @return A [Map] of [tv.dicom.std.core.model.imd.Entry] instances is returned. The keys in the map are the matching XML table IDs.
+ * @return A [List] of [tv.dicom.std.core.model.imd.Entry] instances is returned.
  */
-internal fun buildImds(root: Element, parent: Element): Map<String, Imd> {
-    val imds = mutableMapOf<String, Imd>()
+internal fun buildImds(root: Element, parent: Element): List<Imd> {
+    val imds = mutableListOf<Imd>()
     val optTables = findElements(parent, ".//table")
     if (optTables.isEmpty) {
         return imds
@@ -392,11 +392,7 @@ internal fun buildImds(root: Element, parent: Element): Map<String, Imd> {
             continue
         }
         val imd = opt.get()
-        if (imds.containsKey(imd.id)) {
-            log.error("XML table [${imd.id}] already exists in the IMD map. Original value will not be overridden.")
-        } else {
-            imds[imd.id] = imd
-        }
+        imds.add(imd)
     }
     return imds
 }

@@ -116,13 +116,8 @@ class DicomStdParserTest {
         return ciod
     }
 
-    private fun tableA(): Map<String, Ciod> {
-        val t0 = tableA_2_1()
-        val t1 = tableA_3_1()
-        val ciods = mutableMapOf<String, Ciod>()
-        ciods[t0.id] = t0
-        ciods[t1.id] = t1
-        return ciods
+    private fun tableA(): List<Ciod> {
+        return listOf(tableA_2_1(), tableA_3_1())
     }
 
     private fun tableC_2_1(): Imd {
@@ -209,13 +204,8 @@ class DicomStdParserTest {
         return imd
     }
 
-    private fun tableC(): Map<String, Imd> {
-        val t0 = tableC_2_1()
-        val t1 = tableC_2_2()
-        val imds = mutableMapOf<String, Imd>()
-        imds[t0.id] = t0
-        imds[t1.id] = t1
-        return imds
+    private fun tableC(): List<Imd> {
+        return listOf(tableC_2_1(), tableC_2_2())
     }
 
     @Test
@@ -225,22 +215,25 @@ class DicomStdParserTest {
         val file = File(url.toURI())
 
         val eds = DicomStandard()
-        eds.ciods = tableA()
-        eds.imds = tableC()
+        for (ciod in tableA()) {
+            eds.add(ciod)
+        }
+        for (imd in tableC()) {
+            eds.add(imd)
+        }
 
         val opt = parse(file)
         assertTrue(opt.isPresent)
         val ds = opt.get()
-        assertEquals(eds.ciods.size, ds.ciods.size)
-        assertEquals(eds.imds.size, ds.imds.size)
-        for (i in eds.ciods.keys.indices) {
-            val eKey = eds.ciods.keys.elementAt(i)
-            val key = ds.ciods.keys.elementAt(i)
-            assertEquals(eKey, key)
-            assertNotNull(eds.ciods[eKey])
-            assertNotNull(ds.ciods[key])
-            val eciod : Ciod = eds.ciods[eKey]!!
-            val ciod : Ciod = ds.ciods[key]!!
+        assertEquals(eds.ciodIds().size, ds.ciodIds().size)
+        assertEquals(eds.imdIds().size, ds.imdIds().size)
+        assertEquals(eds.ciodIds(), ds.ciodIds())
+        assertEquals(eds.imdIds(), ds.imdIds())
+        for (key in eds.ciodIds()) {
+            assertNotNull(eds.ciod(key))
+            assertNotNull(ds.ciod(key))
+            val eciod : Ciod = eds.ciod(key)!!
+            val ciod : Ciod = ds.ciod(key)!!
             val min = if (eciod.items.size < ciod.items.size) {
                 eciod.items.size
             } else {
@@ -260,36 +253,33 @@ class DicomStdParserTest {
                 assertEquals(
                     eItem.ie,
                     item.ie,
-                    "Composite Information Module [${eItem.ie}, ${eItem.module}] mismatch at $i, entry $j"
+                    "Composite Information Module [${eItem.ie}, ${eItem.module}] mismatch at $key, entry $j"
                 )
                 assertEquals(
                     eItem.module,
                     item.module,
-                    "Composite Information Module [${eItem.ie}, ${eItem.module}] mismatch at $i, entry $j"
+                    "Composite Information Module [${eItem.ie}, ${eItem.module}] mismatch at $key, entry $j"
                 )
                 assertEquals(
                     eItem.usage,
                     item.usage,
-                    "Composite Information Module [${eItem.ie}, ${eItem.module}] mismatch at $i, entry $j"
+                    "Composite Information Module [${eItem.ie}, ${eItem.module}] mismatch at $key, entry $j"
                 )
                 assertEquals(
                     eItem.reference,
                     item.reference,
-                    "Composite Information Module [${eItem.ie}, ${eItem.module}] mismatch at $i, entry $j"
+                    "Composite Information Module [${eItem.ie}, ${eItem.module}] mismatch at $key, entry $j"
                 )
             }
         }
-        for (i in eds.imds.keys.indices) {
-            val eKey = eds.imds.keys.elementAt(i)
-            val key = ds.imds.keys.elementAt(i)
-            assertEquals(eKey, key)
-            assertNotNull(eds.imds[eKey])
-            assertNotNull(ds.imds[key])
-            val eimd = eds.imds[eKey]!!
-            val imd = ds.imds[key]!!
-            assertEquals(eimd.id, imd.id, "Information Definition Module mismatch at $i")
-            assertEquals(eimd.parentIds, imd.parentIds, "Information Definition Module mismatch at $i")
-            assertEquals(eimd.items.size, imd.items.size, "Information Definition Module mismatch at $i")
+        for (key in eds.imdIds()) {
+            assertNotNull(eds.imd(key))
+            assertNotNull(ds.imd(key))
+            val eimd = eds.imd(key)!!
+            val imd = ds.imd(key)!!
+            assertEquals(eimd.id, imd.id, "Information Definition Module mismatch at $key")
+            assertEquals(eimd.parentIds, imd.parentIds, "Information Definition Module mismatch at $key")
+            assertEquals(eimd.items.size, imd.items.size, "Information Definition Module mismatch at $key")
             for (j in eimd.items.indices) {
                 val eItem = eimd.items[j]
                 val item = imd.items[j]
@@ -302,14 +292,14 @@ class DicomStdParserTest {
                     assertEquals(
                         eEntry.seqIndent,
                         entry.seqIndent,
-                        "Information Definition Module mismatch at $i, entry $j"
+                        "Information Definition Module mismatch at $key, entry $j"
                     )
-                    assertEquals(eEntry.name, entry.name, "Information Definition Module mismatch at $i, entry $j")
-                    assertEquals(eEntry.tag, entry.tag, "Information Definition Module mismatch at $i, entry $j")
-                    assertEquals(eEntry.type, entry.type, "Information Definition Module mismatch at $i, entry $j")
+                    assertEquals(eEntry.name, entry.name, "Information Definition Module mismatch at $key, entry $j")
+                    assertEquals(eEntry.tag, entry.tag, "Information Definition Module mismatch at $key, entry $j")
+                    assertEquals(eEntry.type, entry.type, "Information Definition Module mismatch at $key, entry $j")
                     assertTrue(
                         entry.description.startsWith(eEntry.description),
-                        "Information Definition Module mismatch at $i, entry $j.\n" +
+                        "Information Definition Module mismatch at $key, entry $j.\n" +
                                 "eEntry description: ${eEntry.description}\n" +
                                 "entry description: ${entry.description}"
                     )
@@ -319,7 +309,7 @@ class DicomStdParserTest {
                     assertEquals(
                         eEntry.seqIndent,
                         entry.seqIndent,
-                        "Information Definition Module mismatch at $i, entry $j"
+                        "Information Definition Module mismatch at $key, entry $j"
                     )
 
                 }
