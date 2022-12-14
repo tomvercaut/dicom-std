@@ -20,8 +20,8 @@ data class Tag(var group: UShort = 0u, var element: UShort = 0u) {
         private val log = logger(this::class.java.name)
 
         @JvmStatic
-        private val pattern1 = """\d{4}""".toRegex()
-        private val pattern2 = """0[xX]\d{4}""".toRegex()
+        private val pattern1 = """[0-9a-fA-F]{4}""".toRegex()
+        private val pattern2 = """0[xX][0-9a-fA-F]{4}""".toRegex()
 
         /**
          * Create a DICOM Tag from a String.
