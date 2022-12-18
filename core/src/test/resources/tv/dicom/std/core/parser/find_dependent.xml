@@ -1,0 +1,322 @@
+<!-- This XML file contains a section from the DICOM standard. This section is only meant to test the code in the project. Don't use it for any other purpose. -->
+<!-- Information on the DICOM standard and it's full description can be found on: https://www.dicomstandard.org/current/-->
+<book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" label="PS3.3" version="5.0"
+      xml:id="PS3.3">
+    <chapter label="10" status="1" xml:id="chapter_10">
+
+        <section label="10.8" status="2" xml:id="sect_10.8">
+            <title>SOP Instance Reference Macro</title>
+            <para xml:id="para_d0f18c50-ebcc-4fe8-af6d-a6b6ffa5b8e1">
+                <xref linkend="table_10-11" xrefstyle="select: label"/>
+                specifies the Attributes of the<xref linkend="sect_10.8" xrefstyle="select: title"/>, which references a
+                SOP
+                Instance.
+            </para>
+            <table frame="box" label="10-11" rules="all" xml:id="table_10-11">
+                <caption>SOP Instance Reference Macro Attributes</caption>
+                <thead>
+                    <tr valign="top">
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_5a42bead-86fd-4f7b-8207-2e881965ab73">Attribute Name</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_70ae57b5-e439-4067-bc95-e80d14d1fa04">Tag</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_d34eb0c1-3332-4ca0-a083-ab76f3cb6533">Type</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_1de58578-d160-4168-9c8c-d2466626ce85">Attribute Description</para>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_01f3f1cd-dd4d-471c-b080-9961faf6d1fb">Referenced SOP Class UID</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_e2fab2a1-95b0-4b70-a566-6d84cf79331f">(0008,1150)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_dc719629-f544-459b-93f4-ea556d10f880">1</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_63809a86-e616-4736-811b-d8de9a2a076c">Uniquely identifies the referenced
+                                SOP
+                                Class.
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_ee639991-ef92-4300-9a16-339d6e7d18b0">Referenced SOP Instance UID</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_cbe8fcac-5c05-4c18-ae71-d9bb8875962b">(0008,1155)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_917913b4-a3fa-45eb-ab44-e0d4142b5626">1</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_e163fe69-a141-4d4a-8f47-dfaa443fdddb">Uniquely identifies the referenced
+                                SOP
+                                Instance.
+                            </para>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section label="10.15" status="2" xml:id="sect_10.15">
+            <table frame="box" label="10-18" rules="all" xml:id="table_10-18">
+                <caption>Issuer of Patient ID Macro Attributes</caption>
+                <thead>
+                    <tr valign="top">
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_070e516d-4016-43f4-890c-6c6d03228c25">Attribute Name</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_530d51d4-3fa3-42e7-88a9-7a2cb5bf2c49">Tag</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_39c6c5de-6e39-46bf-8a42-6f106cb5d629">Type</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_f5c66541-225f-44d0-8693-5c0563dfb131">Attribute Description</para>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_df31bd9e-0fd7-4e14-82f6-0fd02f5ce8ee">Issuer of Patient ID</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_4c145a34-0fce-46c7-bd80-ae376dada851">(0010,0021)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_706d8ecb-61ca-4a56-b192-31947917fe85">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_6003b085-206b-4fae-a0ae-410844ff8980">Identifier of the Assigning
+                                Authority (system, organization, agency, or department) that issued the Patient ID.
+                            </para>
+                            <note>
+                                <para xml:id="para_fde39d36-34f5-4459-8bca-12b577233532">Equivalent to HL7 v2 CX
+                                    component 4 subcomponent 1.
+                                </para>
+                            </note>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_02ce40f4-dc63-4aca-98d9-72c5274aa6f8">Issuer of Patient ID Qualifiers
+                                Sequence
+                            </para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_857be70e-4dee-485a-a372-88d48be0ed60">(0010,0024)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_3fdd9a00-eb31-4db8-af70-247fbef8daa2">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_113a690d-eb00-485b-8b86-6cf24804f9bc">Attributes specifying or qualifying
+                                the identity of the issuer of the Patient ID, or scoping the Patient ID.
+                            </para>
+                            <para xml:id="para_25452064-cfd1-4b3b-9dfe-8a9c48d2deab">Only a single Item is permitted in
+                                this Sequence.
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_beff7d9b-9e55-40ee-bb70-4ad01fad4b57">&gt;Universal Entity ID</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_f78c0251-9a34-4bbb-8af7-21e617d40b86">(0040,0032)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_8cc7b297-caf8-429f-84c9-8debeb4858ad">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_c8423c11-6e7c-46ea-8bec-1f773afcaede">Universal or unique identifier for
+                                the Patient ID Assigning Authority. The authority identified by this Attribute shall be
+                                the same as that of Issuer of Patient ID (0010,0021), if present.
+                            </para>
+                            <note>
+                                <para xml:id="para_8933ed06-5a13-4f47-a4fd-9e2d7cc913a6">Equivalent to HL7 v2 CX
+                                    component 4 subcomponent 2 (Universal ID).
+                                </para>
+                            </note>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_980f2028-ed4a-4444-a22d-6243e6f94cf9">&gt;Universal Entity ID Type</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_431ce520-fab9-48be-a014-32866ae0c6f0">(0040,0033)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_377f21a6-d67e-4b2f-a79f-910cc4885f9a">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_db7d89fc-3b4b-4944-94af-9c10f0097055">Standard defining the format of the
+                                Universal Entity ID (0040,0032). Required if Universal Entity ID (0040,0032) is present.
+                            </para>
+                            <note>
+                                <para xml:id="para_cdc31146-8c35-4426-8c4c-509f0256519d">Equivalent to HL7 v2 CX
+                                    component 4 subcomponent 3 (Universal ID Type).
+                                </para>
+                            </note>
+                            <para xml:id="para_b2a63f41-04dd-4ae5-b758-1cb173e955c3">See
+                                <xref linkend="sect_10.14" xrefstyle="select: label"/>
+                                for Defined Terms.
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_9e153931-ca14-4333-bdb5-0b4f4798ecd3">&gt;Identifier Type Code</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_49f7b3bf-28c4-4e1d-9866-566787d80298">(0040,0035)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_d59242b3-8f89-42f7-af95-4b0f7e9d8b4e">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_6d982790-a827-44d5-8fb8-cb5f09898398">Type of Patient ID. Refer to HL7 v2
+                                Table 0203 for Defined Terms.
+                            </para>
+                            <note>
+                                <para xml:id="para_dc68c1a1-46db-4a55-bcba-f75b9d9a8ab4">Equivalent to HL7 v2 CX
+                                    component 5 (Identifier Type Code).
+                                </para>
+                            </note>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_f1a4c71e-5927-4256-b2c3-cdb335cd3aa6">&gt;Assigning Facility Sequence
+                            </para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_c11ff19c-cff9-4e26-8c4a-7d6419b8e621">(0040,0036)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_14ef5f75-aaea-4d7d-85ef-ec3349f743e2">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_d5831995-e3a4-4a21-8649-c52c44a95f5a">The place or location identifier
+                                where the identifier was first assigned to the Patient. This component is not an
+                                inherent part of the identifier but rather part of the history of the identifier.
+                            </para>
+                            <para xml:id="para_9ccf0428-d166-42b5-88ee-0e52aaaffbb0">Only a single Item is permitted in
+                                this Sequence.
+                            </para>
+                            <note>
+                                <para xml:id="para_6a16f809-6605-41ac-8d02-b6104b0bc0ad">Equivalent to HL7 v2 CX
+                                    component 6 (Assigning Facility).
+                                </para>
+                            </note>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="3" rowspan="1">
+                            <para xml:id="para_59d6f4bf-a1e3-4c7a-bd58-5889b64ce38f">
+                                <emphasis role="italic">&gt;&gt;Include
+                                    <xref linkend="table_10-17" xrefstyle="select: label quotedtitle"/>
+                                </emphasis>
+                            </para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_62265648-6d18-4df1-891e-735f755443cf"/>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_40a1a958-8925-424d-93b5-2d39468d9392">&gt;Assigning Jurisdiction Code
+                                Sequence
+                            </para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_b65f6dce-6ee2-4b79-90d3-1833c1ba16d9">(0040,0039)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_e0c17bdb-117f-4064-9cbd-f4e07e11679d">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_a4bbfe26-afa4-4d57-abf8-04fe86756a03">The geo-political body that
+                                assigned the Patient identifier. Typically a code for a country or a state/province.
+                                Only a single Item is permitted in this Sequence.
+                            </para>
+                            <note>
+                                <para xml:id="para_da6e8d69-e95e-4320-b5c5-be5b4cbb811f">Equivalent to HL7 v2 CX
+                                    component 9 (Assigning Jurisdiction).
+                                </para>
+                            </note>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="3" rowspan="1">
+                            <para xml:id="para_424cd96d-af2b-4880-a1eb-339e040082d2">
+                                <emphasis role="italic">&gt;&gt;Include
+                                    <xref linkend="table_8.8-1" xrefstyle="select: label quotedtitle"/>
+                                </emphasis>
+                            </para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_f6b16376-83d6-4352-9dbf-6d50cb3397db">
+                                <emphasis role="italic">B
+                                    <olink targetdoc="PS3.16" targetptr="sect_CID_5001"
+                                           xrefstyle="select: labelnumber quotedtitle"/>
+                                    for country codes.
+                                </emphasis>
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_412b1f6c-0d0b-41e7-8d1c-6713d4acea63">&gt;Assigning Agency or Department
+                                Code Sequence
+                            </para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_33248bfd-fa07-44cf-ae60-7060a45f85fb">(0040,003A)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_60c3fe6f-2dbb-4722-9f8b-300d001207fd">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_1275e635-bf32-4c55-91fd-83047fb19d80">The agency or department that
+                                assigned the Patient identifier. Only a single Item is permitted in this Sequence.
+                            </para>
+                            <note>
+                                <para xml:id="para_d5f050e9-c374-464c-bbc6-c76b57d065fd">Equivalent to HL7 v2 CX
+                                    component 10 (Assigning Agency or Department).
+                                </para>
+                            </note>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="3" rowspan="1">
+                            <para xml:id="para_98185bf3-300b-4c6a-90f1-34f0044a6eb4">
+                                <emphasis role="italic">&gt;&gt;Include
+                                    <xref linkend="table_8.8-1" xrefstyle="select: label quotedtitle"/>
+                                </emphasis>
+                            </para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_cf7077aa-b349-4f66-bd52-c854f50f3181">
+                                <emphasis role="italic">No Baseline CID is defined.</emphasis>
+                            </para>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </chapter>
+</book>

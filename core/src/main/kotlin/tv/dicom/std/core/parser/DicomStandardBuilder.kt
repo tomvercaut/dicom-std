@@ -34,6 +34,7 @@ fun build(documents: List<Document>): Optional<DicomStandard> {
             if (!buildPart03(document, dicomStandard)) {
                 return Optional.empty()
             }
+            findDependents(document, dicomStandard)
         }
     }
     return Optional.of(dicomStandard)
@@ -71,7 +72,7 @@ internal fun buildPart03(document: Document, dicomStandard: DicomStandard): Bool
     for (ciod in ciods) {
         dicomStandard.add(ciod)
     }
-    for(imd in imds) {
+    for (imd in imds) {
         dicomStandard.add(imd)
     }
 
@@ -429,6 +430,46 @@ internal fun buildImd(root: Element, table: Element): Optional<Imd> {
     }
     return Optional.of(imd)
 }
+
+internal fun findDependents(document: Document, dicomStandard: DicomStandard) {
+    val ciodIds = dicomStandard.ciodIds()
+    val imdIds = dicomStandard.imdIds()
+
+    val notImd = mutableListOf<String>()
+    val notFound = mutableListOf<String>()
+
+    for (id in imdIds) {
+        val imd = dicomStandard.imd(id) ?: continue
+        for (item in imd.items) {
+            if (!item.isInclude()) {
+                continue
+            }
+            val id = (item as IncludeEntry).xref.linkend
+            if (ciodIds.contains(id) || imdIds.contains(id) ||
+                notImd.contains(id) || notFound.contains(id)
+            ) {
+                continue
+            }
+            val expression = "//table[@id=\'$id\']"
+            val optElement = findElement(document.documentElement, expression)
+            if (optElement.isEmpty) {
+                notFound.add(id)
+                log.warn("Unable to find XML id: $id")
+                continue
+            }
+            val element = optElement.get()
+            val optImd = buildImd(document.documentElement, element)
+            if (optImd.isEmpty) {
+                log.warn("Unable to build Information Module Definition or attribute table from: $id")
+                notImd.add(id)
+            } else {
+                val imd = optImd.get()
+                dicomStandard.add(imd)
+            }
+        }
+    }
+}
+
 
 /**
  * Determine the depth of a sequence item in an XML table entry.
