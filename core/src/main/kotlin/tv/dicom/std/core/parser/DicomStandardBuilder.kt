@@ -401,6 +401,19 @@ internal fun buildImds(root: Element, parent: Element): List<Imd> {
     return imds
 }
 
+/**
+ * Create an Information Module Definition from a DICOM XML table.
+ *
+ * An empty `Optional` is returned in the following cases:
+ * - the table `Element` is not a table
+ * - the XML element attribute `xml:id` is empty
+ * - the table has no rows
+ * - the table has a row entry that is not valid a Information Module Definition entry.
+ *
+ * @param table XML table element
+ * @return When the creation of the Information Module Definition was successful, it's returned.
+ * Otherwise an empty `Optional` is returned.
+ */
 internal fun buildImd(table: Element): Optional<Imd> {
     val imd = Imd()
     if (table.nodeName != "table") {
@@ -434,7 +447,25 @@ internal fun buildImd(table: Element): Optional<Imd> {
     return Optional.of(imd)
 }
 
-internal fun findDependents(document: Document, dicomStandard: DicomStandard) : Boolean{
+/**
+ * Iterates the Information Module Definitions in the DicomStandard items.
+ *
+ * Foreach `IncludeEntry` find the matching table identifier in the
+ * Composite Information Object Definition list or in the Information
+ * Module Definition list. If the identifier is not found, look in the XML document.
+ *
+ * The missing identifier is found in the `Document`, it's added to the `DicomStandard`.
+ * If the missing identifier is not found in the `Document`,
+ * the function returns false to indicate not all identifiers have been found.
+ *
+ * The function returns true when all internal links have been found.
+ *
+ * @param document Part 03 of the DICOM standard
+ * @param dicomStandard model for the DICOM standard
+ * @return True when all include links have been found and added to the `DicomStandard`.
+ * False if not all include links have been found.
+ */
+internal fun findDependents(document: Document, dicomStandard: DicomStandard): Boolean {
     val ciodIds = dicomStandard.ciodIds()
     var imdIds = dicomStandard.imdIds()
 
@@ -465,7 +496,7 @@ internal fun findDependents(document: Document, dicomStandard: DicomStandard) : 
             if (optElement.isEmpty) {
                 notFound.add(linkId)
                 log.error("Unable to find XML id: $linkId")
-                isOk=false
+                isOk = false
                 continue
             }
             val element = optElement.get()
