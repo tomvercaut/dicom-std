@@ -70,7 +70,7 @@ internal fun buildPart03(document: Document, dicomStandard: DicomStandard): Bool
         return false
     }
     val chapterC = optChapterC.get()
-    val imds = buildImds(root, chapterC)
+    val imds = buildImds(chapterC)
 
     for (ciod in ciods) {
         dicomStandard.add(ciod)
@@ -381,7 +381,7 @@ internal fun hasImdTableHeader(table: Element): Boolean {
  * @param parent XML DOM element that stores all IDM tables in it's descendants
  * @return A [List] of [tv.dicom.std.core.model.imd.Entry] instances is returned.
  */
-internal fun buildImds(root: Element, parent: Element): List<Imd> {
+internal fun buildImds(parent: Element): List<Imd> {
     val imds = mutableListOf<Imd>()
     val optTables = findElements(parent, ".//table")
     if (optTables.isEmpty) {
