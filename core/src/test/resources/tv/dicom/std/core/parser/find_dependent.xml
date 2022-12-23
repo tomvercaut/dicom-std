@@ -318,5 +318,513 @@
                 </tbody>
             </table>
         </section>
+        <section label="10.14" status="2" xml:id="sect_10.14">
+            <title>HL7v2 Hierarchic Designator Macro</title>
+            <para xml:id="para_5b652149-5151-433e-9ece-20f2832246f5">
+                <xref linkend="table_10-17" xrefstyle="select: label"/> specifies the Attributes of the <xref linkend="sect_10.14" xrefstyle="select: title"/>, which identify an entity (system, organization, agency, or department) that has responsibility for managing or assigning a defined set of instance identifiers (such as placer or filler number, Patient identifiers, provider identifiers, etc.). This entity could be a particular health care application such as a registration system that assigns Patient identifiers, a governmental entity such as a licensing authority that assigns professional identifiers or drivers' license numbers, or a facility where such identifiers are assigned.</para>
+            <note>
+                <para xml:id="para_3cc44496-2c43-4779-8531-49b1d028a91a">This definition is identical to HL7 v2.5, Section 2.A.33, with only minor changes for editorial style.</para>
+            </note>
+            <para xml:id="para_424a0f37-7642-457b-84e8-e7ab7d18c2bd">These Attributes are equivalent to the components of the HL7 v2 Hierarchic Designator (HD) and Entity Identifier (EI) data types (see HL7 v2 Chapter 2.A).</para>
+            <para xml:id="para_e8f5e302-29a2-457a-8b26-a78c8ce7bf6d">If both Local Namespace Entity ID (0040,0031) and Universal Entity ID (0040,0032) are present, they shall refer to the same entity.</para>
+            <table frame="box" label="10-17" rules="all" xml:id="table_10-17">
+                <caption>HL7v2 Hierarchic Designator Macro Attributes</caption>
+                <thead>
+                    <tr valign="top">
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_43a03f46-3f87-4433-adb0-fb429bcedad5">Attribute Name</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_f224d45b-762c-4fe4-be4d-7ae549f52b9a">Tag</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_31036985-3cc0-4cf5-8299-d13958d0d56f">Type</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_3e93b2bb-d87d-40dd-aeb7-aa688e41925b">Attribute Description</para>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_df207a7c-a83a-494e-8736-2f91144eae83">Local Namespace Entity ID</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_4b06af43-949f-49df-bc27-f10a4cf2edd0">(0040,0031)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_b4f8d988-a48b-4e93-a7e0-e6a799a3c39b">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_fc53739d-da3e-43ea-9f33-7e7e58279e85">Identifies an entity within the local namespace or domain. Required if Universal Entity ID (0040,0032) is not present; may be present otherwise.</para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_63c3f9d2-8473-41cc-a91c-936387453e66">Universal Entity ID</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_e7b40a42-b85c-4141-a777-69266b608dc7">(0040,0032)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_19ad403a-055e-4dad-ac27-2303684875c6">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_29156532-a15e-4770-bd8b-e5d283d20720">Universal or unique identifier for an entity. Required if Local Namespace Entity ID (0040,0031) is not present; may be present otherwise.</para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_eb8efe83-db51-43f7-933c-5f598fbcd440">Universal Entity ID Type</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_6c54ec2c-d486-4fde-9597-ed8b37168ba4">(0040,0033)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_b8e4d318-76a0-44ff-a0f3-32bd8bc89c1d">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_98293def-3b64-4e5e-8619-746a7b16e9fc">Standard defining the format of the Universal Entity ID. Required if Universal Entity ID (0040,0032) is present.</para>
+                            <variablelist spacing="compact">
+                                <title>Enumerated Values:</title>
+                                <varlistentry>
+                                    <term>DNS</term>
+                                    <listitem>
+                                        <para xml:id="para_eb080a2f-0aa1-46ef-a8a4-eab08149bf92">An Internet dotted name. Either in ASCII or as integers</para>
+                                    </listitem>
+                                </varlistentry>
+                                <varlistentry>
+                                    <term>EUI64</term>
+                                    <listitem>
+                                        <para xml:id="para_306bbe4d-1dcb-48a2-98c4-6baa909894e3">An IEEE Extended Unique Identifier</para>
+                                    </listitem>
+                                </varlistentry>
+                                <varlistentry>
+                                    <term>ISO</term>
+                                    <listitem>
+                                        <para xml:id="para_e12d79ff-da99-4207-82c7-ac496067994f">An International Standards Organization Object Identifier</para>
+                                    </listitem>
+                                </varlistentry>
+                                <varlistentry>
+                                    <term>URI</term>
+                                    <listitem>
+                                        <para xml:id="para_3d4d3471-641a-4496-8ce1-353ab94fa8dc">Uniform Resource Identifier</para>
+                                    </listitem>
+                                </varlistentry>
+                                <varlistentry>
+                                    <term>UUID</term>
+                                    <listitem>
+                                        <para xml:id="para_b7d026fd-8ebf-44bd-ad0e-f6bdc20f0c6d">The DCE Universal Unique Identifier</para>
+                                    </listitem>
+                                </varlistentry>
+                                <varlistentry>
+                                    <term>X400</term>
+                                    <listitem>
+                                        <para xml:id="para_710cb5bf-1677-498d-810e-310c501cbd8d">An X.400 MHS identifier</para>
+                                    </listitem>
+                                </varlistentry>
+                                <varlistentry>
+                                    <term>X500</term>
+                                    <listitem>
+                                        <para xml:id="para_bdfa28dc-d3d2-4f51-9601-0774783e5677">An X.500 directory name</para>
+                                    </listitem>
+                                </varlistentry>
+                            </variablelist>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section label="8.8" status="2" xml:id="sect_8.8">
+            <title>Standard Attribute Sets for Code Sequence Attributes</title>
+            <para xml:id="para_0b9c64aa-2995-47db-b64b-ec7f371009bd">
+                <xref linkend="table_8.8-1" xrefstyle="select: label"/> specifies the default set of Attributes encapsulated in the Items of Code Sequence Attributes. These Attributes comprise the Code Sequence Macro.</para>
+            <note>
+                <para xml:id="para_79e3ca78-c70b-44e3-b918-d6f35e5abea8">The instruction "<emphasis role="italic">Include <xref linkend="table_8.8-1" xrefstyle="select: label quotedtitle"/>
+                </emphasis>" may be used in an Information Object Definition as a concise way to indicate that the Attributes of <xref linkend="table_8.8-1" xrefstyle="select: label"/> are included in the specification of the Attribute Set of a Sequence of Items. Additional constraints on the Code Sequence Data Element (such as a Context Group that defines the value set) may be appended to the "<emphasis role="italic">Include <xref linkend="table_8.8-1" xrefstyle="select: label quotedtitle"/>
+                </emphasis>" instruction.</para>
+            </note>
+            <para xml:id="para_8ef05490-4f0d-49d4-aac9-843fbaca2b4f">The default specifications of this Section are overridden within the scope of a Sequence Item or Code Sequence Attribute or IOD by corresponding specifications defined within the scope of that Sequence Item or Code Sequence Attribute or IOD. Additional Attributes may also be specified by the instantiation of the Macro.</para>
+            <para xml:id="para_76d0e39e-aa45-4bc0-b878-af8e164c4593">The Basic Coded Entry Attributes fully define a Coded Entry. If it is desired to convey the list from which a code has been chosen, then the optional Enhanced Encoding Mode Attributes may also be present.</para>
+            <table frame="box" label="8.8-1a" rules="all" xml:id="table_8.8-1a">
+                <caption>Basic Code Sequence Macro Attributes</caption>
+                <thead>
+                    <tr valign="top">
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_7347bf28-0577-442a-be16-4c8708b3367a">Attribute Name</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_72219c50-3fdf-49a6-b273-0bcb6e749cb2">Tag</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_79469401-984f-49cf-8889-b479a5f212ee">Type</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_fc255c2a-791e-4606-b5fa-9762844ba794">Attribute Description</para>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr valign="top">
+                        <td align="left" colspan="4" rowspan="1">
+                            <para xml:id="para_f5100e63-e841-4e37-8001-cb50b48bd3ef">
+                                <emphasis role="italic">BASIC CODED ENTRY ATTRIBUTES</emphasis>
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_83610a4a-7103-4c73-8f0d-4b04bbb93cb8">Code Value</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_80ca3e87-f3f7-40e3-82a3-a99ebcd36c58">(0008,0100)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_43a3911f-7cc5-4b06-981b-a2ea8e1eef58">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_624b3f3a-3972-4ab2-9631-d5e76d5cb9be">The identifier of the Coded Entry.</para>
+                            <para xml:id="para_a096c916-5a73-4796-835d-f38715f2eea0">See <xref linkend="sect_8.1" xrefstyle="select: label"/>.</para>
+                            <para xml:id="para_49196388-5ded-4726-84ec-3485e1e749bc">Shall be present if the code value length is 16 characters or less, and the code value is not a URN or URL.</para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_a3cd571d-a951-434d-9505-12c4bb0e1f5f">Coding Scheme Designator</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_b6741b0b-9f9c-4f99-aec7-0564e5e6e06f">(0008,0102)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_1d2c9857-c8a9-4f96-9ca8-863501a31ee3">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_12ce980c-1386-46ee-a0af-26acff8c7e4b">The identifier of the coding scheme in which the Coded Entry is defined.</para>
+                            <para xml:id="para_1cc12af4-52a4-4da3-b62d-495aafd91ad2">See <xref linkend="sect_8.2" xrefstyle="select: label"/>.</para>
+                            <para xml:id="para_d669677e-24e8-4b33-ae4e-0f8ba804ba68">Shall be present if Code Value (0008,0100) or Long Code Value (0008,0119) is present. May be present otherwise.</para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_146fb527-3974-4f1e-8128-77f99ac47ddb">Coding Scheme Version</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_988da6a2-0428-4a6d-bc25-e3d62a786a5a">(0008,0103)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_4c0fc31f-a733-4b2c-80af-2b9536e34e64">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_6136148d-043f-4c76-9dcb-213098bf1ab0">An identifier of the version of the coding scheme if necessary to resolve ambiguity.</para>
+                            <para xml:id="para_539e18d1-7446-4b54-b824-f9e1054884c7">See <xref linkend="sect_8.2" xrefstyle="select: label"/>. Required if the value of Coding Scheme Designator (0008,0102) is present and is not sufficient to identify the Code Value (0008,0100) or Long Code Value (0008,0119) unambiguously. Shall not be present if Coding Scheme Designator (0008,0102) is absent. May be present otherwise.</para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_6e49d732-4e0a-4ce9-baf2-b40e98627c7a">Code Meaning</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_22299cfa-bbf9-47de-a879-17cde4f5dce8">(0008,0104)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_f8087dc8-b880-4246-ad91-d4553eee0743">1</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_5b34aef0-6362-41eb-98dd-3560f51612d6">Text that conveys the meaning of the Coded Entry.</para>
+                            <para xml:id="para_f24b0426-0a1a-4729-bb83-7bca635f8006">See <xref linkend="sect_8.3" xrefstyle="select: label"/>.</para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_a696311d-07c2-44de-b096-e24fdbd91fee">Long Code Value</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_0a5cdbcf-bf38-4208-a9a0-35a5b33030e8">(0008,0119)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_bcb75164-d3df-4791-b647-5b95a0881dc2">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_df9dfa3f-b336-4cd8-8a75-a49138336b13">The identifier of the Coded Entry.</para>
+                            <para xml:id="para_85655066-f950-4409-b0b5-96921152a765">See <xref linkend="sect_8.1" xrefstyle="select: label"/>.</para>
+                            <para xml:id="para_e3129e10-b505-466b-bd31-3d62c70b3bcc">Shall be present if Code Value (0008,0100) is not present and the Code Value is not a URN or URL.</para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_850ce60b-0362-4082-bb23-ace58c2794d2">URN Code Value</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_53f0abde-6a4f-4cd6-b601-c74a30842be2">(0008,0120)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_360b9adc-bf2f-4c7d-9570-4dc89bafba0f">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_98573935-afdf-4d6c-a81e-3eeacd54533e">The identifier of the Coded Entry.</para>
+                            <para xml:id="para_b15f819a-6364-4abf-b8a6-1e846e7f32b4">See <xref linkend="sect_8.1" xrefstyle="select: label"/>.</para>
+                            <para xml:id="para_14999e56-f5e9-4cc3-b4a0-07081f253d4f">Shall be present if Code Value (0008,0100) is not present and the Code Value is a URN or URL.</para>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table frame="box" label="8.8-1b" rules="all" xml:id="table_8.8-1b">
+                <caption>Enhanced Code Sequence Macro Attributes</caption>
+                <thead>
+                    <tr valign="top">
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_a0672b3a-b089-4d4d-ab05-6b2fd414190e">Attribute Name</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_3b287c50-8d8a-4bbd-99fe-ad9bc87e5da2">Tag</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_6a855098-7e39-456a-91dc-4535d6ce7406">Type</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_446c8a4f-f05c-42bc-a29c-2c465f7c65db">Attribute Description</para>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_fa19ce09-b5fe-4acd-beaf-fc2f5bbd1d62">Context Identifier</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_77322f73-a95e-416f-9bc7-97a52b579e47">(0008,010F)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_ac2f76c1-a56f-43c4-a851-91422831039c">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_9879c910-efea-40b4-a887-dce9ca25946d">The identifier of the Context Group from which the Coded Entry was selected.</para>
+                            <para xml:id="para_46309550-19c3-4151-b93b-49d8fbec465c">See <xref linkend="sect_8.6" xrefstyle="select: label"/>.</para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_524e304a-2a28-480b-ad1d-059bc2f726b5">Context UID</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_ea25c25c-9822-4fda-b955-8e5aa618b3d1">(0008,0117)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_a350fd9d-ac13-4af5-b149-c1b544ff98e3">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_73eabe58-eacb-4fc2-aed4-c272c972c1d8">The unique identifier of the Context Group from which the Coded Entry was selected.</para>
+                            <para xml:id="para_2e5a35f1-41db-456e-b65d-e56849698cd2">See <xref linkend="sect_8.6" xrefstyle="select: label"/>.</para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_43fd7bc7-025f-4c0d-8407-a2312608f64a">Mapping Resource</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_7729f0c9-85b7-4e57-9dbc-62adf73a0b0a">(0008,0105)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_becaf13a-9785-4b5d-a3fc-2b75f77ad469">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_8c64628f-e945-41d0-b399-c0d5f7e0ad9e">The identifier of the Mapping Resource that defines the Context Group from which Coded Entry was selected.</para>
+                            <para xml:id="para_b252d8a5-5dd8-4c62-aeb7-b007b26aea97">See <xref linkend="sect_8.4" xrefstyle="select: label"/>. Required if Context Identifier (0008,010F) is present.</para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_8c6fa62d-4f2f-4314-8774-e0dfcfcd533d">Mapping Resource UID</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_8835e1b2-b1e0-4ac8-8323-4b2736c27394">(0008,0118)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_c8ee13f0-0978-4ae9-b04e-ed0c7aafdfbf">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_3b6d5f88-9e3b-4799-9863-a690da3c8360">The unique identifier of the Mapping Resource that defines the Context Group from which Coded Entry was selected.</para>
+                            <note>
+                                <para xml:id="para_147d37d4-bd3b-491c-84f2-9f8e297aef02">The unique identifier for the DICOM Content Mapping Resource "DCMR" is defined in <olink targetdoc="PS3.6" targetptr="PS3.6" xrefstyle="select: labelnumber"/>.</para>
+                            </note>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_cee65878-d0cf-4fee-b89c-57ae591ac568">Mapping Resource Name</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_93195f59-81e4-481d-a599-c2415ee71939">(0008,0122)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_d7e901bf-2dd8-4165-81fb-23cba9c4dc90">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_4cbed998-7566-4fd6-b1e3-9f6486ce548c">The name of the Mapping Resource that defines the Context Group from which Coded Entry was selected.</para>
+                            <para xml:id="para_187dbf2c-fecb-449c-8e0f-8fa264a1b95a">See <xref linkend="sect_8.4" xrefstyle="select: label"/>.</para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_f5495b21-1485-46f3-9977-a52aed37bb6c">Context Group Version</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_fb14eadf-3db9-47a7-8e9b-d4b120538f88">(0008,0106)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_8e0b8905-4136-4e6a-a40c-aab3dd04cdfd">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_2edfd38f-326e-4217-acd6-ea7fa9ed1523">The identifier of the version of the Context Group from which the Coded Entry was selected.</para>
+                            <para xml:id="para_aa38907e-3f8c-4e30-a7f1-68689ea791e8">See <xref linkend="sect_8.5" xrefstyle="select: label"/>.</para>
+                            <para xml:id="para_058dd767-9be7-4810-8070-866864ac1857">Required if Context Identifier (0008,010F) is present.</para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_6057515b-e1f9-41b0-844c-8835a0067314">Context Group Extension Flag</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_2b0e3695-2880-4937-ab26-3af041efdb19">(0008,010B)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_38fee92c-33bb-4488-b9a0-d94aafd8f3e7">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_7d367f7f-08c9-4891-8844-cb54287ce3b3">Indicates whether the triplet of Code Value (0008,0100) (or Long Code Value (0008,0119) or URN Code Value (0008,0120))/Coding Scheme Designator (0008,0102)/Code Meaning (0008,0104) is selected from a private extension of the Context Group identified in Context Identifier (0008,010F). See <xref linkend="sect_8.7" xrefstyle="select: label"/>.</para>
+                            <variablelist spacing="compact">
+                                <title>Enumerated Values:</title>
+                                <varlistentry>
+                                    <term>Y</term>
+                                    <listitem>
+                                        <para xml:id="para_91e2f940-7517-4658-9471-48ccbc4c77a6"/>
+                                    </listitem>
+                                </varlistentry>
+                                <varlistentry>
+                                    <term>N</term>
+                                    <listitem>
+                                        <para xml:id="para_538a7bb6-846e-46d4-af6e-6b97c3315fcf"/>
+                                    </listitem>
+                                </varlistentry>
+                            </variablelist>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_304ae149-7cb7-4a45-bf96-0154cdcc6040">Context Group Local Version</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_cca285e1-c793-49c6-8fc1-668dfdad1331">(0008,0107)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_fe05f590-e41f-426c-80ae-0b42e38c9b55">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_103a9b91-1500-494e-87dd-79d1b535240f">An implementation-specific version of a Context Group that contains private extensions.</para>
+                            <para xml:id="para_89f6521e-831c-49e2-92dc-ede75b39a9a0">See <xref linkend="sect_8.7" xrefstyle="select: label"/>. Required if the value of Context Group Extension Flag (0008,010B) is "Y".</para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_afe53f15-3abe-4e07-8c62-34d77f4df3b5">Context Group Extension Creator UID</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_702ce072-b6d8-499b-8f95-717bd4090b0b">(0008,010D)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_5139afcb-7f36-4f01-a32a-793b5cece045">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_b883f4ce-246d-4233-b522-093f1fa0d4e4">Identifies the person or organization who created an extension to the Context Group. See <xref linkend="sect_8.7" xrefstyle="select: label"/>.</para>
+                            <para xml:id="para_c7806d62-1e61-4ffa-8e6d-8c5cfe58b9be">Required if the value of Context Group Extension Flag (0008,010B) is "Y".</para>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table frame="box" label="8.8-1" rules="all" xml:id="table_8.8-1">
+                <caption>Code Sequence Macro Attributes</caption>
+                <thead>
+                    <tr valign="top">
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_07239689-c353-4661-b0ba-1cf11d96db93">Attribute Name</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_54b11461-3a32-48cf-b67d-45fa53afd036">Tag</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_e59b281a-7414-431d-a31a-98d3fcc5e3c9">Type</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_8b93f9f9-6b1f-476b-b36a-1059cb9899c4">Attribute Description</para>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr valign="top">
+                        <td align="left" colspan="4" rowspan="1">
+                            <para xml:id="para_f26e05b3-81a5-4fb1-800a-4d7b2eea7807">
+                                <emphasis role="italic">BASIC CODED ENTRY ATTRIBUTES</emphasis>
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="4" rowspan="1">
+                            <para xml:id="para_b86b6136-47f0-4f88-a7db-14254264a971">
+                                <emphasis role="italic">Include <xref linkend="table_8.8-1a" xrefstyle="select: label"/>
+                                </emphasis>
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_ddbc6017-b7ed-4a71-a1f1-ca06a51904e7">Equivalent Code Sequence</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_6f2856c5-10ce-4f6a-bef6-998cd4bbfe46">(0008,0121)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_a44390d4-7052-46fc-b5e5-eeea09de9ea9">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_c32b3ab1-f6a7-4c45-8594-14bcfea070f3">Codes that are considered equivalent by the creating system.</para>
+                            <para xml:id="para_8d511d7c-f177-4d12-80c0-7f0d32653fdd">One or more Items are permitted in this Sequence.</para>
+                            <para xml:id="para_4556c2fe-e657-43c7-8c66-b4603431e788">See <xref linkend="sect_8.9" xrefstyle="select: label"/>.</para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="4" rowspan="1">
+                            <para xml:id="para_3335b5a2-026c-4758-b4da-c1214bc43877">
+                                <emphasis role="italic">&gt;Include <xref linkend="table_8.8-1a" xrefstyle="select: label"/>
+                                </emphasis>
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="4" rowspan="1">
+                            <para xml:id="para_e2d5279c-7adc-4c9d-9c76-f2ee20a5ae14">
+                                <emphasis role="italic">&gt;Include <xref linkend="table_8.8-1b" xrefstyle="select: label"/>
+                                </emphasis>
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="4" rowspan="1">
+                            <para xml:id="para_1f5353e3-b430-4c5f-8a39-a918ac8017db">
+                                <emphasis role="italic">ENHANCED ENCODING MODE</emphasis>
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="4" rowspan="1">
+                            <para xml:id="para_2a08b034-feba-4514-ac46-f8d450b7db0b">
+                                <emphasis role="italic">Include <xref linkend="table_8.8-1b" xrefstyle="select: label"/>
+                                </emphasis>
+                            </para>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
     </chapter>
 </book>

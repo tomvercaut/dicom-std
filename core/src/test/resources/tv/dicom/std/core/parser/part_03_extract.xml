@@ -2,6 +2,1464 @@
 <!-- Information on the DICOM standard and it's full description can be found on: https://www.dicomstandard.org/current/-->
 <book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" label="PS3.3" version="5.0"
       xml:id="PS3.3">
+    <chapter label="8" status="1" xml:id="chapter_8">
+        <section label="8.8" status="2" xml:id="sect_8.8">
+            <title>Standard Attribute Sets for Code Sequence Attributes</title>
+            <para xml:id="para_0b9c64aa-2995-47db-b64b-ec7f371009bd">
+                <xref linkend="table_8.8-1" xrefstyle="select: label"/>
+                specifies the default set of Attributes encapsulated in the Items of Code Sequence Attributes. These
+                Attributes comprise the Code Sequence Macro.
+            </para>
+            <note>
+                <para xml:id="para_79e3ca78-c70b-44e3-b918-d6f35e5abea8">The instruction "
+                    <emphasis role="italic">Include
+                        <xref linkend="table_8.8-1" xrefstyle="select: label quotedtitle"/>
+                    </emphasis>
+                    " may be used in an Information Object Definition as a concise way to indicate that the Attributes
+                    of
+                    <xref linkend="table_8.8-1" xrefstyle="select: label"/>
+                    are included in the specification of the Attribute Set of a Sequence of Items. Additional
+                    constraints on the Code Sequence Data Element (such as a Context Group that defines the value set)
+                    may be appended to the "
+                    <emphasis role="italic">Include
+                        <xref linkend="table_8.8-1" xrefstyle="select: label quotedtitle"/>
+                    </emphasis>
+                    " instruction.
+                </para>
+            </note>
+            <para xml:id="para_8ef05490-4f0d-49d4-aac9-843fbaca2b4f">The default specifications of this Section are
+                overridden within the scope of a Sequence Item or Code Sequence Attribute or IOD by corresponding
+                specifications defined within the scope of that Sequence Item or Code Sequence Attribute or IOD.
+                Additional Attributes may also be specified by the instantiation of the Macro.
+            </para>
+            <para xml:id="para_76d0e39e-aa45-4bc0-b878-af8e164c4593">The Basic Coded Entry Attributes fully define a
+                Coded Entry. If it is desired to convey the list from which a code has been chosen, then the optional
+                Enhanced Encoding Mode Attributes may also be present.
+            </para>
+            <table frame="box" label="8.8-1a" rules="all" xml:id="table_8.8-1a">
+                <caption>Basic Code Sequence Macro Attributes</caption>
+                <thead>
+                    <tr valign="top">
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_7347bf28-0577-442a-be16-4c8708b3367a">Attribute Name</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_72219c50-3fdf-49a6-b273-0bcb6e749cb2">Tag</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_79469401-984f-49cf-8889-b479a5f212ee">Type</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_fc255c2a-791e-4606-b5fa-9762844ba794">Attribute Description</para>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr valign="top">
+                        <td align="left" colspan="4" rowspan="1">
+                            <para xml:id="para_f5100e63-e841-4e37-8001-cb50b48bd3ef">
+                                <emphasis role="italic">BASIC CODED ENTRY ATTRIBUTES</emphasis>
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_83610a4a-7103-4c73-8f0d-4b04bbb93cb8">Code Value</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_80ca3e87-f3f7-40e3-82a3-a99ebcd36c58">(0008,0100)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_43a3911f-7cc5-4b06-981b-a2ea8e1eef58">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_624b3f3a-3972-4ab2-9631-d5e76d5cb9be">The identifier of the Coded
+                                Entry.
+                            </para>
+                            <para xml:id="para_a096c916-5a73-4796-835d-f38715f2eea0">See
+                                <xref linkend="sect_8.1"
+                                      xrefstyle="select: label"/>
+                                .
+                            </para>
+                            <para xml:id="para_49196388-5ded-4726-84ec-3485e1e749bc">Shall be present if the code value
+                                length is 16 characters or less, and the code value is not a URN or URL.
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_a3cd571d-a951-434d-9505-12c4bb0e1f5f">Coding Scheme Designator</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_b6741b0b-9f9c-4f99-aec7-0564e5e6e06f">(0008,0102)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_1d2c9857-c8a9-4f96-9ca8-863501a31ee3">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_12ce980c-1386-46ee-a0af-26acff8c7e4b">The identifier of the coding scheme
+                                in which the Coded Entry is defined.
+                            </para>
+                            <para xml:id="para_1cc12af4-52a4-4da3-b62d-495aafd91ad2">See
+                                <xref linkend="sect_8.2"
+                                      xrefstyle="select: label"/>
+                                .
+                            </para>
+                            <para xml:id="para_d669677e-24e8-4b33-ae4e-0f8ba804ba68">Shall be present if Code Value
+                                (0008,0100) or Long Code Value (0008,0119) is present. May be present otherwise.
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_146fb527-3974-4f1e-8128-77f99ac47ddb">Coding Scheme Version</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_988da6a2-0428-4a6d-bc25-e3d62a786a5a">(0008,0103)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_4c0fc31f-a733-4b2c-80af-2b9536e34e64">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_6136148d-043f-4c76-9dcb-213098bf1ab0">An identifier of the version of the
+                                coding scheme if necessary to resolve ambiguity.
+                            </para>
+                            <para xml:id="para_539e18d1-7446-4b54-b824-f9e1054884c7">See
+                                <xref linkend="sect_8.2"
+                                      xrefstyle="select: label"/>
+                                . Required if the value of Coding Scheme Designator (0008,0102) is present and is not
+                                sufficient to identify the Code Value (0008,0100) or Long Code Value (0008,0119)
+                                unambiguously. Shall not be present if Coding Scheme Designator (0008,0102) is absent.
+                                May be present otherwise.
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_6e49d732-4e0a-4ce9-baf2-b40e98627c7a">Code Meaning</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_22299cfa-bbf9-47de-a879-17cde4f5dce8">(0008,0104)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_f8087dc8-b880-4246-ad91-d4553eee0743">1</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_5b34aef0-6362-41eb-98dd-3560f51612d6">Text that conveys the meaning of
+                                the Coded Entry.
+                            </para>
+                            <para xml:id="para_f24b0426-0a1a-4729-bb83-7bca635f8006">See
+                                <xref linkend="sect_8.3"
+                                      xrefstyle="select: label"/>
+                                .
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_a696311d-07c2-44de-b096-e24fdbd91fee">Long Code Value</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_0a5cdbcf-bf38-4208-a9a0-35a5b33030e8">(0008,0119)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_bcb75164-d3df-4791-b647-5b95a0881dc2">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_df9dfa3f-b336-4cd8-8a75-a49138336b13">The identifier of the Coded
+                                Entry.
+                            </para>
+                            <para xml:id="para_85655066-f950-4409-b0b5-96921152a765">See
+                                <xref linkend="sect_8.1"
+                                      xrefstyle="select: label"/>
+                                .
+                            </para>
+                            <para xml:id="para_e3129e10-b505-466b-bd31-3d62c70b3bcc">Shall be present if Code Value
+                                (0008,0100) is not present and the Code Value is not a URN or URL.
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_850ce60b-0362-4082-bb23-ace58c2794d2">URN Code Value</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_53f0abde-6a4f-4cd6-b601-c74a30842be2">(0008,0120)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_360b9adc-bf2f-4c7d-9570-4dc89bafba0f">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_98573935-afdf-4d6c-a81e-3eeacd54533e">The identifier of the Coded
+                                Entry.
+                            </para>
+                            <para xml:id="para_b15f819a-6364-4abf-b8a6-1e846e7f32b4">See
+                                <xref linkend="sect_8.1"
+                                      xrefstyle="select: label"/>
+                                .
+                            </para>
+                            <para xml:id="para_14999e56-f5e9-4cc3-b4a0-07081f253d4f">Shall be present if Code Value
+                                (0008,0100) is not present and the Code Value is a URN or URL.
+                            </para>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table frame="box" label="8.8-1b" rules="all" xml:id="table_8.8-1b">
+                <caption>Enhanced Code Sequence Macro Attributes</caption>
+                <thead>
+                    <tr valign="top">
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_a0672b3a-b089-4d4d-ab05-6b2fd414190e">Attribute Name</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_3b287c50-8d8a-4bbd-99fe-ad9bc87e5da2">Tag</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_6a855098-7e39-456a-91dc-4535d6ce7406">Type</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_446c8a4f-f05c-42bc-a29c-2c465f7c65db">Attribute Description</para>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_fa19ce09-b5fe-4acd-beaf-fc2f5bbd1d62">Context Identifier</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_77322f73-a95e-416f-9bc7-97a52b579e47">(0008,010F)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_ac2f76c1-a56f-43c4-a851-91422831039c">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_9879c910-efea-40b4-a887-dce9ca25946d">The identifier of the Context Group
+                                from which the Coded Entry was selected.
+                            </para>
+                            <para xml:id="para_46309550-19c3-4151-b93b-49d8fbec465c">See
+                                <xref linkend="sect_8.6"
+                                      xrefstyle="select: label"/>
+                                .
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_524e304a-2a28-480b-ad1d-059bc2f726b5">Context UID</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_ea25c25c-9822-4fda-b955-8e5aa618b3d1">(0008,0117)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_a350fd9d-ac13-4af5-b149-c1b544ff98e3">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_73eabe58-eacb-4fc2-aed4-c272c972c1d8">The unique identifier of the
+                                Context Group from which the Coded Entry was selected.
+                            </para>
+                            <para xml:id="para_2e5a35f1-41db-456e-b65d-e56849698cd2">See
+                                <xref linkend="sect_8.6"
+                                      xrefstyle="select: label"/>
+                                .
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_43fd7bc7-025f-4c0d-8407-a2312608f64a">Mapping Resource</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_7729f0c9-85b7-4e57-9dbc-62adf73a0b0a">(0008,0105)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_becaf13a-9785-4b5d-a3fc-2b75f77ad469">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_8c64628f-e945-41d0-b399-c0d5f7e0ad9e">The identifier of the Mapping
+                                Resource that defines the Context Group from which Coded Entry was selected.
+                            </para>
+                            <para xml:id="para_b252d8a5-5dd8-4c62-aeb7-b007b26aea97">See
+                                <xref linkend="sect_8.4"
+                                      xrefstyle="select: label"/>
+                                . Required if Context Identifier (0008,010F) is present.
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_8c6fa62d-4f2f-4314-8774-e0dfcfcd533d">Mapping Resource UID</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_8835e1b2-b1e0-4ac8-8323-4b2736c27394">(0008,0118)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_c8ee13f0-0978-4ae9-b04e-ed0c7aafdfbf">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_3b6d5f88-9e3b-4799-9863-a690da3c8360">The unique identifier of the
+                                Mapping Resource that defines the Context Group from which Coded Entry was selected.
+                            </para>
+                            <note>
+                                <para xml:id="para_147d37d4-bd3b-491c-84f2-9f8e297aef02">The unique identifier for the
+                                    DICOM Content Mapping Resource "DCMR" is defined in
+                                    <olink targetdoc="PS3.6"
+                                           targetptr="PS3.6"
+                                           xrefstyle="select: labelnumber"/>
+                                    .
+                                </para>
+                            </note>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_cee65878-d0cf-4fee-b89c-57ae591ac568">Mapping Resource Name</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_93195f59-81e4-481d-a599-c2415ee71939">(0008,0122)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_d7e901bf-2dd8-4165-81fb-23cba9c4dc90">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_4cbed998-7566-4fd6-b1e3-9f6486ce548c">The name of the Mapping Resource
+                                that defines the Context Group from which Coded Entry was selected.
+                            </para>
+                            <para xml:id="para_187dbf2c-fecb-449c-8e0f-8fa264a1b95a">See
+                                <xref linkend="sect_8.4"
+                                      xrefstyle="select: label"/>
+                                .
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_f5495b21-1485-46f3-9977-a52aed37bb6c">Context Group Version</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_fb14eadf-3db9-47a7-8e9b-d4b120538f88">(0008,0106)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_8e0b8905-4136-4e6a-a40c-aab3dd04cdfd">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_2edfd38f-326e-4217-acd6-ea7fa9ed1523">The identifier of the version of
+                                the Context Group from which the Coded Entry was selected.
+                            </para>
+                            <para xml:id="para_aa38907e-3f8c-4e30-a7f1-68689ea791e8">See
+                                <xref linkend="sect_8.5"
+                                      xrefstyle="select: label"/>
+                                .
+                            </para>
+                            <para xml:id="para_058dd767-9be7-4810-8070-866864ac1857">Required if Context Identifier
+                                (0008,010F) is present.
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_6057515b-e1f9-41b0-844c-8835a0067314">Context Group Extension Flag</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_2b0e3695-2880-4937-ab26-3af041efdb19">(0008,010B)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_38fee92c-33bb-4488-b9a0-d94aafd8f3e7">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_7d367f7f-08c9-4891-8844-cb54287ce3b3">Indicates whether the triplet of
+                                Code Value (0008,0100) (or Long Code Value (0008,0119) or URN Code Value
+                                (0008,0120))/Coding Scheme Designator (0008,0102)/Code Meaning (0008,0104) is selected
+                                from a private extension of the Context Group identified in Context Identifier
+                                (0008,010F). See<xref linkend="sect_8.7" xrefstyle="select: label"/>.
+                            </para>
+                            <variablelist spacing="compact">
+                                <title>Enumerated Values:</title>
+                                <varlistentry>
+                                    <term>Y</term>
+                                    <listitem>
+                                        <para xml:id="para_91e2f940-7517-4658-9471-48ccbc4c77a6"/>
+                                    </listitem>
+                                </varlistentry>
+                                <varlistentry>
+                                    <term>N</term>
+                                    <listitem>
+                                        <para xml:id="para_538a7bb6-846e-46d4-af6e-6b97c3315fcf"/>
+                                    </listitem>
+                                </varlistentry>
+                            </variablelist>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_304ae149-7cb7-4a45-bf96-0154cdcc6040">Context Group Local Version</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_cca285e1-c793-49c6-8fc1-668dfdad1331">(0008,0107)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_fe05f590-e41f-426c-80ae-0b42e38c9b55">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_103a9b91-1500-494e-87dd-79d1b535240f">An implementation-specific version
+                                of a Context Group that contains private extensions.
+                            </para>
+                            <para xml:id="para_89f6521e-831c-49e2-92dc-ede75b39a9a0">See
+                                <xref linkend="sect_8.7"
+                                      xrefstyle="select: label"/>
+                                . Required if the value of Context Group Extension Flag (0008,010B) is "Y".
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_afe53f15-3abe-4e07-8c62-34d77f4df3b5">Context Group Extension Creator
+                                UID
+                            </para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_702ce072-b6d8-499b-8f95-717bd4090b0b">(0008,010D)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_5139afcb-7f36-4f01-a32a-793b5cece045">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_b883f4ce-246d-4233-b522-093f1fa0d4e4">Identifies the person or
+                                organization who created an extension to the Context Group. See
+                                <xref linkend="sect_8.7"
+                                      xrefstyle="select: label"/>
+                                .
+                            </para>
+                            <para xml:id="para_c7806d62-1e61-4ffa-8e6d-8c5cfe58b9be">Required if the value of Context
+                                Group Extension Flag (0008,010B) is "Y".
+                            </para>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table frame="box" label="8.8-1" rules="all" xml:id="table_8.8-1">
+                <caption>Code Sequence Macro Attributes</caption>
+                <thead>
+                    <tr valign="top">
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_07239689-c353-4661-b0ba-1cf11d96db93">Attribute Name</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_54b11461-3a32-48cf-b67d-45fa53afd036">Tag</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_e59b281a-7414-431d-a31a-98d3fcc5e3c9">Type</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_8b93f9f9-6b1f-476b-b36a-1059cb9899c4">Attribute Description</para>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr valign="top">
+                        <td align="left" colspan="4" rowspan="1">
+                            <para xml:id="para_f26e05b3-81a5-4fb1-800a-4d7b2eea7807">
+                                <emphasis role="italic">BASIC CODED ENTRY ATTRIBUTES</emphasis>
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="4" rowspan="1">
+                            <para xml:id="para_b86b6136-47f0-4f88-a7db-14254264a971">
+                                <emphasis role="italic">Include
+                                    <xref linkend="table_8.8-1a" xrefstyle="select: label"/>
+                                </emphasis>
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_ddbc6017-b7ed-4a71-a1f1-ca06a51904e7">Equivalent Code Sequence</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_6f2856c5-10ce-4f6a-bef6-998cd4bbfe46">(0008,0121)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_a44390d4-7052-46fc-b5e5-eeea09de9ea9">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_c32b3ab1-f6a7-4c45-8594-14bcfea070f3">Codes that are considered
+                                equivalent by the creating system.
+                            </para>
+                            <para xml:id="para_8d511d7c-f177-4d12-80c0-7f0d32653fdd">One or more Items are permitted in
+                                this Sequence.
+                            </para>
+                            <para xml:id="para_4556c2fe-e657-43c7-8c66-b4603431e788">See
+                                <xref linkend="sect_8.9"
+                                      xrefstyle="select: label"/>
+                                .
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="4" rowspan="1">
+                            <para xml:id="para_3335b5a2-026c-4758-b4da-c1214bc43877">
+                                <emphasis role="italic">&gt;Include
+                                    <xref linkend="table_8.8-1a" xrefstyle="select: label"/>
+                                </emphasis>
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="4" rowspan="1">
+                            <para xml:id="para_e2d5279c-7adc-4c9d-9c76-f2ee20a5ae14">
+                                <emphasis role="italic">&gt;Include
+                                    <xref linkend="table_8.8-1b" xrefstyle="select: label"/>
+                                </emphasis>
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="4" rowspan="1">
+                            <para xml:id="para_1f5353e3-b430-4c5f-8a39-a918ac8017db">
+                                <emphasis role="italic">ENHANCED ENCODING MODE</emphasis>
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="4" rowspan="1">
+                            <para xml:id="para_2a08b034-feba-4514-ac46-f8d450b7db0b">
+                                <emphasis role="italic">Include
+                                    <xref linkend="table_8.8-1b" xrefstyle="select: label"/>
+                                </emphasis>
+                            </para>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </chapter>
+    <chapter label="10" status="1" xml:id="chapter_10">
+        <section label="10.8" status="2" xml:id="sect_10.8">
+            <title>SOP Instance Reference Macro</title>
+            <para xml:id="para_d0f18c50-ebcc-4fe8-af6d-a6b6ffa5b8e1">
+                <xref linkend="table_10-11" xrefstyle="select: label"/>
+                specifies the Attributes of the<xref linkend="sect_10.8" xrefstyle="select: title"/>, which references a
+                SOP Instance.
+            </para>
+            <table frame="box" label="10-11" rules="all" xml:id="table_10-11">
+                <caption>SOP Instance Reference Macro Attributes</caption>
+                <thead>
+                    <tr valign="top">
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_5a42bead-86fd-4f7b-8207-2e881965ab73">Attribute Name</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_70ae57b5-e439-4067-bc95-e80d14d1fa04">Tag</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_d34eb0c1-3332-4ca0-a083-ab76f3cb6533">Type</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_1de58578-d160-4168-9c8c-d2466626ce85">Attribute Description</para>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_01f3f1cd-dd4d-471c-b080-9961faf6d1fb">Referenced SOP Class UID</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_e2fab2a1-95b0-4b70-a566-6d84cf79331f">(0008,1150)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_dc719629-f544-459b-93f4-ea556d10f880">1</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_63809a86-e616-4736-811b-d8de9a2a076c">Uniquely identifies the referenced
+                                SOP Class.
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_ee639991-ef92-4300-9a16-339d6e7d18b0">Referenced SOP Instance UID</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_cbe8fcac-5c05-4c18-ae71-d9bb8875962b">(0008,1155)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_917913b4-a3fa-45eb-ab44-e0d4142b5626">1</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_e163fe69-a141-4d4a-8f47-dfaa443fdddb">Uniquely identifies the referenced
+                                SOP Instance.
+                            </para>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section label="10.15" status="2" xml:id="sect_10.15">
+            <title>Issuer of Patient ID Macro</title>
+            <para xml:id="para_337a45c5-b5ea-44ed-94ac-a25bc0941823">
+                <xref linkend="table_10-18" xrefstyle="select: label"/>
+                specifies the Attributes of the<xref linkend="sect_10.15" xrefstyle="select: title"/>, which identify
+                the source of Patient ID (0010,0020).
+            </para>
+            <para xml:id="para_e510c361-91d9-4afd-9d17-5e8ddee567fa">These Attributes are equivalent to components of
+                the HL7 v2 Extended Composite ID with Check Digit (CX) data type (see HL7 v2 Chapter 2.A.14), as used in
+                the HL7 v2 PID-3 Patient Identifier List field.
+            </para>
+            <table frame="box" label="10-18" rules="all" xml:id="table_10-18">
+                <caption>Issuer of Patient ID Macro Attributes</caption>
+                <thead>
+                    <tr valign="top">
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_070e516d-4016-43f4-890c-6c6d03228c25">Attribute Name</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_530d51d4-3fa3-42e7-88a9-7a2cb5bf2c49">Tag</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_39c6c5de-6e39-46bf-8a42-6f106cb5d629">Type</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_f5c66541-225f-44d0-8693-5c0563dfb131">Attribute Description</para>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_df31bd9e-0fd7-4e14-82f6-0fd02f5ce8ee">Issuer of Patient ID</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_4c145a34-0fce-46c7-bd80-ae376dada851">(0010,0021)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_706d8ecb-61ca-4a56-b192-31947917fe85">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_6003b085-206b-4fae-a0ae-410844ff8980">Identifier of the Assigning
+                                Authority (system, organization, agency, or department) that issued the Patient ID.
+                            </para>
+                            <note>
+                                <para xml:id="para_fde39d36-34f5-4459-8bca-12b577233532">Equivalent to HL7 v2 CX
+                                    component 4 subcomponent 1.
+                                </para>
+                            </note>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_02ce40f4-dc63-4aca-98d9-72c5274aa6f8">Issuer of Patient ID Qualifiers
+                                Sequence
+                            </para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_857be70e-4dee-485a-a372-88d48be0ed60">(0010,0024)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_3fdd9a00-eb31-4db8-af70-247fbef8daa2">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_113a690d-eb00-485b-8b86-6cf24804f9bc">Attributes specifying or qualifying
+                                the identity of the issuer of the Patient ID, or scoping the Patient ID.
+                            </para>
+                            <para xml:id="para_25452064-cfd1-4b3b-9dfe-8a9c48d2deab">Only a single Item is permitted in
+                                this Sequence.
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_beff7d9b-9e55-40ee-bb70-4ad01fad4b57">&gt;Universal Entity ID</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_f78c0251-9a34-4bbb-8af7-21e617d40b86">(0040,0032)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_8cc7b297-caf8-429f-84c9-8debeb4858ad">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_c8423c11-6e7c-46ea-8bec-1f773afcaede">Universal or unique identifier for
+                                the Patient ID Assigning Authority. The authority identified by this Attribute shall be
+                                the same as that of Issuer of Patient ID (0010,0021), if present.
+                            </para>
+                            <note>
+                                <para xml:id="para_8933ed06-5a13-4f47-a4fd-9e2d7cc913a6">Equivalent to HL7 v2 CX
+                                    component 4 subcomponent 2 (Universal ID).
+                                </para>
+                            </note>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_980f2028-ed4a-4444-a22d-6243e6f94cf9">&gt;Universal Entity ID Type</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_431ce520-fab9-48be-a014-32866ae0c6f0">(0040,0033)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_377f21a6-d67e-4b2f-a79f-910cc4885f9a">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_db7d89fc-3b4b-4944-94af-9c10f0097055">Standard defining the format of the
+                                Universal Entity ID (0040,0032). Required if Universal Entity ID (0040,0032) is present.
+                            </para>
+                            <note>
+                                <para xml:id="para_cdc31146-8c35-4426-8c4c-509f0256519d">Equivalent to HL7 v2 CX
+                                    component 4 subcomponent 3 (Universal ID Type).
+                                </para>
+                            </note>
+                            <para xml:id="para_b2a63f41-04dd-4ae5-b758-1cb173e955c3">See
+                                <xref linkend="sect_10.14" xrefstyle="select: label"/>
+                                for Defined Terms.
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_9e153931-ca14-4333-bdb5-0b4f4798ecd3">&gt;Identifier Type Code</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_49f7b3bf-28c4-4e1d-9866-566787d80298">(0040,0035)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_d59242b3-8f89-42f7-af95-4b0f7e9d8b4e">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_6d982790-a827-44d5-8fb8-cb5f09898398">Type of Patient ID. Refer to HL7 v2
+                                Table 0203 for Defined Terms.
+                            </para>
+                            <note>
+                                <para xml:id="para_dc68c1a1-46db-4a55-bcba-f75b9d9a8ab4">Equivalent to HL7 v2 CX
+                                    component 5 (Identifier Type Code).
+                                </para>
+                            </note>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_f1a4c71e-5927-4256-b2c3-cdb335cd3aa6">&gt;Assigning Facility Sequence
+                            </para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_c11ff19c-cff9-4e26-8c4a-7d6419b8e621">(0040,0036)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_14ef5f75-aaea-4d7d-85ef-ec3349f743e2">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_d5831995-e3a4-4a21-8649-c52c44a95f5a">The place or location identifier
+                                where the identifier was first assigned to the Patient. This component is not an
+                                inherent part of the identifier but rather part of the history of the identifier.
+                            </para>
+                            <para xml:id="para_9ccf0428-d166-42b5-88ee-0e52aaaffbb0">Only a single Item is permitted in
+                                this Sequence.
+                            </para>
+                            <note>
+                                <para xml:id="para_6a16f809-6605-41ac-8d02-b6104b0bc0ad">Equivalent to HL7 v2 CX
+                                    component 6 (Assigning Facility).
+                                </para>
+                            </note>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="3" rowspan="1">
+                            <para xml:id="para_59d6f4bf-a1e3-4c7a-bd58-5889b64ce38f">
+                                <emphasis role="italic">&gt;&gt;Include
+                                    <xref linkend="table_10-17" xrefstyle="select: label quotedtitle"/>
+                                </emphasis>
+                            </para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_62265648-6d18-4df1-891e-735f755443cf"/>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_40a1a958-8925-424d-93b5-2d39468d9392">&gt;Assigning Jurisdiction Code
+                                Sequence
+                            </para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_b65f6dce-6ee2-4b79-90d3-1833c1ba16d9">(0040,0039)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_e0c17bdb-117f-4064-9cbd-f4e07e11679d">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_a4bbfe26-afa4-4d57-abf8-04fe86756a03">The geo-political body that
+                                assigned the Patient identifier. Typically a code for a country or a state/province.
+                                Only a single Item is permitted in this Sequence.
+                            </para>
+                            <note>
+                                <para xml:id="para_da6e8d69-e95e-4320-b5c5-be5b4cbb811f">Equivalent to HL7 v2 CX
+                                    component 9 (Assigning Jurisdiction).
+                                </para>
+                            </note>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="3" rowspan="1">
+                            <para xml:id="para_424cd96d-af2b-4880-a1eb-339e040082d2">
+                                <emphasis role="italic">&gt;&gt;Include
+                                    <xref linkend="table_8.8-1" xrefstyle="select: label quotedtitle"/>
+                                </emphasis>
+                            </para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_f6b16376-83d6-4352-9dbf-6d50cb3397db">
+                                <emphasis role="italic">B
+                                    <olink targetdoc="PS3.16" targetptr="sect_CID_5001"
+                                           xrefstyle="select: labelnumber quotedtitle"/>
+                                    for country codes.
+                                </emphasis>
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_412b1f6c-0d0b-41e7-8d1c-6713d4acea63">&gt;Assigning Agency or Department
+                                Code Sequence
+                            </para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_33248bfd-fa07-44cf-ae60-7060a45f85fb">(0040,003A)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_60c3fe6f-2dbb-4722-9f8b-300d001207fd">3</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_1275e635-bf32-4c55-91fd-83047fb19d80">The agency or department that
+                                assigned the Patient identifier. Only a single Item is permitted in this Sequence.
+                            </para>
+                            <note>
+                                <para xml:id="para_d5f050e9-c374-464c-bbc6-c76b57d065fd">Equivalent to HL7 v2 CX
+                                    component 10 (Assigning Agency or Department).
+                                </para>
+                            </note>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="3" rowspan="1">
+                            <para xml:id="para_98185bf3-300b-4c6a-90f1-34f0044a6eb4">
+                                <emphasis role="italic">&gt;&gt;Include
+                                    <xref linkend="table_8.8-1" xrefstyle="select: label quotedtitle"/>
+                                </emphasis>
+                            </para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_cf7077aa-b349-4f66-bd52-c854f50f3181">
+                                <emphasis role="italic">No Baseline CID is defined.</emphasis>
+                            </para>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <table frame="box" label="10-3b" rules="all" xml:id="table_10-3b">
+            <caption>Referenced Instances and Access Macro Attributes</caption>
+            <thead>
+                <tr valign="top">
+                    <th align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_682a3fa2-dc73-455b-9bca-a8884bdd9bc6">Attribute Name</para>
+                    </th>
+                    <th align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_c193e19a-d47e-4abb-8ff8-1ee57bf6f5c1">Tag</para>
+                    </th>
+                    <th align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_f9984f0c-16af-488b-8532-4e4853d40b63">Type</para>
+                    </th>
+                    <th align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_b2cb9fd6-ba0f-48e3-8a04-b3ec2c754810">Attribute Description</para>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_61794b64-6e25-4165-b64d-68a21b0faafe">Type of Instances</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_90dddb3b-147e-4208-9160-a7cc199d80b2">(0040,E020)</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_3cffc980-3c68-4f88-b077-da6bf615e261">1</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_a0f18f34-4a84-4090-898d-1e19b9f76e9e">Type of object Instances referenced.
+                        </para>
+                        <variablelist spacing="compact">
+                            <title>Defined Terms:</title>
+                            <varlistentry>
+                                <term>DICOM</term>
+                                <listitem>
+                                    <para xml:id="para_ce4ae0ff-ebdc-4f06-8b2d-714d7eef462e"/>
+                                </listitem>
+                            </varlistentry>
+                            <varlistentry>
+                                <term>CDA</term>
+                                <listitem>
+                                    <para xml:id="para_f03ec65d-129a-4f04-ba13-c706359584be"/>
+                                </listitem>
+                            </varlistentry>
+                        </variablelist>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_fafc72b9-94e8-4c91-a762-f983ed03ae38">Study Instance UID</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_0dd626f8-e725-49f0-acd7-eaf229bb0b3b">(0020,000D)</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_adf2e535-44ff-42b8-9894-9611e2fa50d9">1C</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_5f9aedca-c810-4dae-9e32-d7d7f8a1272c">Unique identifier for the Study.</para>
+                        <para xml:id="para_229a3a98-10eb-4bb3-b6bf-e4fade9760c9">Required if Type of Instances
+                            (0040,E020) is DICOM and the Information Model of the referenced Instance contains the Study
+                            IE.
+                        </para>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_debc552a-b1ae-4dc8-aa10-9116d5e585d0">Series Instance UID</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_509a036e-0e04-45e2-bd27-7bac3f2b3756">(0020,000E)</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_39e4cbb9-b148-4309-825a-8793e9faea12">1C</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_06ccadc8-8df5-41ba-8b66-6dddfcdad876">Unique identifier for the Series that
+                            is part of the Study identified in Study Instance UID (0020,000D), if present, and contains
+                            the referenced object Instance(s).
+                        </para>
+                        <para xml:id="para_a8f41eb4-aa95-4e26-ac78-687eaae26fc2">Required if Type of Instances
+                            (0040,E020) is DICOM and the Information Model of the referenced Instance contains the
+                            Series IE.
+                        </para>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_8cb095a7-9efd-49b2-b67e-0fa39a34b9fe">Referenced SOP Sequence</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_585447e8-f577-410e-b418-67cb6fd24dcb">(0008,1199)</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_d10e7816-52b7-470f-aac6-331a776b36b4">1</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_64ff92ac-7d47-4432-ba01-7027c0f2032f">References to object Instances.</para>
+                        <para xml:id="para_092d1148-8c23-4301-83db-a447df5a1260">One or more Items shall be included in
+                            this Sequence.
+                        </para>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_6c593068-0198-4516-bf22-1ec241866838">&gt;Referenced SOP Class UID</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_0d714de2-3ad6-4a8f-a6e1-47cd965a0c3a">(0008,1150)</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_ce62fb10-a30e-47be-9457-9abea917f9d1">1</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_ad4953d4-69ac-43af-bcb5-5604c8a69130">Uniquely identifies the referenced SOP
+                            Class.
+                        </para>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_7cf52e32-c714-463b-937d-cc7386cc36ef">&gt;Referenced SOP Instance UID</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_fbfa9a24-1a56-49ea-9063-0ea080f6d68f">(0008,1155)</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_c7b5019a-84d7-4c36-a075-d8a3b6a3fdeb">1</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_dbe68d57-ac2d-4627-8a72-5cbfe7ab2b80">Uniquely identifies the referenced SOP
+                            Instance.
+                        </para>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_759c864b-f791-4bd8-a02b-9c28559b6641">&gt;HL7 Instance Identifier</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_0961d3ee-fe38-4852-8305-dc413684408a">(0040,E001)</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_5254dd61-52d1-4d6a-8c84-22dd7e85055d">1C</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_e34d081a-ca91-4c1e-867d-2fbada74425b">Instance Identifier of the encapsulated
+                            HL7 Structured Document, encoded as a UID (OID or UUID), concatenated with a caret ("^") and
+                            Extension value (if Extension is present in Instance Identifier).
+                        </para>
+                        <para xml:id="para_78186fb4-c5b3-49de-9815-cf0e4e533fab">Required if Type of Instances
+                            (0040,E020) is CDA.
+                        </para>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_1a7e90db-bcc5-4fc1-a18b-820f04828ba3">&gt;Referenced Frame Number</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_f436b72d-13ea-43f8-8a5c-c1073cc1d138">(0008,1160)</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_dce32d15-bce4-4f18-b098-c9074c15576e">1C</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_4cc11d65-b116-4688-ba07-dd62bd51859f">Identifies the frame numbers within the
+                            Referenced SOP Instance to which the reference applies. The first frame shall be denoted as
+                            frame number 1.
+                        </para>
+                        <note>
+                            <para xml:id="para_e2359edc-51fe-4f62-abc5-a7447e377de7">This Attribute may be
+                                multi-valued.
+                            </para>
+                        </note>
+                        <para xml:id="para_ed775e50-cce1-4f59-8b92-cbd73bd876b3">Required if the Referenced SOP Instance
+                            is a multi-frame image and the reference does not apply to all frames, and Referenced
+                            Segment Number (0062,000B) is not present.
+                        </para>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_f2decc5d-0f27-4e9c-80ea-d8974fbe525a">&gt;Referenced Segment Number</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_d2bb0fb7-7b12-4168-bff4-a35a57868834">(0062,000B)</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_2e0ad65b-f519-4335-820d-248cbd42e40c">1C</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_59e0b8bd-e2cb-44de-81c4-721492a056f4">Identifies the Segment Number to which
+                            the reference applies. Required if the Referenced SOP Instance is a Segmentation and the
+                            reference does not apply to all segments and Referenced Frame Number (0008,1160) is not
+                            present.
+                        </para>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_35f32af7-11f0-45d8-abc6-8010360f3c08">DICOM Retrieval Sequence</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_ea0d0db0-0cff-4511-93ad-44b6758f21c1">(0040,E021)</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_9848e4fa-4ff4-4f08-954e-33aed317f193">1C</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_c6578d08-d78c-4bb2-974e-68955de0cc1c">Details for retrieving Instances via
+                            the DICOM Retrieve Service.
+                        </para>
+                        <para xml:id="para_7b3c9df2-5f20-45d1-987f-0202c51f5cc0">Required if DICOM Media Retrieval
+                            Sequence (0040,E022), WADO Retrieval Sequence (0040,E023), WADO-RS Retrieval Sequence
+                            (0040,E025) and XDS Retrieval Sequence (0040,E024) are not present. May be present
+                            otherwise.
+                        </para>
+                        <para xml:id="para_7e61d635-10fc-4b07-b1d0-f9da35352480">This Sequence shall only identify
+                            sources known to have Instances referenced in Referenced SOP Sequence (0008,1199).
+                        </para>
+                        <para xml:id="para_8f667a2d-85b0-4b6c-8e08-9fb90798c0b8">One or more Items shall be included in
+                            this Sequence.
+                        </para>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_b4c2411b-c6d7-460d-8528-1cd7963a6907">&gt;Retrieve AE Title</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_890477ff-1b4c-44a8-b918-eef7ff8e136c">(0008,0054)</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_8ed3fcf0-0102-4ffd-9f64-77e45b92b0d9">1</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_c44c65f4-d542-4268-8b17-9226612f6bea">Title of a DICOM Application Entity
+                            where the referenced Instance(s) may be retrieved on the network.
+                        </para>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_af721059-b79e-43ce-a62b-7d07d462ea78">DICOM Media Retrieval Sequence</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_21e4ba12-4d40-4490-94f3-2eea6f3d8db5">(0040,E022)</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_b4c57994-98c8-4867-a557-e83530d832a0">1C</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_5cd3b583-01ee-40b7-b926-447e2b9d35c6">Details for retrieving Instances from
+                            Media.
+                        </para>
+                        <para xml:id="para_3b1b0441-0b22-4986-b4e6-70e96b8d4543">Required if DICOM Retrieval Sequence
+                            (0040,E021), WADO Retrieval Sequence (0040,E023), and WADO-RS Retrieval Sequence (0040,E025)
+                            and XDS Retrieval Sequence (0040,E024) are not present. May be present otherwise.
+                        </para>
+                        <para xml:id="para_d8ae2ae6-4d36-48b4-b45f-b39ca8d4473b">This Sequence shall only identify media
+                            known to have Instances referenced in Referenced SOP Sequence (0008,1199).
+                        </para>
+                        <para xml:id="para_884942f1-37f0-411b-b9f1-d6cdb5186c22">One or more Items shall be included in
+                            this Sequence.
+                        </para>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_55cba0ed-1802-4298-b4b5-d0c262fdcb96">&gt;Storage Media File-Set ID</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_f6ba9102-1dd8-4ded-abe1-9a232feab264">(0088,0130)</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_7f23c514-4bfe-4bfa-9584-d8afdde4c27c">2</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_4f7f15db-abc8-474d-a628-c39eed1a903d">The user or implementation specific
+                            human readable identifier that identifies the Storage Media on which the referenced
+                            Instance(s) reside.
+                        </para>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_4d53b0fe-f349-45f9-823e-597986faa172">&gt;Storage Media File-Set UID</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_df9cc63b-2cdf-4e97-ac04-4a6ae3ad94e4">(0088,0140)</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_fe60e2de-d1d3-4cc1-9c46-9ce09784adad">1</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_bf573e03-8cfa-4462-b218-50a2f30f05cf">Uniquely identifies the Storage Media
+                            on which the referenced Instance(s) reside.
+                        </para>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_b68e4067-2c77-4add-9864-3561e48d0a57">WADO Retrieval Sequence</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_3e9a913f-086c-413c-9384-57964f1b6bad">(0040,E023)</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_56c92278-fff7-45ec-870d-c034a862ac4f">1C</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_bf6c42cf-e93f-4824-bec9-3044f974747d">Details for retrieving Instances
+                            available via WADO-URI.
+                        </para>
+                        <note>
+                            <para xml:id="para_87c7f326-107c-4a18-88b9-60712a9f7041">This Sequence addresses use of the
+                                URI-based Web Access to DICOM Objects. Retrieval via the IHE XDS-I.b RAD-69 Transaction
+                                <xref linkend="biblio_IHE_RAD_TF_2"/>
+                                is addressed in the XDS Retrieval Sequence (0040,E024).
+                            </para>
+                        </note>
+                        <para xml:id="para_18f25d79-1cd6-4635-8143-c840a095d6cc">Required if DICOM Retrieval Sequence
+                            (0040,E021), DICOM Media Retrieval Sequence (0040,E022), WADO-RS Retrieval Sequence
+                            (0040,E025) and XDS Retrieval Sequence (0040,E024) are not present. May be present
+                            otherwise.
+                        </para>
+                        <para xml:id="para_3aced68b-557a-4519-bbf6-bce898356534">One or more Items shall be included in
+                            this Sequence.
+                        </para>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_7d437f2d-8630-48b4-8c10-daf26a5dc8f7">&gt;Retrieve URI</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_d0a30e26-1aee-4040-afa0-47f8de08d7b1">(0040,E010)</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_1d806a63-fbe3-47ac-9177-20a09bfdce68">1</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_9bae47b1-6228-48eb-92e8-2cd562c9203e">URI/URL specifying the location of the
+                            referenced Instance(s). Includes fully specified scheme, authority, path, and query in
+                            accordance with<xref linkend="biblio_RFC_3986"/>.
+                        </para>
+                        <note>
+                            <para xml:id="para_579dc3f3-c3f6-407b-b4bc-d6197e7cc820">The VR of this Data Element has
+                                changed from UT to UR.
+                            </para>
+                        </note>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_67628fe7-edcb-4614-ab68-d24e50be195f">XDS Retrieval Sequence</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_856d00d4-6b5e-4b3c-b124-f740b533268a">(0040,E024)</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_7d1fedb0-b6e5-4a64-a235-6a42bab4837e">1C</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_6c7e4974-b152-4661-871f-89f7a5124bd3">Details for retrieving Instances using
+                            the IHE XDS-I.b RAD-69 Transaction.
+                        </para>
+                        <note>
+                            <para xml:id="para_020ae95c-9384-49b9-b460-e9625c404c63">Retrieval via WADO-URI is addressed
+                                by the WADO Retrieval Sequence (0040,E023). Retrieval via WADO-RS is addressed by the
+                                WADO-RS Retrieval Sequence (0040,E025).
+                            </para>
+                        </note>
+                        <para xml:id="para_ce75abe1-1b4a-4164-8c7b-9147a191a9bc">Required if DICOM Retrieval Sequence
+                            (0040,E021), DICOM Media Retrieval Sequence (0040,E022), WADO-RS Retrieval Sequence
+                            (0040,E025) and WADO Retrieval Sequence (0040,E023) are not present. May be present
+                            otherwise.
+                        </para>
+                        <para xml:id="para_d9421c93-4180-42b4-a711-96e893a97384">This Sequence shall only identify
+                            repositories known to have Instances referenced in Referenced SOP Sequence (0008,1199).
+                        </para>
+                        <para xml:id="para_054d4ef3-c3a6-4210-8fdb-9a7b62577ab8">One or more Items shall be included in
+                            this Sequence.
+                        </para>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_f4dbf372-081c-477b-98f4-e3498cfda653">&gt;Repository Unique ID</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_0eb2f4a5-322e-4ea3-9bf8-27b85751e1a5">(0040,E030)</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_c73844b4-d881-4167-ab1c-28f52e8374c5">1</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_35adb82c-7eb0-4f52-b67b-c4cc9ce73f66">Uniquely identifies a Repository from
+                            which the referenced Instances can be retrieved.
+                        </para>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_5e285e75-bf56-4531-9388-82b108db5050">&gt;Home Community ID</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_db82245b-f9ec-4f18-92f6-b461ca3d7ca8">(0040,E031)</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_4386b039-fba4-4a0f-8f9c-8006c534c4da">3</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_838ca07a-6b5c-4784-a20e-5b1ea231b0fb">Uniquely identifies a Community to
+                            which requests for the referenced Instances can be directed.
+                        </para>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_18b5a039-eca6-43f3-a606-278fca4b9b30">WADO-RS Retrieval Sequence</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_ba5191c2-9398-43b1-a26f-f476adf96de8">(0040,E025)</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_c237bb15-2b4e-4eb1-b790-8df7fb8d8b40">1C</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_b461f0aa-d918-4d68-aec0-6daeccef7327">Details for retrieving Instances via
+                            WADO-RS.
+                        </para>
+                        <note>
+                            <para xml:id="para_6afb22cc-92e8-4ec8-9a23-820f4c4a769b">Retrieval via WADO-URI is addressed
+                                in the WADO Retrieval Sequence (0040,E023). Retrieval via the IHE XDS-I.b RAD-69
+                                Transaction
+                                <xref linkend="biblio_IHE_RAD_TF_2"/>
+                                is addressed in the XDS Retrieval Sequence (0040,E024).
+                            </para>
+                        </note>
+                        <para xml:id="para_b7ee2e87-bf40-453d-81ac-285937b27988">Required if DICOM Retrieval Sequence
+                            (0040,E021), DICOM Media Retrieval Sequence (0040,E022), WADO Retrieval Sequence (0040,E023)
+                            and XDS Retrieval Sequence (0040,E024) are not present. May be present otherwise.
+                        </para>
+                        <para xml:id="para_2c5ed86d-aafc-45b9-ab5f-d55bd8e4968b">One or more Items shall be included in
+                            this Sequence.
+                        </para>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_196f3d69-09dc-4da5-a86b-a1d5ff3a4fdc">&gt;Retrieve URL</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_91c0f16f-54f6-4534-85d1-e832e3a8602a">(0008,1190)</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_779424bb-a920-4352-8115-f2dae4a70dbc">1</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_a4505a57-f28a-4458-b2e5-7825a3721911">URL specifying the location of the
+                            referenced Instance(s).
+                        </para>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <section label="10.14" status="2" xml:id="sect_10.14">
+            <table frame="box" label="10-17" rules="all" xml:id="table_10-17">
+                <caption>HL7v2 Hierarchic Designator Macro Attributes</caption>
+                <thead>
+                    <tr valign="top">
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_43a03f46-3f87-4433-adb0-fb429bcedad5">Attribute Name</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_f224d45b-762c-4fe4-be4d-7ae549f52b9a">Tag</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_31036985-3cc0-4cf5-8299-d13958d0d56f">Type</para>
+                        </th>
+                        <th align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_3e93b2bb-d87d-40dd-aeb7-aa688e41925b">Attribute Description</para>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_df207a7c-a83a-494e-8736-2f91144eae83">Local Namespace Entity ID</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_4b06af43-949f-49df-bc27-f10a4cf2edd0">(0040,0031)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_b4f8d988-a48b-4e93-a7e0-e6a799a3c39b">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_fc53739d-da3e-43ea-9f33-7e7e58279e85">Identifies an entity within the
+                                local namespace or domain. Required if Universal Entity ID (0040,0032) is not present;
+                                may be present otherwise.
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_63c3f9d2-8473-41cc-a91c-936387453e66">Universal Entity ID</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_e7b40a42-b85c-4141-a777-69266b608dc7">(0040,0032)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_19ad403a-055e-4dad-ac27-2303684875c6">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_29156532-a15e-4770-bd8b-e5d283d20720">Universal or unique identifier for
+                                an entity. Required if Local Namespace Entity ID (0040,0031) is not present; may be
+                                present otherwise.
+                            </para>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_eb8efe83-db51-43f7-933c-5f598fbcd440">Universal Entity ID Type</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_6c54ec2c-d486-4fde-9597-ed8b37168ba4">(0040,0033)</para>
+                        </td>
+                        <td align="center" colspan="1" rowspan="1">
+                            <para xml:id="para_b8e4d318-76a0-44ff-a0f3-32bd8bc89c1d">1C</para>
+                        </td>
+                        <td align="left" colspan="1" rowspan="1">
+                            <para xml:id="para_98293def-3b64-4e5e-8619-746a7b16e9fc">Standard defining the format of the
+                                Universal Entity ID. Required if Universal Entity ID (0040,0032) is present.
+                            </para>
+                            <variablelist spacing="compact">
+                                <title>Enumerated Values:</title>
+                                <varlistentry>
+                                    <term>DNS</term>
+                                    <listitem>
+                                        <para xml:id="para_eb080a2f-0aa1-46ef-a8a4-eab08149bf92">An Internet dotted
+                                            name. Either in ASCII or as integers
+                                        </para>
+                                    </listitem>
+                                </varlistentry>
+                                <varlistentry>
+                                    <term>EUI64</term>
+                                    <listitem>
+                                        <para xml:id="para_306bbe4d-1dcb-48a2-98c4-6baa909894e3">An IEEE Extended Unique
+                                            Identifier
+                                        </para>
+                                    </listitem>
+                                </varlistentry>
+                                <varlistentry>
+                                    <term>ISO</term>
+                                    <listitem>
+                                        <para xml:id="para_e12d79ff-da99-4207-82c7-ac496067994f">An International
+                                            Standards Organization Object Identifier
+                                        </para>
+                                    </listitem>
+                                </varlistentry>
+                                <varlistentry>
+                                    <term>URI</term>
+                                    <listitem>
+                                        <para xml:id="para_3d4d3471-641a-4496-8ce1-353ab94fa8dc">Uniform Resource
+                                            Identifier
+                                        </para>
+                                    </listitem>
+                                </varlistentry>
+                                <varlistentry>
+                                    <term>UUID</term>
+                                    <listitem>
+                                        <para xml:id="para_b7d026fd-8ebf-44bd-ad0e-f6bdc20f0c6d">The DCE Universal
+                                            Unique Identifier
+                                        </para>
+                                    </listitem>
+                                </varlistentry>
+                                <varlistentry>
+                                    <term>X400</term>
+                                    <listitem>
+                                        <para xml:id="para_710cb5bf-1677-498d-810e-310c501cbd8d">An X.400 MHS
+                                            identifier
+                                        </para>
+                                    </listitem>
+                                </varlistentry>
+                                <varlistentry>
+                                    <term>X500</term>
+                                    <listitem>
+                                        <para xml:id="para_bdfa28dc-d3d2-4f51-9601-0774783e5677">An X.500 directory
+                                            name
+                                        </para>
+                                    </listitem>
+                                </varlistentry>
+                            </variablelist>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </chapter>
     <chapter label="A" status="1" xml:id="chapter_A">
         <section label="A.2" status="2" xml:id="sect_A.2">
             <title>Computed Radiography Image IOD</title>
@@ -1251,5 +2709,184 @@
                 </section>
             </section>
         </section>
+
+        <section label="C.7" status="2" xml:id="sect_C.7">
+            <section label="C.7.1" status="3" xml:id="sect_C.7.1">
+                <section label="C.7.1.4" status="4" xml:id="sect_C.7.1.4">
+                    <table frame="box" label="C.7.1.4-1" rules="all" xml:id="table_C.7.1.4-1">
+                        <caption>Patient Group Macro Attributes</caption>
+                        <thead>
+                            <tr valign="top">
+                                <th align="center" colspan="1" rowspan="1">
+                                    <para xml:id="para_f0634cf7-b29a-45a0-b884-bdf3915f87b6">Attribute Name</para>
+                                </th>
+                                <th align="center" colspan="1" rowspan="1">
+                                    <para xml:id="para_b1993d7a-f427-4b98-bb26-2a15d8b3e8df">Tag</para>
+                                </th>
+                                <th align="center" colspan="1" rowspan="1">
+                                    <para xml:id="para_24f3ff37-c38f-4624-bf40-94c988415514">Type</para>
+                                </th>
+                                <th align="center" colspan="1" rowspan="1">
+                                    <para xml:id="para_b50b0311-6cad-4063-b5b4-b0c962181fa5">Attribute Description
+                                    </para>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr valign="top">
+                                <td align="left" colspan="1" rowspan="1">
+                                    <para xml:id="para_ac463e7a-7a49-4df0-9563-925879fa192f">Source Patient Group
+                                        Identification Sequence
+                                    </para>
+                                </td>
+                                <td align="center" colspan="1" rowspan="1">
+                                    <para xml:id="para_7ce8eb67-9a3b-4ebd-ad49-c72328c32afc">(0010,0026)</para>
+                                </td>
+                                <td align="center" colspan="1" rowspan="1">
+                                    <para xml:id="para_8e67145a-175e-40d8-a2f1-c40eeb40b42a">3</para>
+                                </td>
+                                <td align="left" colspan="1" rowspan="1">
+                                    <para xml:id="para_4c308fd9-cd58-435d-9711-b10624077265">A Sequence containing the
+                                        value
+                                        used for Patient ID (0010,0020) and related Attributes in the source Composite
+                                        Instances that contained a group of subjects whose data was acquired at the same
+                                        time, from which this Composite Instance was extracted. See<xref
+                                                linkend="sect_C.7.1.4.1.1" xrefstyle="select: label"/>.
+                                    </para>
+                                    <para xml:id="para_131b838f-b085-4807-9cd0-724b1bb4401d">Only a single Item is
+                                        permitted
+                                        in this Sequence.
+                                    </para>
+                                </td>
+                            </tr>
+                            <tr valign="top">
+                                <td align="left" colspan="1" rowspan="1">
+                                    <para xml:id="para_4e2c78f4-121c-446d-b4f9-00922e4b2116">&gt;Patient ID</para>
+                                </td>
+                                <td align="center" colspan="1" rowspan="1">
+                                    <para xml:id="para_020d0ae6-aec6-474e-978c-c8e6b790e01d">(0010,0020)</para>
+                                </td>
+                                <td align="center" colspan="1" rowspan="1">
+                                    <para xml:id="para_43bce51e-b255-44cf-9a18-291f5b02e0fa">1</para>
+                                </td>
+                                <td align="left" colspan="1" rowspan="1">
+                                    <para xml:id="para_86b92af1-ebec-45dc-8d5b-02d425c1e14e">Primary identifier for the
+                                        group of subjects.
+                                    </para>
+                                </td>
+                            </tr>
+                            <tr valign="top">
+                                <td align="left" colspan="3" rowspan="1">
+                                    <para xml:id="para_176f5141-c45d-44f1-8195-fc9dd6317035">
+                                        <emphasis role="italic">&gt;Include
+                                            <xref linkend="table_10-18" xrefstyle="select: label quotedtitle"/>
+                                        </emphasis>
+                                    </para>
+                                </td>
+                                <td align="left" colspan="1" rowspan="1">
+                                    <para xml:id="para_a4b4d4e1-389d-4ddc-8984-163b0ad35f16"/>
+                                </td>
+                            </tr>
+                            <tr valign="top">
+                                <td align="left" colspan="1" rowspan="1">
+                                    <para xml:id="para_b208469e-5d8c-46a2-9cf0-341bbf126814">Group of Patients
+                                        Identification Sequence
+                                    </para>
+                                </td>
+                                <td align="center" colspan="1" rowspan="1">
+                                    <para xml:id="para_bf33eb29-9d28-4ac4-a046-9170a82d8795">(0010,0027)</para>
+                                </td>
+                                <td align="center" colspan="1" rowspan="1">
+                                    <para xml:id="para_f973bdfd-c14d-4dcf-8110-dc7622e41c1b">3</para>
+                                </td>
+                                <td align="left" colspan="1" rowspan="1">
+                                    <para xml:id="para_1b7939c6-bab7-4d07-a892-163d0f084837">A Sequence containing the
+                                        identifiers and locations of the individual subjects whose data was acquired at
+                                        the
+                                        same time (as a group) and encoded in this Composite Instance. See<xref
+                                                linkend="sect_C.7.1.4.1.1" xrefstyle="select: label"/>.
+                                    </para>
+                                    <para xml:id="para_de1a0650-3c6b-4e92-99cc-d6de41bdc986">One or more Items are
+                                        permitted
+                                        in this Sequence.
+                                    </para>
+                                </td>
+                            </tr>
+                            <tr valign="top">
+                                <td align="left" colspan="1" rowspan="1">
+                                    <para xml:id="para_647e5ca7-b0e0-4284-a4bd-240186b63810">&gt;Patient ID</para>
+                                </td>
+                                <td align="center" colspan="1" rowspan="1">
+                                    <para xml:id="para_cfb3c2db-bc63-47c9-83b8-77c6c7893d96">(0010,0020)</para>
+                                </td>
+                                <td align="center" colspan="1" rowspan="1">
+                                    <para xml:id="para_ce905dab-1a45-4aa3-80c3-e481dbb144e0">1</para>
+                                </td>
+                                <td align="left" colspan="1" rowspan="1">
+                                    <para xml:id="para_12abde71-9393-4f1a-8b60-28200e39fc8a">Primary identifier for an
+                                        individual subject.
+                                    </para>
+                                </td>
+                            </tr>
+                            <tr valign="top">
+                                <td align="left" colspan="3" rowspan="1">
+                                    <para xml:id="para_53ced2c3-7a7e-4c9e-b372-2da23c48cb40">
+                                        <emphasis role="italic">&gt;Include
+                                            <xref linkend="table_10-18" xrefstyle="select: label quotedtitle"/>
+                                        </emphasis>
+                                    </para>
+                                </td>
+                                <td align="left" colspan="1" rowspan="1">
+                                    <para xml:id="para_1e78f488-9bb3-42cd-b4e0-1a107cef2a36"/>
+                                </td>
+                            </tr>
+                            <tr valign="top">
+                                <td align="left" colspan="1" rowspan="1">
+                                    <para xml:id="para_b5abdd92-26c3-4db9-b909-fbf4d02602ff">&gt;Subject Relative
+                                        Position
+                                        in Image
+                                    </para>
+                                </td>
+                                <td align="center" colspan="1" rowspan="1">
+                                    <para xml:id="para_9df9cc40-9b61-4f75-9730-0728ca60a94e">(0010,0028)</para>
+                                </td>
+                                <td align="center" colspan="1" rowspan="1">
+                                    <para xml:id="para_54be252d-c12d-4ea5-9cbe-cfbde97c5707">3</para>
+                                </td>
+                                <td align="left" colspan="1" rowspan="1">
+                                    <para xml:id="para_d12ecf33-092b-41b5-93c1-b808a92362e1">The position in the image
+                                        pixel
+                                        data of the individual subject identified in this Sequence relative to the other
+                                        subjects. See<xref linkend="sect_C.7.1.4.1.1.1" xrefstyle="select: label"/>.
+                                    </para>
+                                </td>
+                            </tr>
+                            <tr valign="top">
+                                <td align="left" colspan="1" rowspan="1">
+                                    <para xml:id="para_2f1fbbb0-5079-4c82-945d-8f5f3f00c749">&gt;Patient Position</para>
+                                </td>
+                                <td align="center" colspan="1" rowspan="1">
+                                    <para xml:id="para_fd9d7137-5ae6-43eb-94a2-003ce45d1c37">(0018,5100)</para>
+                                </td>
+                                <td align="center" colspan="1" rowspan="1">
+                                    <para xml:id="para_61df4667-e47e-4c9b-800a-404bc80c45eb">3</para>
+                                </td>
+                                <td align="left" colspan="1" rowspan="1">
+                                    <para xml:id="para_f4dcf837-531d-46af-9a64-6ae7c7a79501">Patient position descriptor
+                                        relative to the equipment. See<xref linkend="sect_C.7.1.4.1.1.1"
+                                                                            xrefstyle="select: label"/>.
+                                    </para>
+                                    <para xml:id="para_55f962dc-3a58-4e4e-b225-35388c607643">See
+                                        <xref linkend="sect_C.7.3.1.1.2" xrefstyle="select: label"/>
+                                        for Defined Terms and further explanation.
+                                    </para>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </section>
+        </section>
     </chapter>
+
 </book>

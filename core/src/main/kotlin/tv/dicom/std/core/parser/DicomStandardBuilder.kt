@@ -34,7 +34,10 @@ fun build(documents: List<Document>): Optional<DicomStandard> {
             if (!buildPart03(document, dicomStandard)) {
                 return Optional.empty()
             }
-            findDependents(document, dicomStandard)
+            if (!findDependents(document, dicomStandard)) {
+                log.error("Unable to find all dependent elements.")
+                return Optional.empty()
+            }
         }
     }
     return Optional.of(dicomStandard)
@@ -386,7 +389,7 @@ internal fun buildImds(root: Element, parent: Element): List<Imd> {
     }
     val tables = optTables.get()
     for (table in tables) {
-        val opt = buildImd(root, table)
+        val opt = buildImd(table)
         if (opt.isEmpty) {
             val id = table.getAttribute("xml:id")
             log.error("XML table [${id}] is no valid IMD table")
@@ -398,7 +401,7 @@ internal fun buildImds(root: Element, parent: Element): List<Imd> {
     return imds
 }
 
-internal fun buildImd(root: Element, table: Element): Optional<Imd> {
+internal fun buildImd(table: Element): Optional<Imd> {
     val imd = Imd()
     if (table.nodeName != "table") {
         return Optional.empty()
@@ -431,43 +434,56 @@ internal fun buildImd(root: Element, table: Element): Optional<Imd> {
     return Optional.of(imd)
 }
 
-internal fun findDependents(document: Document, dicomStandard: DicomStandard) {
+internal fun findDependents(document: Document, dicomStandard: DicomStandard) : Boolean{
     val ciodIds = dicomStandard.ciodIds()
-    val imdIds = dicomStandard.imdIds()
+    var imdIds = dicomStandard.imdIds()
 
     val notImd = mutableListOf<String>()
     val notFound = mutableListOf<String>()
 
-    for (id in imdIds) {
-        val imd = dicomStandard.imd(id) ?: continue
+    var i = 0
+    var size = imdIds.size
+    var isOk = true
+    while (i < size) {
+        val elementId = imdIds.elementAt(i)
+        val imd = dicomStandard.imd(elementId) ?: continue
         for (item in imd.items) {
             if (!item.isInclude()) {
                 continue
             }
-            val id = (item as IncludeEntry).xref.linkend
-            if (ciodIds.contains(id) || imdIds.contains(id) ||
-                notImd.contains(id) || notFound.contains(id)
+            val linkId = (item as IncludeEntry).xref.linkend
+            if (linkId.isBlank()) {
+                continue
+            }
+            if (ciodIds.contains(linkId) || imdIds.contains(linkId) ||
+                notImd.contains(linkId) || notFound.contains(linkId)
             ) {
                 continue
             }
-            val expression = "//table[@id=\'$id\']"
+            val expression = "//table[@id=\'$linkId\']"
             val optElement = findElement(document.documentElement, expression)
             if (optElement.isEmpty) {
-                notFound.add(id)
-                log.warn("Unable to find XML id: $id")
+                notFound.add(linkId)
+                log.error("Unable to find XML id: $linkId")
+                isOk=false
                 continue
             }
             val element = optElement.get()
-            val optImd = buildImd(document.documentElement, element)
+            val optImd = buildImd(element)
             if (optImd.isEmpty) {
-                log.warn("Unable to build Information Module Definition or attribute table from: $id")
-                notImd.add(id)
+                log.warn("Unable to build Information Module Definition or attribute table from: $linkId")
+                notImd.add(linkId)
             } else {
-                val imd = optImd.get()
-                dicomStandard.add(imd)
+                val newImd = optImd.get()
+                dicomStandard.add(newImd)
+                imdIds = dicomStandard.imdIds()
+                size = imdIds.size
             }
         }
+
+        i += 1
     }
+    return isOk
 }
 
 

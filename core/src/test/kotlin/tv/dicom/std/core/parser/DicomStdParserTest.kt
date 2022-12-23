@@ -35,10 +35,14 @@ class DicomStdParserTest {
         val opt = parse(file)
         assertTrue(opt.isPresent)
         val ds = opt.get()
-        assertEquals(eds.ciodIds().size, ds.ciodIds().size)
-        assertEquals(eds.imdIds().size, ds.imdIds().size)
-        assertEquals(eds.ciodIds(), ds.ciodIds())
-        assertEquals(eds.imdIds(), ds.imdIds())
+        assertTrue(eds.ciodIds().size <= ds.ciodIds().size)
+        assertTrue(eds.imdIds().size <= ds.imdIds().size)
+        for (key in eds.ciodIds()) {
+            assertTrue(ds.ciodIds().contains(key))
+        }
+        for (key in eds.imdIds()) {
+            assertTrue(ds.imdIds().contains(key))
+        }
         for (key in eds.ciodIds()) {
             assertNotNull(eds.ciod(key))
             assertNotNull(ds.ciod(key))

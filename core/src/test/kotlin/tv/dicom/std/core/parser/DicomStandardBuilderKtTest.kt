@@ -204,7 +204,7 @@ class DicomStandardBuilderKtTest {
         val builder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
         val document = builder.parse(File(url.toURI()))
 
-        findDependents(document, ds)
+        assertTrue(findDependents(document, ds))
         var imd = ds.imd("table_10-11")
         assertNotNull(imd)
         imd = imd!!
