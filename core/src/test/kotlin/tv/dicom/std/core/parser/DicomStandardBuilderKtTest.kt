@@ -88,6 +88,19 @@ class DicomStandardBuilderKtTest {
     }
 
     @Test
+    fun getCaption() {
+        val url = this::class.java.getResource("part_03_table_A.2-1.xml")
+            ?: throw NullPointerException("Failed to obtain test resource (part_03_table_A.2-1.xml)")
+        val builder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+        val document = builder.parse(File(url.toURI()))
+        val root = document.documentElement
+
+        val caption = getCaption(root)
+        assertNotNull(caption)
+        assertEquals("CR Image IOD Modules", caption!!)
+    }
+
+    @Test
     fun getParentXmlId() {
 
         val url = this::class.java.getResource("para_xref.xml")
@@ -193,7 +206,8 @@ class DicomStandardBuilderKtTest {
         val ds = DicomStandard()
         ds.add(
             Imd(
-                "table_C.2-1", listOf(), mutableListOf(
+                "table_C.2-1", "Patient Relationship Module Attributes",
+                listOf(), mutableListOf(
                     IncludeEntry(0u, XRef("table_10-11")),
                     IncludeEntry(0u, XRef("table_10-18")),
                 )
@@ -210,6 +224,7 @@ class DicomStandardBuilderKtTest {
         imd = imd!!
 
         assertEquals("table_10-11", imd.id)
+        assertEquals("SOP Instance Reference Macro Attributes", imd.caption)
         assertEquals(2, imd.items.size)
         assertEquals("Referenced SOP Class UID", (imd.items[0] as DataEntry).name)
         assertEquals(Tag(0x0008, 0x1150), (imd.items[0] as DataEntry).tag)
@@ -225,6 +240,7 @@ class DicomStandardBuilderKtTest {
         assertNotNull(imd)
         imd = imd!!
         assertEquals("table_10-18", imd.id)
+        assertEquals("Issuer of Patient ID Macro Attributes", imd.caption)
         assertEquals(11, imd.items.size)
         assertEquals("Issuer of Patient ID", (imd.items[0] as DataEntry).name)
         assertFalse((imd.items[0] as DataEntry).isSequence())

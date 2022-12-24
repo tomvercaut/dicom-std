@@ -133,6 +133,12 @@ internal fun buildCiod(table: Element): Optional<Ciod> {
     }
     ciod.id = id
     ciod.parentIds = getParentXmlId(table)
+    val caption = getCaption(table)
+    if (caption.isNullOrBlank()) {
+        log.error("XML table has no caption which is required for the implementation.")
+        return Optional.empty()
+    }
+    ciod.caption = caption
     if (!hasCiodTableHeader(table)) {
         log.error("XML table [${ciod.id}] has no matching CIOD table header")
         return Optional.empty()
@@ -426,6 +432,12 @@ internal fun buildImd(table: Element): Optional<Imd> {
     }
     imd.id = id
     imd.parentIds = getParentXmlId(table)
+    val caption = getCaption(table)
+    if (caption.isNullOrBlank()) {
+        log.error("XML table has no caption which is required for the implementation.")
+        return Optional.empty()
+    }
+    imd.caption = caption
     if (!hasImdTableHeader(table)) {
         log.error("XML table [${imd.id}] has no matching IMD table header")
         return Optional.empty()
@@ -657,6 +669,27 @@ internal fun buildImdEntry(tr: Element): Optional<tv.dicom.std.core.model.imd.En
         return Optional.of(entry)
     }
     return Optional.empty()
+}
+
+/**
+ * Get the caption of an XML table.
+ *
+ * @param table XML DOM element
+ * @return Caption of an XML table.
+ * Null is returned the XML DOM element is not a table or if a nested caption element is not found.
+ */
+internal fun getCaption(table: Element): String? {
+    if (table.nodeName != "table") {
+        log.error("Invalid function argument: expected a table element but got a ${table.nodeName}")
+        return null
+    }
+    val opt = findElement(table, "caption")
+    if (opt.isEmpty) {
+        log.error("Table doesn't have a caption.")
+        return null
+    }
+    val caption = opt.get()
+    return trimWsNl(caption.textContent)
 }
 
 /**
