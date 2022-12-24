@@ -114,7 +114,7 @@ internal fun buildCiods(parent: Element): List<Ciod> {
 }
 
 /**
- * Build a Composite Information Object Definition (CIOD) from a XML table.
+ * Build a Composite Information Object Definition (CIOD) from an XML table.
  *
  * The input XML element is expected to be a `table`. The table header is validated to match the pattern of CIOD table header. Each table row is modeled as an [Ciod] entry using the [buildCiodEntry] function.
  *
@@ -254,7 +254,7 @@ internal fun ciodUsage(element: Element): Usage? {
 }
 
 /**
- * Create an [XRef] model from an xref XML [element] in the DICOM standard.
+ * Create an [XRef] model from an {@code xref} XML [element] in the DICOM standard.
  *
  * @param element XML DOM element
  * @param nested search for a nested xref element if the name of [element] is not "xref"
@@ -296,9 +296,9 @@ private fun getTableHeaderRows(table: Element): Optional<List<Element>> {
  *
  * @param table CIOD XML table
  * @return True if it matches the following criteria:
- *   * no thead element
- *   * no tr element
- *   * the first tr element doesn't contain the
+ *   * no {@code thead} element
+ *   * no {@code tr} element
+ *   * the first {@code tr} element doesn't contain the
  */
 internal fun hasCiodTableHeader(table: Element): Boolean {
     val opt = getTableHeaderRows(table)
@@ -328,13 +328,13 @@ internal fun hasCiodTableHeader(table: Element): Boolean {
 }
 
 /**
- * Check if a table header matches with the one from a Information Module Definition (IMD) table.
+ * Check if a table header matches with the one from an Information Module Definition (IMD) table.
  *
  * @param table IMD XML table
  * @return True if it matches the following criteria:
- *   * no thead element
- *   * no tr element
- *   * not one tr does not have the following formats:
+ *   * no {@code thead} element
+ *   * no {@code tr} element
+ *   * not one {@code tr} does not have the following formats:
  *      - | attribute name | tag | type | attribute description
  *      - | attribute name | tag | attribute description
  */
@@ -380,11 +380,11 @@ internal fun hasImdTableHeader(table: Element): Boolean {
 }
 
 /**
- * Build all Information Definition Modules (IDM)s.
+ * Build all Information Module Definitions (IMD)s.
  *
  * The function looks for all tables within [parent] (for example the XML element matching the expression `//chapter[@id='chapter_C']`) and tries to build [Imd] instances from them.
  *
- * @param parent XML DOM element that stores all IDM tables in it's descendants
+ * @param parent XML DOM element that stores all IMD tables in it's descendants
  * @return A [List] of [tv.dicom.std.core.model.imd.Entry] instances is returned.
  */
 internal fun buildImds(parent: Element): List<Imd> {
@@ -414,11 +414,11 @@ internal fun buildImds(parent: Element): List<Imd> {
  * - the table `Element` is not a table
  * - the XML element attribute `xml:id` is empty
  * - the table has no rows
- * - the table has a row entry that is not valid a Information Module Definition entry.
+ * - the table has a row entry that is not valid an Information Module Definition entry.
  *
  * @param table XML table element
  * @return When the creation of the Information Module Definition was successful, it's returned.
- * Otherwise an empty `Optional` is returned.
+ * Otherwise, an empty `Optional` is returned.
  */
 internal fun buildImd(table: Element): Optional<Imd> {
     val imd = Imd()
@@ -734,7 +734,7 @@ internal fun isElementType(node: Node?): Boolean {
  *
  * @param node XML DOM Node
  * @param expression XPath expression
- * @return If a matching [Element] is found an [Optional] of the [Element] is returned. Otherwise an [Optional.empty] is returned.
+ * @return If a matching [Element] is found an [Optional] of the [Element] is returned. Otherwise, an [Optional.empty] is returned.
  */
 internal fun findElement(node: Node, expression: String): Optional<Element> {
     return try {
@@ -754,7 +754,7 @@ internal fun findElement(node: Node, expression: String): Optional<Element> {
  *
  * @param element XML DOM [Element]
  * @param expression XPath expression
- * @return If a matching [NodeList] is found an [Optional] of the [NodeList] is returned. Otherwise an [Optional.empty] is returned.
+ * @return If a matching [NodeList] is found an [Optional] of the [NodeList] is returned. Otherwise, an [Optional.empty] is returned.
  */
 internal fun findNodes(element: Element, expression: String): Optional<NodeList> {
     return try {
@@ -770,7 +770,7 @@ internal fun findNodes(element: Element, expression: String): Optional<NodeList>
  *
  * @param element XML DOM [Element]
  * @param expression XPath expression
- * @return If a matching [List] is found an [Optional] of the [List] is returned. Otherwise an [Optional.empty] is returned.
+ * @return If a matching [List] is found an [Optional] of the [List] is returned. Otherwise, an [Optional.empty] is returned.
  */
 internal fun findElements(element: Element, expression: String): Optional<List<Element>> {
     return try {
