@@ -630,7 +630,7 @@ internal fun buildImdEntry(tr: Element): Optional<tv.dicom.std.core.model.imd.En
         return Optional.empty()
     }
     val tds = optTd.get()
-    if (tds.size != 1 && tds.size != 2 && tds.size != 3 && tds.size != 4) {
+    if (tds.isEmpty() || tds.size > 4) {
         log.error("Table row contains an unsupported number of columns [${tds.size}]")
         return Optional.empty()
     }
@@ -645,7 +645,7 @@ internal fun buildImdEntry(tr: Element): Optional<tv.dicom.std.core.model.imd.En
             entry.description = trimWsNl(tds[1].textContent)
         }
         return Optional.of(entry as tv.dicom.std.core.model.imd.Entry)
-    } else if (tds.size == 3 || tds.size == 4) {
+    } else { // if (tds.size == 3 || tds.size == 4) {
         val entry = DataEntry()
         entry.seqIndent = sequenceItemDepth(tds[0].textContent)
         entry.name = attributeName(trimWsNl(tds[0].textContent))
@@ -655,9 +655,8 @@ internal fun buildImdEntry(tr: Element): Optional<tv.dicom.std.core.model.imd.En
             return Optional.empty()
         }
         entry.tag = tag
-        if (tds.size == 3) {
-            entry.description = trimWsNl(tds[2].textContent)
-        } else if (tds.size == 4) {
+        entry.description = trimWsNl(tds[2].textContent)
+        if (tds.size == 4) {
             val type = attributeTypeFromString(trimWsNl(tds[2].textContent))
             if (type == null) {
                 log.error("Table row contains an unsupported entry in the Type column [${tds[2]}]")
@@ -668,7 +667,6 @@ internal fun buildImdEntry(tr: Element): Optional<tv.dicom.std.core.model.imd.En
         }
         return Optional.of(entry)
     }
-    return Optional.empty()
 }
 
 /**
@@ -728,21 +726,6 @@ internal fun isElementType(node: Node?): Boolean {
         false
     } else {
         node.nodeType == Node.ELEMENT_NODE
-    }
-}
-
-/**
- * Find an XML [Node] based on an XPath expression.
- *
- * @param node XML DOM Node
- * @param expression XPath expression
- * @return If a matching [Node] is found an [Optional] of the [Node] is returned. Otherwise an [Optional.empty] is returned.
- */
-internal fun findNode(node: Element, expression: String): Optional<Node> {
-    return try {
-        Optional.of(xPathFactory.newXPath().compile(expression).evaluate(node, XPathConstants.NODE) as Node)
-    } catch (ex: NullPointerException) {
-        Optional.empty()
     }
 }
 
