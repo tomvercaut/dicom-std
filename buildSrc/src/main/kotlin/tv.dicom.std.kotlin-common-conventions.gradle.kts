@@ -14,7 +14,7 @@ repositories {
 
 dependencies {
 
-    implementation("org.apache.logging.log4j:log4j-api-kotlin:1.3.0-SNAPSHOT")
+    implementation("org.apache.logging.log4j:log4j-api-kotlin:1.3.0")
 
     // log4j-core is a runtime dependency
     // The version of log4j-core was increased to 2.19.0 because it's binary compatible with previous releases.
