@@ -36,6 +36,56 @@ class DicomStandardBuilderKtTest {
     }
 
     @Test
+    fun hasCiodTableHeader() {
+        val url = this::class.java.getResource("part_03_table_A.2-1.xml")
+            ?: throw NullPointerException("Failed to obtain test resource (part_03_table_A.2-1.xml)")
+        val builder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+        val document = builder.parse(File(url.toURI()))
+        val root = document.documentElement
+
+        val b = hasCiodTableHeader(root)
+        assertTrue(b)
+    }
+
+    @Test
+    fun ciodTableHeaderInvalidColumnName() {
+        val url = this::class.java.getResource("part_03_table_A.2-1.xml")
+            ?: throw NullPointerException("Failed to obtain test resource (part_03_table_A.2-1.xml)")
+        val builder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+        val document = builder.parse(File(url.toURI()))
+        val root = document.documentElement
+
+        val o = findNodes(root, "thead/tr/th/para")
+        assertTrue(o.isPresent)
+        val paras = o.get()
+        assertEquals(4, paras.length)
+
+        var para = paras.item(0)
+        para.textContent = "IES"
+        var b = hasCiodTableHeader(root)
+        assertFalse(b)
+        para.textContent = "IE"
+
+        para = paras.item(1)
+        para.textContent = "Modules"
+        b = hasCiodTableHeader(root)
+        assertFalse(b)
+        para.textContent = "Module"
+
+        para = paras.item(2)
+        para.textContent = "References"
+        b = hasCiodTableHeader(root)
+        assertFalse(b)
+        para.textContent = "Reference"
+
+        para = paras.item(3)
+        para.textContent = "Usages"
+        b = hasCiodTableHeader(root)
+        assertFalse(b)
+        para.textContent = "Usage"
+    }
+
+    @Test
     fun buildCiodEntry() {
         val url = this::class.java.getResource("build_ciod_entry.xml")
             ?: throw NullPointerException("Failed to obtain test resource (build_ciod_entry.xml)")

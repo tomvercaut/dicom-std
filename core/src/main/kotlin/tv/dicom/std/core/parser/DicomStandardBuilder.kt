@@ -296,9 +296,9 @@ private fun getTableHeaderRows(table: Element): Optional<List<Element>> {
  *
  * @param table CIOD XML table
  * @return True if it matches the following criteria:
- *   * no {@code thead} element
- *   * no {@code tr} element
- *   * the first {@code tr} element doesn't contain the
+ *   * has a table header
+ *   * table header has at least one row with 4 columns
+ *   * matching column names (case-insensitive): ie, module, reference, usage
  */
 internal fun hasCiodTableHeader(table: Element): Boolean {
     val opt = getTableHeaderRows(table)
@@ -319,12 +319,12 @@ internal fun hasCiodTableHeader(table: Element): Boolean {
         val module = trimWsNl(tds[1].textContent.lowercase())
         val reference = trimWsNl(tds[2].textContent.lowercase())
         val usage = trimWsNl(tds[3].textContent.lowercase())
-        if (ie == "ie" || module == "module" || reference == "reference" || usage == "usage") {
+        if (ie == "ie" && module == "module" && reference == "reference" && usage == "usage") {
             return true
         }
     }
 
-    return true
+    return false
 }
 
 /**
