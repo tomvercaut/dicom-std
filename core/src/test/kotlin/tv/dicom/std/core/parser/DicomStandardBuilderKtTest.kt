@@ -1,8 +1,7 @@
 package tv.dicom.std.core.parser
 
-import org.junit.jupiter.api.Test
-
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 import tv.dicom.std.core.model.*
 import tv.dicom.std.core.model.imd.DataEntry
 import tv.dicom.std.core.model.imd.Imd
@@ -317,6 +316,25 @@ class DicomStandardBuilderKtTest {
         assertEquals(AttributeType.Type3, (imd.items[1] as DataEntry).type)
         assertTrue((imd.items[1] as DataEntry).description.startsWith("Attributes specifying or"))
 
+    }
+
+    @Test
+    fun tableRowColumns() {
+        val url = this::class.java.getResource("table_row_columns.xml")
+            ?: throw NullPointerException("Failed to obtain test resource (build_imd_entry4.xml)")
+        val builder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+        val document = builder.parse(File(url.toURI()))
+        val root = document.documentElement
+
+        val otds = tableRowColumns(root)
+        assertTrue(otds.isPresent)
+        val tds = otds.get()
+        assertEquals(3, tds.size)
+        val cols: List<String> = mutableListOf(
+            trimWsNl(tds.get(0).textContent), trimWsNl(tds.get(1).textContent), trimWsNl(tds.get(2).textContent)
+        )
+        val ecols = mutableListOf("column1", "column2", "column3")
+        assertEquals(ecols, cols)
     }
 
     @Test

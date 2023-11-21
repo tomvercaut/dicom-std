@@ -186,16 +186,11 @@ internal fun buildCiod(table: Element): Optional<Ciod> {
  * @return An optional CIOD entry is returned.
  */
 internal fun buildCiodEntry(tr: Element): Optional<Entry> {
-    if (tr.nodeName != "tr") {
-        log.error("XML Element is not a table row element (tr)")
+    val otds = tableRowColumns(tr)
+    if (otds.isEmpty) {
         return Optional.empty()
     }
-    val optTd = findElements(tr, "td")
-    if (optTd.isEmpty) {
-        log.error("Table row does not contain table columns.")
-        return Optional.empty()
-    }
-    val tds = optTd.get()
+    val tds = otds.get()
     if (tds.size != 3 && tds.size != 4) {
         log.error("Table row contains an unsupported number of columns [${tds.size}]")
         return Optional.empty()
@@ -620,16 +615,9 @@ internal fun attributeName(s: String): String {
  * @return Entry can be either a [DataEntry] or an [IncludeEntry] depending on the data in the table row.
  */
 internal fun buildImdEntry(tr: Element): Optional<tv.dicom.std.core.model.imd.Entry> {
-    if (tr.nodeName != "tr") {
-        log.error("XML Element is not a table row element (tr)")
-        return Optional.empty()
-    }
-    val optTd = findElements(tr, "td")
-    if (optTd.isEmpty) {
-        log.error("Table row does not contain table columns.")
-        return Optional.empty()
-    }
-    val tds = optTd.get()
+    val otds = tableRowColumns(tr)
+    if (otds.isEmpty) return Optional.empty()
+    val tds = otds.get()
     if (tds.isEmpty() || tds.size > 4) {
         log.error("Table row contains an unsupported number of columns [${tds.size}]")
         return Optional.empty()
@@ -791,6 +779,25 @@ internal fun findElements(element: Element, expression: String): Optional<List<E
     } catch (ex: NullPointerException) {
         Optional.empty()
     }
+}
+
+/**
+ * Retrieve the list of table columns from a table row element in XML.
+ *
+ * @param tr The XML table row element.
+ * @return An optional list of column elements if the table row is valid, otherwise an empty optional.
+ */
+internal fun tableRowColumns(tr: Element): Optional<List<Element>> {
+    if (tr.nodeName != "tr") {
+        log.error("XML Element is not a table row element (tr)")
+        return Optional.empty()
+    }
+    val optTd = findElements(tr, "td")
+    if (optTd.isEmpty) {
+        log.error("Table row does not contain table columns.")
+        return Optional.empty()
+    }
+    return optTd
 }
 
 /**
