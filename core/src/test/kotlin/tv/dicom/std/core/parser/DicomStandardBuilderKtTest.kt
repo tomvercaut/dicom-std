@@ -36,6 +36,19 @@ class DicomStandardBuilderKtTest {
     }
 
     @Test
+    fun buildCiodsNoTables() {
+        // Doesn't contain table elements
+        val url = this::class.java.getResource("build_ciod_entry.xml")
+            ?: throw NullPointerException("Failed to obtain test resource (part_03_table_A.2-1.xml)")
+        val builder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+        val document = builder.parse(File(url.toURI()))
+        val root = document.documentElement
+
+        val list = buildCiods(root)
+        assertTrue(list.isEmpty())
+    }
+
+    @Test
     fun hasCiodTableHeader() {
         val url = this::class.java.getResource("part_03_table_A.2-1.xml")
             ?: throw NullPointerException("Failed to obtain test resource (part_03_table_A.2-1.xml)")
