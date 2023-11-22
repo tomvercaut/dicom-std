@@ -618,22 +618,23 @@ internal fun buildImdEntry(tr: Element): Optional<tv.dicom.std.core.model.imd.En
     val otds = tableRowColumns(tr)
     if (otds.isEmpty) return Optional.empty()
     val tds = otds.get()
-    if (tds.isEmpty() || tds.size > 4) {
-        log.error("Table row contains an unsupported number of columns [${tds.size}]")
+    val ntds = tds.size
+    if (ntds == 0 || ntds > 4) {
+        log.error("Table row contains an unsupported number of columns [${ntds}]")
         return Optional.empty()
     }
 
-    if (tds.size == 1 || tds.size == 2) {
+    if (ntds == 1 || ntds == 2) {
         val entry = IncludeEntry()
         entry.seqIndent = sequenceItemDepth(tds[0].textContent)
         if (attributeHasInclude(tds[0].textContent)) {
             entry.xref = xref(tds[0])
         }
-        if (tds.size == 2) {
+        if (ntds == 2) {
             entry.description = trimWsNl(tds[1].textContent)
         }
         return Optional.of(entry as tv.dicom.std.core.model.imd.Entry)
-    } else { // if (tds.size == 3 || tds.size == 4) {
+    } else { // if (ntds == 3 || ntds == 4) {
         val entry = DataEntry()
         entry.seqIndent = sequenceItemDepth(tds[0].textContent)
         entry.name = attributeName(trimWsNl(tds[0].textContent))
@@ -644,7 +645,7 @@ internal fun buildImdEntry(tr: Element): Optional<tv.dicom.std.core.model.imd.En
         }
         entry.tag = tag
         entry.description = trimWsNl(tds[2].textContent)
-        if (tds.size == 4) {
+        if (ntds == 4) {
             val type = attributeTypeFromString(trimWsNl(tds[2].textContent))
             if (type == null) {
                 log.error("Table row contains an unsupported entry in the Type column [${tds[2]}]")
