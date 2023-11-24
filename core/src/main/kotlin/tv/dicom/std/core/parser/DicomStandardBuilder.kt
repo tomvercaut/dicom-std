@@ -1,11 +1,17 @@
 package tv.dicom.std.core.parser
 
 import org.apache.logging.log4j.kotlin.logger
-import org.w3c.dom.*
+import org.w3c.dom.Document
+import org.w3c.dom.Element
+import org.w3c.dom.Node
+import org.w3c.dom.NodeList
 import tv.dicom.std.core.Resource
 import tv.dicom.std.core.model.*
 import tv.dicom.std.core.model.ciod.Ciod
 import tv.dicom.std.core.model.ciod.Entry
+import tv.dicom.std.core.model.dictionary.DataElement
+import tv.dicom.std.core.model.dictionary.RangedTag
+import tv.dicom.std.core.model.dictionary.VR
 import tv.dicom.std.core.model.imd.DataEntry
 import tv.dicom.std.core.model.imd.Imd
 import tv.dicom.std.core.model.imd.IncludeEntry
@@ -36,6 +42,10 @@ fun build(documents: List<Document>): Optional<DicomStandard> {
             }
             if (!findDependents(document, dicomStandard)) {
                 log.error("Unable to find all dependent elements.")
+                return Optional.empty()
+            }
+        } else if (rootId == "PS3.6") {
+            if (!buildPart06(document, dicomStandard)) {
                 return Optional.empty()
             }
         }
@@ -80,6 +90,128 @@ internal fun buildPart03(document: Document, dicomStandard: DicomStandard): Bool
     }
 
     return true
+}
+
+
+/**
+ * Build the DicomStandard model using the XML document from part 06 of the DICOM standard.
+ *
+ * @param document XML document of the DICOM standard
+ * @return If successful, true is returned. If something went wrong false is returned.
+ */
+internal fun buildPart06(document: Document, dicomStandard: DicomStandard): Boolean {
+    val root = document.documentElement
+    // Get Chapter 6
+    // Composite Information Object Definitions (Normative)
+    val optChapter6 = findElement(root, "//chapter[@id='chapter_6']")
+    if (optChapter6.isEmpty) {
+        log.error(Resource.errorMessage("DicomPart06ChapterAMissing"))
+        return false
+    }
+    val chapter6 = optChapter6.get()
+    val registry = buildDataElementRegistry(chapter6)
+
+    for (r in registry) {
+        dicomStandard.add(r)
+    }
+    return true
+}
+
+/**
+ * Build a registry of DICOM data elements (part06, chapter6).
+ *
+ * The function looks for all tables with [parent] (for example the XML element matching the expression `//chapter[@id='chapter_6']`) and tries to build [DataElement] instances from them.
+ *
+ * @param parent XML DOM element that stores all DataElement tables in it's descendants
+ * @return A [List] of [DataElement] instances is returned.
+ */
+internal fun buildDataElementRegistry(parent: Element): Set<DataElement> {
+    val registry = mutableSetOf<DataElement>()
+
+    val optTables = findElements(parent, ".//table")
+    if (optTables.isEmpty) {
+        return registry
+    }
+    val tables = optTables.get()
+    for (table in tables) {
+        val opt = buildDataElementRegistryFromTable(table)
+        if (opt.isEmpty) {
+            val id = table.getAttribute("xml:id")
+            log.error("XML table [${id}] is no valid DataElement table")
+            continue
+        }
+        val set = opt.get()
+        for (e in set) {
+            registry.add(e)
+        }
+    }
+
+    return registry
+}
+
+/**
+ * Builds a registry of DataElement instances from an XML table.
+ *
+ * @param table The XML table element to build the registry from.
+ * @return An Optional containing a Set of DataElement instances if the table is valid,
+ *         otherwise an empty Optional.
+ */
+internal fun buildDataElementRegistryFromTable(table: Element): Optional<Set<DataElement>> {
+    val registry = mutableSetOf<DataElement>()
+    if (table.nodeName != "table") {
+        return Optional.empty()
+    }
+    val id = table.getAttribute("xml:id")
+    if (id.isBlank()) {
+        log.error("XML table has no id attribute which is required for the implementation.")
+        return Optional.empty()
+    }
+    val optTrs = findElements(table, "tbody/tr")
+    if (optTrs.isEmpty) {
+        log.error("XML table [${id}] has no rows")
+        return Optional.empty()
+    }
+    val trs = optTrs.get()
+    for (i in trs.indices) {
+        val optEntry = buildDataElementEntry(trs[i])
+        if (optEntry.isEmpty) {
+            log.error("XML table [${id}] rows [$i] does not contain a valid DataElement entry")
+            return Optional.empty()
+        }
+        registry.add(optEntry.get())
+    }
+    return Optional.of(registry)
+}
+
+/**
+ * Builds a DataElement object based on the provided XML table row element.
+ *
+ * @param tr The XML table row element.
+ * @return An optional DataElement object if the table row contains valid data, otherwise an empty optional.
+ */
+internal fun buildDataElementEntry(tr: Element): Optional<DataElement> {
+    val otds = tableRowColumns(tr)
+    if (otds.isEmpty) {
+        return Optional.empty()
+    }
+    val tds = otds.get()
+    if (tds.size != 6) {
+        log.error("Table row contains an unsupported number of columns [${tds.size}]")
+        return Optional.empty()
+    }
+
+    val tag = RangedTag.of(trimWsNl(tds[0].textContent))
+    if (tag == null) {
+        log.error("Table row contains an unsupported entry for the Tag column [${tds[0]}]")
+        return Optional.empty()
+    }
+    val name = replaceZWSP(trimWsNl(tds[1].textContent))
+    val keyword = replaceZWSP(trimWsNl(tds[2].textContent))
+    val svrs = replaceZWSP(trimWsNl(tds[3].textContent))
+    val vrs = svrs.split("or").map { VR.valueOf(replaceZWSP(trimWsNl(it.trim())) )}
+    val vm = replaceZWSP(trimWsNl(tds[4].textContent))
+    val description = replaceZWSP(trimWsNl(tds[5].textContent))
+    return Optional.of(DataElement(tag, name, keyword, vrs, vm, description))
 }
 
 
@@ -809,4 +941,8 @@ internal fun tableRowColumns(tr: Element): Optional<List<Element>> {
  */
 internal fun trimWsNl(s: String): String {
     return s.trim { c: Char -> c == '\n' || c == ' ' || c == '\r' }
+}
+
+internal fun replaceZWSP(s: String): String {
+    return s.replace("\u200B", "")
 }

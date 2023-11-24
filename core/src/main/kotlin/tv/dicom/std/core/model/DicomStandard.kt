@@ -1,17 +1,19 @@
 package tv.dicom.std.core.model
 
 import tv.dicom.std.core.model.ciod.Ciod
+import tv.dicom.std.core.model.dictionary.DataElement
 import tv.dicom.std.core.model.imd.Imd
 
 class DicomStandard {
     private val ciods: MutableMap<String, Ciod> = mutableMapOf()
     private val imds: MutableMap<String, Imd> = mutableMapOf()
+    private val dataElements: MutableSet<DataElement> = mutableSetOf()
 
     /**
      * Add a Composite Information Object Definition to the DicomStandard.
      *
      * @param ciod Composite Information Object Definition instance
-     * @return True the instance is added. False if the instance was not added.
+     * @return `true` the instance is added. `false` if the instance was not added.
      */
     fun add(ciod: Ciod): Boolean {
         if (!ciods.containsKey(ciod.id)) {
@@ -25,7 +27,7 @@ class DicomStandard {
      * Add an Information Module Definition to the DicomStandard.
      *
      * @param imd Information Module Definition instance
-     * @return True the instance is added. False if the instance was not added.
+     * @return `true` the instance is added. `false` if the instance was not added.
      */
     fun add(imd: Imd): Boolean {
         if (!imds.containsKey(imd.id)) {
@@ -33,6 +35,16 @@ class DicomStandard {
             return true
         }
         return false
+    }
+
+    /**
+     * Add a DataElement to the DicomStandard if it doesn't already exist.
+     *
+     * @param element DataElement instance
+     * @return `true` if the DataElement was added, `false` if it already exists.
+     */
+    fun add(element: DataElement): Boolean {
+        return dataElements.add(element)
     }
 
     /**
@@ -51,6 +63,15 @@ class DicomStandard {
      */
     fun imdIds(): Set<String> {
         return imds.keys
+    }
+
+    /**
+     * Retrieves the set of registered data elements.
+     *
+     * @return A [Set] of [DataElement] instances representing the registered data elements.
+     */
+    fun dataElementRegistry(): Set<DataElement> {
+        return dataElements
     }
 
     /**

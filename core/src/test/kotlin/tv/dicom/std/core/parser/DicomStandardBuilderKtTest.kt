@@ -3,6 +3,10 @@ package tv.dicom.std.core.parser
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import tv.dicom.std.core.model.*
+import tv.dicom.std.core.model.dictionary.DataElement
+import tv.dicom.std.core.model.dictionary.RangedTag
+import tv.dicom.std.core.model.dictionary.RangedTagItem
+import tv.dicom.std.core.model.dictionary.VR
 import tv.dicom.std.core.model.imd.DataEntry
 import tv.dicom.std.core.model.imd.Imd
 import tv.dicom.std.core.model.imd.IncludeEntry
@@ -11,6 +15,119 @@ import java.io.File
 import javax.xml.parsers.DocumentBuilderFactory
 
 class DicomStandardBuilderKtTest {
+
+    @Test
+    fun buildPart06() {
+        val url = this::class.java.getResource("part_06_extract.xml")
+            ?: throw NullPointerException("Failed to obtain test resource (part_06_extract.xml)")
+        val builder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+        val document = builder.parse(File(url.toURI()))
+
+        val dicomStandard = DicomStandard()
+        assertTrue(buildPart06(document, dicomStandard))
+        val registry = dicomStandard.dataElementRegistry()
+        assertEquals(3, registry.size)
+        val expected = setOf(
+            DataElement(
+                RangedTag(RangedTagItem((0x0008).toUShort()), RangedTagItem((0x0001).toUShort())),
+                "Length to End",
+                "LengthToEnd",
+                listOf(VR.UL),
+                "1",
+                "RET"
+            ),
+            DataElement(
+                RangedTag(RangedTagItem((0x0008).toUShort()), RangedTagItem((0x0005).toUShort())),
+                "Specific Character Set",
+                "SpecificCharacterSet",
+                listOf(VR.CS),
+                "1-n",
+                ""
+            ),
+            DataElement(
+                RangedTag(RangedTagItem((0x7FE0).toUShort()), RangedTagItem((0x0020).toUShort())),
+                "Coefficients SDVN",
+                "CoefficientsSDVN",
+                listOf(VR.OW),
+                "1",
+                "RET (2007)"
+            )
+        )
+        assertEquals(expected, registry)
+    }
+
+    @Test
+    fun buildDataElementEntry1() {
+        val url = this::class.java.getResource("build_data_element_entry1.xml")
+            ?: throw NullPointerException("Failed to obtain test resource (build_data_element_entry1.xml)")
+        val builder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+        val document = builder.parse(File(url.toURI()))
+        val root = document.documentElement
+
+        val o = buildDataElementEntry(root)
+        assertTrue(o.isPresent)
+        val element = o.get()
+        assertEquals((0x0008).toUShort(), element.tag.group.min)
+        assertEquals((0x0008).toUShort(), element.tag.group.max)
+        assertEquals((0x0001).toUShort(), element.tag.element.min)
+        assertEquals((0x0001).toUShort(), element.tag.element.max)
+
+        assertEquals("Length to End", element.name)
+        assertEquals("LengthToEnd", element.keyword)
+        assertEquals(1, element.vrs.size)
+        assertEquals(VR.UL, element.vrs[0])
+        assertEquals("1", element.vm)
+        assertEquals("RET", element.description)
+    }
+
+    @Test
+    fun buildDataElementEntry2() {
+        val url = this::class.java.getResource("build_data_element_entry2.xml")
+            ?: throw NullPointerException("Failed to obtain test resource (build_data_element_entry2.xml)")
+        val builder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+        val document = builder.parse(File(url.toURI()))
+        val root = document.documentElement
+
+        val o = buildDataElementEntry(root)
+        assertTrue(o.isPresent)
+        val element = o.get()
+        assertEquals((0x7FE0).toUShort(), element.tag.group.min)
+        assertEquals((0x7FE0).toUShort(), element.tag.group.max)
+        assertEquals((0x0020).toUShort(), element.tag.element.min)
+        assertEquals((0x0020).toUShort(), element.tag.element.max)
+
+        assertEquals("Coefficients SDVN", element.name)
+        assertEquals("CoefficientsSDVN", element.keyword)
+        assertEquals(1, element.vrs.size)
+        assertEquals(VR.OW, element.vrs[0])
+        assertEquals("1", element.vm)
+        assertEquals("RET (2007)", element.description)
+    }
+
+    @Test
+    fun buildDataElementEntry3() {
+        val url = this::class.java.getResource("build_data_element_entry3.xml")
+            ?: throw NullPointerException("Failed to obtain test resource (build_data_element_entry3.xml)")
+        val builder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+        val document = builder.parse(File(url.toURI()))
+        val root = document.documentElement
+
+        val o = buildDataElementEntry(root)
+        assertTrue(o.isPresent)
+        val element = o.get()
+        assertEquals((0x7F00).toUShort(), element.tag.group.min)
+        assertEquals((0x7FFF).toUShort(), element.tag.group.max)
+        assertEquals((0x0010).toUShort(), element.tag.element.min)
+        assertEquals((0x0010).toUShort(), element.tag.element.max)
+
+        assertEquals("Variable Pixel Data", element.name)
+        assertEquals("VariablePixelData", element.keyword)
+        assertEquals(2, element.vrs.size)
+        assertEquals(VR.OB, element.vrs[0])
+        assertEquals(VR.OW, element.vrs[1])
+        assertEquals("1", element.vm)
+        assertEquals("RET (2007)", element.description)
+    }
 
     @Test
     fun buildCiod() {
@@ -331,7 +448,7 @@ class DicomStandardBuilderKtTest {
         val tds = otds.get()
         assertEquals(3, tds.size)
         val cols: List<String> = mutableListOf(
-            trimWsNl(tds.get(0).textContent), trimWsNl(tds.get(1).textContent), trimWsNl(tds.get(2).textContent)
+            trimWsNl(tds[0].textContent), trimWsNl(tds[1].textContent), trimWsNl(tds[2].textContent)
         )
         val ecols = mutableListOf("column1", "column2", "column3")
         assertEquals(ecols, cols)

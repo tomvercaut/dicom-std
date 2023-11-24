@@ -1,0 +1,129 @@
+<!-- This XML file contains a modified section from the DICOM standard. This section is only meant to test the code in the project. Don't use it for any other purpose. -->
+<!-- Information on the DICOM standard and it's full description can be found on: https://www.dicomstandard.org/current/-->
+<book xmlns="http://docbook.org/ns/docbook" label="PS3.6" version="5.0"
+      xml:id="PS3.6">
+    <chapter xml:id="chapter_6">
+        <title>Registry of DICOM Data Elements</title>
+        <table xml:id="table_6-1">
+            <caption>Registry of DICOM Data Elements</caption>
+            <thead>
+                <tr>
+                    <th>
+                        <para>
+                            <emphasis>Tag</emphasis>
+                        </para>
+                    </th>
+                    <th>
+                        <para>
+                            <emphasis>Name</emphasis>
+                        </para>
+                    </th>
+                    <th>
+                        <para>
+                            <emphasis>Keyword</emphasis>
+                        </para>
+                    </th>
+                    <th>
+                        <para>
+                            <emphasis>VR</emphasis>
+                        </para>
+                    </th>
+                    <th>
+                        <para>
+                            <emphasis>VM</emphasis>
+                        </para>
+                    </th>
+                    <th>
+                        <para/>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <para>
+                            <emphasis>(0008,0001)</emphasis>
+                        </para>
+                    </td>
+                    <td>
+                        <para>
+                            <emphasis>Length to End</emphasis>
+                        </para>
+                    </td>
+                    <td>
+                        <para>
+                            <emphasis>Length​To​End</emphasis>
+                        </para>
+                    </td>
+                    <td>
+                        <para>
+                            <emphasis>UL</emphasis>
+                        </para>
+                    </td>
+                    <td>
+                        <para>
+                            <emphasis>1</emphasis>
+                        </para>
+                    </td>
+                    <td>
+                        <para>
+                            <emphasis>RET</emphasis>
+                        </para>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <para>(0008,0005)</para>
+                    </td>
+                    <td>
+                        <para>Specific Character Set</para>
+                    </td>
+                    <td>
+                        <para>Specific​Character​Set</para>
+                    </td>
+                    <td>
+                        <para>CS</para>
+                    </td>
+                    <td>
+                        <para>1-n</para>
+                    </td>
+                    <td>
+                        <para/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <para>
+                            <emphasis role="italic">(7FE0,0020)</emphasis>
+                        </para>
+                    </td>
+                    <td>
+                        <para>
+                            <emphasis role="italic">Coefficients SDVN</emphasis>
+                        </para>
+                    </td>
+                    <td>
+                        <para>
+                            <emphasis role="italic">Coefficients​SDVN</emphasis>
+                        </para>
+                    </td>
+                    <td>
+                        <para>
+                            <emphasis role="italic">OW</emphasis>
+                        </para>
+                    </td>
+                    <td>
+                        <para>
+                            <emphasis role="italic">1</emphasis>
+                        </para>
+                    </td>
+                    <td>
+                        <para>
+                            <emphasis role="italic">RET (2007)</emphasis>
+                        </para>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </chapter>
+</book>
