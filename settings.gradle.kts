@@ -1,2 +1,2 @@
 rootProject.name = "dicom-std"
-include("core")
+include("model", "parser")
