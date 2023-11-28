@@ -19,6 +19,18 @@ import javax.xml.parsers.DocumentBuilderFactory
 class DicomStandardBuilderKtTest {
 
     @Test
+    fun dicomVersion() {
+        val url = this::class.java.getResource("dicomVersion.xml")
+            ?: throw NullPointerException("Failed to obtain test resource (dicomVersion.xml)")
+        val builder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+        val document = builder.parse(File(url.toURI()))
+
+        val dicomStandard = DicomStandard()
+        assertTrue(dicomVersion(document, dicomStandard))
+        assertEquals("2023e", dicomStandard.version)
+    }
+
+    @Test
     fun buildPart06() {
         val url = this::class.java.getResource("part_06_extract.xml")
             ?: throw NullPointerException("Failed to obtain test resource (part_06_extract.xml)")

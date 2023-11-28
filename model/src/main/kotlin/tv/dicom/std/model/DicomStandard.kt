@@ -5,6 +5,7 @@ import tv.dicom.std.model.dictionary.DataElement
 import tv.dicom.std.model.imd.Imd
 
 class DicomStandard {
+    var version: String=""
     private val ciods: MutableMap<String, Ciod> = mutableMapOf()
     private val imds: MutableMap<String, Imd> = mutableMapOf()
     private val dataElements: MutableSet<DataElement> = mutableSetOf()

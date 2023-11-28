@@ -53,6 +53,47 @@ fun build(documents: List<Document>): Optional<DicomStandard> {
     return Optional.of(dicomStandard)
 }
 
+/**
+ * Retrieves the DICOM version from a given XML document.
+ *
+ * @param document The XML document from which to retrieve the DICOM version.
+ * @param dicomStandard The instance of DicomStandard where the DICOM version will be stored.
+ * @return Returns true if the DICOM version was successfully retrieved and stored, false otherwise.
+ */
+internal fun dicomVersion(document: Document, dicomStandard: DicomStandard): Boolean {
+    val root = document.documentElement
+    // Get the title and subtitle of the document
+    val optTitle = findElement(root, "title")
+    if (optTitle.isEmpty) {
+        log.error(Resource.errorMessage("DicomPartTitleMissing"))
+        return false
+    }
+    val title = replaceZWSP(trimWsNl( optTitle.get().textContent))
+    if (title.isBlank()) {
+        log.error(Resource.errorMessage("EmptyTitle"))
+        return false
+    }
+    val optSubTitle = findElement(root, "subtitle")
+    if (optSubTitle.isEmpty) {
+        log.error(Resource.errorMessage("DicomPartSubTitleMissing"))
+        return false
+    }
+    val subTitle = replaceZWSP(trimWsNl( optSubTitle.get().textContent))
+    if (subTitle.isBlank()) {
+        log.error(Resource.errorMessage("EmptySubTitle"))
+        return false
+    }
+    var i = subTitle.indexOf(title)
+    if (i == -1) {
+        log.error("Unable to find title in subtitle.")
+        return false
+    }
+    i += title.length + 1
+    val j = subTitle.indexOf(" ", i)
+    dicomStandard.version = replaceZWSP(trimWsNl(subTitle.substring(i, j)))
+    return true
+}
+
 
 /**
  * Build the DicomStandard model using the XML document from part 03 of the DICOM standard.

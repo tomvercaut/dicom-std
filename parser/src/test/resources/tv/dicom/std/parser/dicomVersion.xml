@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- This XML file contains a section from the DICOM standard. This section is only meant to test the code in the project. Don't use it for any other purpose. -->
+<!-- Information on the DICOM standard and it's full description can be found on: https://www.dicomstandard.org/current/-->
+<book xmlns="http://docbook.org/ns/docbook" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xl="http://www.w3.org/1999/xlink" label="PS3.1" version="5.0" xml:id="PS3.1">
+    <title>PS3.1</title>
+    <subtitle>DICOM PS3.1 2023e - Introduction and Overview</subtitle>
+</book>
